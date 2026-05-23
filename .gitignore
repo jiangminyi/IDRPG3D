@@ -1,5 +1,6 @@
 # Local download/cache area used while preparing framework baselines.
 _downloads/
+.cache/
 
 # Unity generated folders in the client project.
 Client/UnityProject/Library/
