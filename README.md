@@ -12,3 +12,7 @@ IDRPG3D is an idle 3D RPG project focused on automatic combat, loot farming, and
 ## Version Policy
 
 Framework versions are pinned in `Docs/framework-versions.md`. Upgrade one framework at a time and keep protocol compatibility checks explicit.
+
+## Development Tooling
+
+MCP and Codex skill usage are recorded in `Docs/mcp-and-skills.md`.
