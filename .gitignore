@@ -2,6 +2,11 @@
 _downloads/
 .cache/
 
+# .NET build outputs.
+Bin/
+bin/
+obj/
+
 # Unity generated folders in the client project.
 Client/UnityProject/Library/
 Client/UnityProject/Temp/
