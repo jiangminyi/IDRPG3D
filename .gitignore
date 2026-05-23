@@ -1,0 +1,35 @@
+# Local download/cache area used while preparing framework baselines.
+_downloads/
+
+# Unity generated folders in the client project.
+Client/UnityProject/Library/
+Client/UnityProject/Temp/
+Client/UnityProject/Obj/
+Client/UnityProject/Build/
+Client/UnityProject/Builds/
+Client/UnityProject/Logs/
+Client/UnityProject/UserSettings/
+Client/UnityProject/MemoryCaptures/
+Client/UnityProject/Recordings/
+
+# Unity/IDE generated local files.
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.opendb
+*.VC.db
+
+# IDE/editor state.
+.idea/
+.vs/
+.vscode/
+*.swp
+*.swo
+
+# OS files.
+Thumbs.db
+Desktop.ini
+.DS_Store
