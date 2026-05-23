@@ -1,0 +1,16 @@
+{
+    "Export": {
+        "NetworkProtocolDirectory": {
+            "Value": "NetworkProtocol",
+            "Comment": "Fantasy protocol definition directory."
+        },
+        "NetworkProtocolServerDirectory": {
+            "Value": "Generated/Server",
+            "Comment": "Generated C# protocol files for the Fantasy server."
+        },
+        "NetworkProtocolClientDirectory": {
+            "Value": "Generated/Client",
+            "Comment": "Generated C# protocol files for the Unity client."
+        }
+    }
+}

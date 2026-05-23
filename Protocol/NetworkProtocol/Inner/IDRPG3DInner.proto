@@ -1,0 +1,5 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+// Reserved for server-to-server protocols.
+// Keep empty until the first server module boundary is implemented.

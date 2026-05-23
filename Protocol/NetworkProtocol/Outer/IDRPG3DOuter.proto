@@ -1,0 +1,129 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+// IDRPG3D first network protocol baseline.
+// Default serialization is Fantasy ProtoBuf.
+
+enum IDRPG3DErrorCode
+{
+	IDRPG3DErrorCodeSuccess = 0,
+	IDRPG3DErrorCodeUnknown = 1,
+	IDRPG3DErrorCodeInvalidAccount = 2,
+	IDRPG3DErrorCodePlayerNotFound = 3,
+	IDRPG3DErrorCodeTeamNotFound = 4,
+	IDRPG3DErrorCodeAlreadyInTeam = 5,
+	IDRPG3DErrorCodeIdleBattleAlreadyRunning = 6,
+	IDRPG3DErrorCodeIdleBattleNotRunning = 7
+}
+
+message ItemReward
+{
+	int32 ItemId = 1;
+	int64 Count = 2;
+}
+
+message PlayerBrief
+{
+	int64 PlayerId = 1;
+	string Name = 2;
+	int32 Level = 3;
+}
+
+message TeamMemberInfo
+{
+	int64 PlayerId = 1;
+	string Name = 2;
+	int32 Level = 3;
+	bool IsOnline = 4;
+}
+
+message TeamInfo
+{
+	int64 TeamId = 1;
+	repeated TeamMemberInfo Members = 2;
+	int64 LeaderPlayerId = 3;
+}
+
+message IdleBattleSummary
+{
+	int64 BattleId = 1;
+	int32 MapId = 2;
+	int64 StartTime = 3;
+	int64 LastSettleTime = 4;
+	repeated ItemReward Rewards = 5;
+	int64 Exp = 6;
+	int64 Gold = 7;
+}
+
+message C2G_LoginRequest // IRequest,G2C_LoginResponse
+{
+	string Account = 1;
+	string DeviceId = 2;
+}
+
+message G2C_LoginResponse // IResponse
+{
+	int64 PlayerId = 1;
+	string Token = 2;
+	PlayerBrief Player = 3;
+}
+
+message C2G_EnterWorldRequest // IRequest,G2C_EnterWorldResponse
+{
+	int64 PlayerId = 1;
+	string Token = 2;
+}
+
+message G2C_EnterWorldResponse // IResponse
+{
+	PlayerBrief Player = 1;
+	TeamInfo Team = 2;
+	IdleBattleSummary CurrentBattle = 3;
+}
+
+message C2G_StartIdleBattleRequest // IRequest,G2C_StartIdleBattleResponse
+{
+	int32 MapId = 1;
+}
+
+message G2C_StartIdleBattleResponse // IResponse
+{
+	IdleBattleSummary Battle = 1;
+}
+
+message C2G_StopIdleBattleRequest // IRequest,G2C_StopIdleBattleResponse
+{
+	int64 BattleId = 1;
+}
+
+message G2C_StopIdleBattleResponse // IResponse
+{
+	IdleBattleSummary Battle = 1;
+}
+
+message G2C_BattleRewardPush // IMessage
+{
+	IdleBattleSummary Battle = 1;
+	repeated ItemReward NewRewards = 2;
+	int64 Exp = 3;
+	int64 Gold = 4;
+}
+
+message C2G_CreateTeamRequest // IRequest,G2C_CreateTeamResponse
+{
+}
+
+message G2C_CreateTeamResponse // IResponse
+{
+	TeamInfo Team = 1;
+}
+
+message C2G_JoinTeamRequest // IRequest,G2C_JoinTeamResponse
+{
+	int64 TeamId = 1;
+}
+
+message G2C_JoinTeamResponse // IResponse
+{
+	TeamInfo Team = 1;
+}
