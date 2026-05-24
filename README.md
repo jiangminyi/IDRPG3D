@@ -21,6 +21,7 @@ MCP and Codex skill usage are recorded in `Docs/mcp-and-skills.md`.
 ## Local Server Smoke
 
 MongoDB setup is recorded in `Docs/local-mongodb.md`.
+Unity local scene testing is recorded in `Docs/local-unity-test.md`.
 
 Build the server with the local .NET 8 SDK:
 
