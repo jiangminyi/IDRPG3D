@@ -52,6 +52,44 @@ Expected:
 TcpTestSucceeded : True
 ```
 
+## Visual Database Tool
+
+Use `mongo-express` `1.0.0` for local development data inspection:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Scripts\start-mongo-express.ps1
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8081
+```
+
+Default login:
+
+```text
+admin / pass
+```
+
+The script connects only to the development database `idrpg3d_dev` and runs in read-only mode by default. It pins `mongo-express` to `1.0.0` because older `0.54.0` uses a legacy MongoDB driver and fails against MongoDB 8 with `Unsupported OP_QUERY command: listCollections`.
+
+To allow edits from the web UI during local debugging, start it explicitly with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Scripts\start-mongo-express.ps1 -Writable
+```
+
+Expected smoke-test collections:
+
+```text
+smoke_players
+smoke_idle_battles
+smoke_teams
+```
+
+MongoDB Compass was also evaluated. The official Windows package found through `winget` was `MongoDB.Compass.Full` `1.49.7.0`, but the MSI install failed locally with `0x8007029c`, and the official portable zip exited immediately in this environment. Compass settings did not show a reliable built-in Chinese UI switch. Avoid third-party Compass Chinese patches for database tooling; use browser translation on `mongo-express` if a Chinese UI is needed.
+
 ## Fantasy Configuration
 
 The game server config should include this database entry under its `<world>` node:
