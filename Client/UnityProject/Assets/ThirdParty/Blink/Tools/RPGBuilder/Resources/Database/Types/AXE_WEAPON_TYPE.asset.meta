@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc5539388a78af742a7a5ff4b4821b7f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/AXE_WEAPON_TYPE.asset
+  uploadId: 600198

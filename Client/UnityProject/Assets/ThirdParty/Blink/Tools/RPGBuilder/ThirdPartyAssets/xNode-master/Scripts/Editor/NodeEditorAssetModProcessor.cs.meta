@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: e515e86efe8160243a68b7c06d730c9c
+timeCreated: 1507982232
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/xNode-master/Scripts/Editor/NodeEditorAssetModProcessor.cs
+  uploadId: 600198

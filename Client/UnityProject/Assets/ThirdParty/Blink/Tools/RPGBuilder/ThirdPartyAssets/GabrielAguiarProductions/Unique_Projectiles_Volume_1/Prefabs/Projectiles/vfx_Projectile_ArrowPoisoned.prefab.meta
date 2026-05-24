@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e21f397f19b330b43a512abfdfd2c479
+timeCreated: 1543610007
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_1/Prefabs/Projectiles/vfx_Projectile_ArrowPoisoned.prefab
+  uploadId: 600198

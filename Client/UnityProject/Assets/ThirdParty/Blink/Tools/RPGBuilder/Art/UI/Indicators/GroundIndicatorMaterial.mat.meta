@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 13f014d34a8cee24596d006d90fbfba8
+timeCreated: 1487336157
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Indicators/GroundIndicatorMaterial.mat
+  uploadId: 600198

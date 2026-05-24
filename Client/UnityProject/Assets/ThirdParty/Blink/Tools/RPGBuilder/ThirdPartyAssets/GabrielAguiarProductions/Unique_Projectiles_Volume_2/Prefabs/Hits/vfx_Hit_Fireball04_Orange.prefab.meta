@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b24d86eef3cf9d74ca645a82ee838035
+timeCreated: 1550765548
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_Fireball04_Orange.prefab
+  uploadId: 600198

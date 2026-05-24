@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc1cf45aab2eafc4ca21d9979ca467b8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Auras/Stealthed.prefab
+  uploadId: 600198

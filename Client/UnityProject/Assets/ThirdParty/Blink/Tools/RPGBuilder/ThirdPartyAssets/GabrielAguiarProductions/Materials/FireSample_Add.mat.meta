@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c64289e4d51d77d4f9a3c288ca059796
+timeCreated: 1521213145
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Materials/FireSample_Add.mat
+  uploadId: 600198

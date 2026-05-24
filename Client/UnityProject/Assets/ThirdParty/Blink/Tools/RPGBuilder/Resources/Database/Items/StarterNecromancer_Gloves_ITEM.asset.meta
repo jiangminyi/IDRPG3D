@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8584f11cab9c48344bb2c34861a95c27
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Items/StarterNecromancer_Gloves_ITEM.asset
+  uploadId: 600198

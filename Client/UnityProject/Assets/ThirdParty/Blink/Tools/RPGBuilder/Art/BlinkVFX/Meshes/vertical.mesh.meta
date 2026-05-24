@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 90e3098bac5cd7f4c9bdf25d8251d86f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Meshes/vertical.mesh
+  uploadId: 600198

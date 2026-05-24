@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3b22ef5da01b28c4fbe82067cfc8949f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/AnimationTemplates/Casting_ANIMATION.asset
+  uploadId: 600198

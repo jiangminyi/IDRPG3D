@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02fa9285f204bbe4585a8ebf5f10ecc2
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/StatListTemplates/Placeholder.txt
+  uploadId: 600198

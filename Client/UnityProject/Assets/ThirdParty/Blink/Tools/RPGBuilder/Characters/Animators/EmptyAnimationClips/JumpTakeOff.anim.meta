@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdbf910a3efc42842bb2bc5e8f77aac9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/JumpTakeOff.anim
+  uploadId: 600198

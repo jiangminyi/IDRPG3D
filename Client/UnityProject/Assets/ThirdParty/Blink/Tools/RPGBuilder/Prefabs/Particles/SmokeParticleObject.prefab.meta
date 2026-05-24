@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1aa6f56981873e94dbd4ec5e6b8353d6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/Particles/SmokeParticleObject.prefab
+  uploadId: 600198

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 86713f318086d2147b0b3b4a614e2324
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Persistence/NPCSpawnerSaver.cs
+  uploadId: 600198

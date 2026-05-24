@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a1151f93a5d8abe469933328037322dc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/VisualEffects/Fire_Pulse_VISUAL_EFFECT.asset
+  uploadId: 600198

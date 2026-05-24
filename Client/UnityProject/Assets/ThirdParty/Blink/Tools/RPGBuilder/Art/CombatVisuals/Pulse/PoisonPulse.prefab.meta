@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ff36baba546ab37419f7acf77ded2c0c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Pulse/PoisonPulse.prefab
+  uploadId: 600198

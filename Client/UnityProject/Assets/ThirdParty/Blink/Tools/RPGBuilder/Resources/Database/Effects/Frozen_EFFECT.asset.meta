@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d21aefd385f4e7c43862529576ca09aa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/Frozen_EFFECT.asset
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d7d4bad8b5220334bb3c0c166da903c7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Materials/M_RockFormation_06.mat
+  uploadId: 600198

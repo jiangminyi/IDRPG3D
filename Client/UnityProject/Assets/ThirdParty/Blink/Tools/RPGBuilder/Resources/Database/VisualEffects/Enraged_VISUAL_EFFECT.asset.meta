@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ee44e66b2365b824390bf2e874b297a2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/VisualEffects/Enraged_VISUAL_EFFECT.asset
+  uploadId: 600198

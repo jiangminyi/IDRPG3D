@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 89c71292d1f1f1b49b35ce7cc7cf6c8b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Nodes/RPGDialogueBaseNode.cs
+  uploadId: 600198

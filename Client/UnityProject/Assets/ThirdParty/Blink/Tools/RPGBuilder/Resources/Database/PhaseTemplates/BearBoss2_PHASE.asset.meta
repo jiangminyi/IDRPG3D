@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 44209a4c371d47146a957258c3d11432
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PhaseTemplates/BearBoss2_PHASE.asset
+  uploadId: 600198

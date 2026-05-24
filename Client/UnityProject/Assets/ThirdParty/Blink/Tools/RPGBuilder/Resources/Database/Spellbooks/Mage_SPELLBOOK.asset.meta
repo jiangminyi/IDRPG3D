@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7dc675e936f244e4ebb36d17cc4942df
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Spellbooks/Mage_SPELLBOOK.asset
+  uploadId: 600198

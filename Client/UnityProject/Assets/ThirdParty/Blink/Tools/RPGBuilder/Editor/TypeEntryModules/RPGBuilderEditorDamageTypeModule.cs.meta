@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ea2b6ee20220d5442890ebc999cea4ac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Editor/TypeEntryModules/RPGBuilderEditorDamageTypeModule.cs
+  uploadId: 600198

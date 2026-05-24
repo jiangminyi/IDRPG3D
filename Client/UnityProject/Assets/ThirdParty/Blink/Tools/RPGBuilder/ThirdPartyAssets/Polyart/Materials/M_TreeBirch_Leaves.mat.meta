@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80bac2b3309d3d34c85971907111c725
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Materials/M_TreeBirch_Leaves.mat
+  uploadId: 600198

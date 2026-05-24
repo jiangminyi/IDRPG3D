@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: caf42d2e5141c544e86440115e219e1a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/GenderSlot.prefab
+  uploadId: 600198

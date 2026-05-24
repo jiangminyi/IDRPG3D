@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b29271bbd6fb51f44afc7e809100e1af
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Pyromancer/Fire_Column.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4e647d760267b594e92e387f8dfa1429
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/BehaviorTemplates/Static_BEHAVIOR.asset
+  uploadId: 600198

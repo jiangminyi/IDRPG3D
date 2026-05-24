@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb120b9d265d3994d89f20a6a371a77b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Heal Received_STAT.asset
+  uploadId: 600198

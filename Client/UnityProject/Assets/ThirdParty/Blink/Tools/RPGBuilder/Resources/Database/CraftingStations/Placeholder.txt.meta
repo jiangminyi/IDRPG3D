@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cfc716b8746935c408a207c0fa8b6679
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/CraftingStations/Placeholder.txt
+  uploadId: 600198

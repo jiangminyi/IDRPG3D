@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2c69eb46056573147b732ea7144e468a
+timeCreated: 1542039123
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Prefabs/vfx_Projectile_Comet.prefab
+  uploadId: 600198

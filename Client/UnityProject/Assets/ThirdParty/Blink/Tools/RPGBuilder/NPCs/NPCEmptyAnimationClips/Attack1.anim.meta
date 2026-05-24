@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 77c496a09e2db8d4fb5d8ed1d9185da1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/NPCEmptyAnimationClips/Attack1.anim
+  uploadId: 600198

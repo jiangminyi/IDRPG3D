@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 87a43141d2a7323418b8db412b6c937e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/UI/ScreenTextObject.cs
+  uploadId: 600198

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: aa3b1b8191a7de34a91c92cdd2370924
+timeCreated: 1521127272
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Materials/CircleWave02_Add_5x5.mat
+  uploadId: 600198

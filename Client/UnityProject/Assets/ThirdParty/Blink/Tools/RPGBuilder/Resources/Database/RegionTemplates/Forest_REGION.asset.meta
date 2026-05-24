@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0f4a8047d05c88344985899bfd19165f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/RegionTemplates/Forest_REGION.asset
+  uploadId: 600198

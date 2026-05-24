@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 927b23db0dcac2a4191f6025ff49ab83
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Utilities/ResetDatabase.asset
+  uploadId: 600198

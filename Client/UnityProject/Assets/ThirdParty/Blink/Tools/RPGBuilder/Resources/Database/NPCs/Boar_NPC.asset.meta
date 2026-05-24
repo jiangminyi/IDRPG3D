@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 24eb6a277c7a6d346b3cee0859a0c6c0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/NPCs/Boar_NPC.asset
+  uploadId: 600198

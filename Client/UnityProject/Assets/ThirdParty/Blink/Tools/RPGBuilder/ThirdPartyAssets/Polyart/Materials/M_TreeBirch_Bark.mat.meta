@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 351c6850aa5620944bc0d683179b15d4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Materials/M_TreeBirch_Bark.mat
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e8cf7dcd6636ff6418644a9a74ec5895
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/ResourceNodes/EpicChest.prefab
+  uploadId: 600198

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 76467ff8f8c19bc488f71aae6c9e81de
+timeCreated: 1536706381
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Materials/Mobile/CircleShatter_MobAddScroll_02_Ice.mat
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 102dc0b2be301764ebc5dc31deb4d0b3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Anvil_Sample_01.prefab
+  uploadId: 600198

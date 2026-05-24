@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb86e8f15f9593f439268922fea0b05e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/Buff.anim
+  uploadId: 600198

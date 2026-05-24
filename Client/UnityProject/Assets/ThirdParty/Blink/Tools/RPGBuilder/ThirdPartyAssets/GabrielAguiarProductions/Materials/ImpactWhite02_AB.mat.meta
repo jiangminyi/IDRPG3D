@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5545886e8352e884fb651dd7fd0fb137
+timeCreated: 1495151947
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Materials/ImpactWhite02_AB.mat
+  uploadId: 600198

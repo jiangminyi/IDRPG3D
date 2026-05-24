@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 74efcf118280bb44496d2ccda6f4538f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/MeleeAttack2.anim
+  uploadId: 600198

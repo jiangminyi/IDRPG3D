@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e3c622b2b13de474896fd7761977d8bb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/FrostFireProjectile.prefab
+  uploadId: 600198

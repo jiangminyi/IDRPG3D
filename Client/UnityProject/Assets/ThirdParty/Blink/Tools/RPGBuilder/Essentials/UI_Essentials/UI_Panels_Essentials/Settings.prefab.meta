@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ca8f29c5ff7b28f478e84efe6769cf2e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/UI_Essentials/UI_Panels_Essentials/Settings.prefab
+  uploadId: 600198

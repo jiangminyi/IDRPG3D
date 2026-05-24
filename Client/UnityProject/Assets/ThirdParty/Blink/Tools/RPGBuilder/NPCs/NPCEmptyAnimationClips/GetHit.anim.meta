@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 715bb774c43d07f4d9d23fe2c79d4a30
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/NPCEmptyAnimationClips/GetHit.anim
+  uploadId: 600198

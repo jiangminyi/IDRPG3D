@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 04e84d313893bbe43a3809bdeb1109f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/DatabaseData/WorldData.cs
+  uploadId: 600198

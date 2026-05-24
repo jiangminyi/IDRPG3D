@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 276a10db873800a41b8232e61420e7f1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Furnace_Small_Stone_Sample.prefab
+  uploadId: 600198

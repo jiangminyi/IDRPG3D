@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 371c4ee5661ca774ba55454b4d594be9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Spellbooks/Warrior_SPELLBOOK.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f7812ea90f0476447abc9c3c8863c920
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Species/Placeholder.txt
+  uploadId: 600198

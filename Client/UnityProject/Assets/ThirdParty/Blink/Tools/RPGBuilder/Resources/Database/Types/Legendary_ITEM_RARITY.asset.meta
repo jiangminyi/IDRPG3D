@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1ba7c644b767724488d7890d0825afd2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/Legendary_ITEM_RARITY.asset
+  uploadId: 600198

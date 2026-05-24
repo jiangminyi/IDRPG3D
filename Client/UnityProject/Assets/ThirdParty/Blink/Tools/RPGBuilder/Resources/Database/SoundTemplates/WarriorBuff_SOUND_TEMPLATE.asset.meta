@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8ceb1d9178316e9428fddc9fc6b9c407
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/SoundTemplates/WarriorBuff_SOUND_TEMPLATE.asset
+  uploadId: 600198

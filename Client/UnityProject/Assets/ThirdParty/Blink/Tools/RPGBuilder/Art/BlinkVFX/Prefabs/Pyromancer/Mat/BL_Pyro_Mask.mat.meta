@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f9c7a7de819ea1040a2485e931558ccc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Pyromancer/Mat/BL_Pyro_Mask.mat
+  uploadId: 600198

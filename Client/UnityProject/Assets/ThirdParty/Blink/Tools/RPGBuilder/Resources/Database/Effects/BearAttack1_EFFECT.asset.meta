@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 03b7b5cb7b4066c4ea5807f4ea0292f0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/BearAttack1_EFFECT.asset
+  uploadId: 600198

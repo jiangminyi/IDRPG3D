@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 48cd2b498a03c4f4d8acaf656612535a
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyLicenses.txt
+  uploadId: 600198

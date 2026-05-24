@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d2012dfa80edae4b8cce6be26083491
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/PETS_ACTION_KEY_CATEGORY.asset
+  uploadId: 600198

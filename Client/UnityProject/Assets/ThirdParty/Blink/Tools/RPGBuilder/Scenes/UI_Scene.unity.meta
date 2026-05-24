@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1d756824ce51a404a9f8136e4c5b4464
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scenes/UI_Scene.unity
+  uploadId: 600198

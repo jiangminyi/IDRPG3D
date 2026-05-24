@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e540277d695470b4d85f72a22b7c1020
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Foliage/Dreamscape_Simple_Foliage.shader
+  uploadId: 600198

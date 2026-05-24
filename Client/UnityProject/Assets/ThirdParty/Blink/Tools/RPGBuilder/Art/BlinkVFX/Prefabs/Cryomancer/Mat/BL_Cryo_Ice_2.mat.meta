@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e90f222627406fa44afb10bc74e9197a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Cryomancer/Mat/BL_Cryo_Ice_2.mat
+  uploadId: 600198

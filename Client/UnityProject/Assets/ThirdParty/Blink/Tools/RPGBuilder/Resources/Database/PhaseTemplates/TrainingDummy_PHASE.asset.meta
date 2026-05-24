@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 369eebdf6220f2946b7fcf40291afed5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PhaseTemplates/TrainingDummy_PHASE.asset
+  uploadId: 600198

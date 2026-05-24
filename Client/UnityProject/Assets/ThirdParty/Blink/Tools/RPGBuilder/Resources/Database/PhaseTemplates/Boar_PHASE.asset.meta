@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 81e855dde46cc40418091f81e13251bb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PhaseTemplates/Boar_PHASE.asset
+  uploadId: 600198

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 714d27dfb3ffe6042aed3b21bfb972ae
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Managers/CursorManager.cs
+  uploadId: 600198

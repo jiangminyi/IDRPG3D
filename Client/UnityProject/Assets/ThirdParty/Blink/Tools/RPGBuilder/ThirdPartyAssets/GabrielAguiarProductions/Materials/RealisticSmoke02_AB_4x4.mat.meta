@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 525e7f3ebab14f641afb882d09f84df0
+timeCreated: 1509792375
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Materials/RealisticSmoke02_AB_4x4.mat
+  uploadId: 600198

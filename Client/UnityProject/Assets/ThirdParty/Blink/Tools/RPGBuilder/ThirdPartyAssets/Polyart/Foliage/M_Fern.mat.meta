@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab536f43999c32e4297b5caed05d074a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Foliage/M_Fern.mat
+  uploadId: 600198

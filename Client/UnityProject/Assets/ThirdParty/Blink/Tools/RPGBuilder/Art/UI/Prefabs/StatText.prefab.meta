@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 84efafbfc77cfad4f8b6edcc40c047c4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/StatText.prefab
+  uploadId: 600198

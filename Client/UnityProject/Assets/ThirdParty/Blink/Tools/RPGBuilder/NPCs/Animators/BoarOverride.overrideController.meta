@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f882879e7869c048ad2c22c822ac054
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/Animators/BoarOverride.overrideController
+  uploadId: 600198

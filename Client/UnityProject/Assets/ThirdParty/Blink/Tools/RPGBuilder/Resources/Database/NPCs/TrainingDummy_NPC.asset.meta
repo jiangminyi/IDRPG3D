@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6f750d1b74e7e0246960355e09931db5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/NPCs/TrainingDummy_NPC.asset
+  uploadId: 600198

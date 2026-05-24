@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0633befa43c4ef34d83efafef1c0dd1f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/LootBag/Coins.mat
+  uploadId: 600198

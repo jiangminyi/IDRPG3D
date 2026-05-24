@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 139e09dade49c6543ad8b75a9081ef1a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Chance to apply
+    Burn_STAT.asset
+  uploadId: 600198

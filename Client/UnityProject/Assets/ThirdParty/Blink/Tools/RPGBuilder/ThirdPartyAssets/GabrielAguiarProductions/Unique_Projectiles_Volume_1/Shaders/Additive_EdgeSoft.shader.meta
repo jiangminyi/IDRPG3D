@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2bbb684815e227148bd7f9a30fb29fbc
+timeCreated: 1555349128
+licenseType: Store
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {fileID: 2800000, guid: ee563c601ce871f42ad3f66c8ae56b8e, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_1/Shaders/Additive_EdgeSoft.shader
+  uploadId: 600198

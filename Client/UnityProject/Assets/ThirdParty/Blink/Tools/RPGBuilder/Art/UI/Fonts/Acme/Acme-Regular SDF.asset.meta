@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b41ca2088edf9864bb933f45baaf6ab4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Fonts/Acme/Acme-Regular SDF.asset
+  uploadId: 600198

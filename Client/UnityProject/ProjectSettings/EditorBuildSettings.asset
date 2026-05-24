@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IDRPG3D_LocalTest.unity
     guid: fa0700fc4f3d31341b6766681a17d4e0
+  - enabled: 1
+    path: Assets/ThirdParty/Blink/Tools/RPGBuilder/Scenes/DEMO_RPGBuilder2.0.unity
+    guid: 1f6bc91b6f0af0e4d9d9848d3c0323fa
   m_configObjects: {}

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 4c0568434d8a3434d8e1a1140b6710fd
+timeCreated: 1542065489
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Prefabs/MagicAbilities/PC/vfx_MagicAbility_Spikes_Ice.prefab
+  uploadId: 600198

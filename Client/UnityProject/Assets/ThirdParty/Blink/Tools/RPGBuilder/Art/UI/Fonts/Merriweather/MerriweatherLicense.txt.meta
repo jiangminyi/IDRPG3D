@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 657e71736c8fab9429f880f650bcaa5a
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Fonts/Merriweather/MerriweatherLicense.txt
+  uploadId: 600198

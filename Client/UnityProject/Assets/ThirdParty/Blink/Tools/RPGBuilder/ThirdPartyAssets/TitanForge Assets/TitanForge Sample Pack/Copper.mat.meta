@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b1b56142a2062ed4591a63c1981f0709
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Copper.mat
+  uploadId: 600198

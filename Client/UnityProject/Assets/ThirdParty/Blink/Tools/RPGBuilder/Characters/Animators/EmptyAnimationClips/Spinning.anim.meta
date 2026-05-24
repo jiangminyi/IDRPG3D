@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 58dd85e658f07834c8814303843104c3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/Spinning.anim
+  uploadId: 600198

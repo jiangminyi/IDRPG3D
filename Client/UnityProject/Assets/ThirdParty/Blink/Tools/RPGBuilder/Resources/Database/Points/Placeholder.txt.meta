@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 39be49d715847f14cb654f44e6813ab0
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Points/Placeholder.txt
+  uploadId: 600198

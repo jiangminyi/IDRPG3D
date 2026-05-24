@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4ead7886c42b316409a47add16e0f19b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Settings/World_Settings.asset
+  uploadId: 600198

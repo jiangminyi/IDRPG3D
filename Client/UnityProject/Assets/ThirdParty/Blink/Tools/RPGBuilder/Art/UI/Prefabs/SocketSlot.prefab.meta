@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a8a0387497f975a428c4d2c3b6055691
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/SocketSlot.prefab
+  uploadId: 600198

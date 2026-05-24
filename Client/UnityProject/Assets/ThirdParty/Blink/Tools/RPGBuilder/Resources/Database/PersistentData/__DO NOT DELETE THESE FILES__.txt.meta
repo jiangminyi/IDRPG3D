@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab36f556ca155d54a94f2dba6df7f633
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/__DO
+    NOT DELETE THESE FILES__.txt
+  uploadId: 600198

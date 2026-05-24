@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7766221ee3d8a8c4e92454c84bc2734a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/UI_Essentials/UI_Panels_Essentials/Skill_Book.prefab
+  uploadId: 600198

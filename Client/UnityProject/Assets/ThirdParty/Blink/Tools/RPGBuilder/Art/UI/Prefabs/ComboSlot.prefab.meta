@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 22db763a0b0df034e91e2494a8fdae2f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/ComboSlot.prefab
+  uploadId: 600198

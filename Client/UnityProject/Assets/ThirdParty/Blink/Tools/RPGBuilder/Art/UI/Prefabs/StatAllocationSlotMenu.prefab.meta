@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 14724878ab0218947ae0f547ef6673ad
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/StatAllocationSlotMenu.prefab
+  uploadId: 600198

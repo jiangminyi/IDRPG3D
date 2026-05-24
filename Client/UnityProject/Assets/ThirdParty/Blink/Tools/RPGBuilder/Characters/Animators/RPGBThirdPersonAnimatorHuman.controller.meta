@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a7fb1b03a3beacc4ea0b8338bb822ee8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/RPGBThirdPersonAnimatorHuman.controller
+  uploadId: 600198

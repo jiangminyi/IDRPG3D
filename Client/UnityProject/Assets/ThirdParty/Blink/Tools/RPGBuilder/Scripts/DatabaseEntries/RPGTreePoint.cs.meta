@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 611f062e7b0d0c94699a3f17232f0985
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/DatabaseEntries/RPGTreePoint.cs
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7299d745753f5be4c8b771f41945ed2c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Pyromancer/Fire_Charge.prefab
+  uploadId: 600198

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 806bd4aad9c166c4aa2bf3e3f0fd7644
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Managers/EnchantingManager.cs
+  uploadId: 600198

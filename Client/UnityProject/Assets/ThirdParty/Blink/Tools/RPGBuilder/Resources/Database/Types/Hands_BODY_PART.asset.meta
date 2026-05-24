@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7dd55ca703afcaf40933a7ed7304245c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/Hands_BODY_PART.asset
+  uploadId: 600198

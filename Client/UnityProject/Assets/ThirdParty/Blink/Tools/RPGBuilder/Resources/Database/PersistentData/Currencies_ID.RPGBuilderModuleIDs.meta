@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5805be694309d3a42bfec5102e71a04e
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/Currencies_ID.RPGBuilderModuleIDs
+  uploadId: 600198

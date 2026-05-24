@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 576c287598b434948a2dfb1d4cadaa56
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorEntryModules/Spellbooks.asset
+  uploadId: 600198

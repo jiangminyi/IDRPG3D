@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 827c282016b19644d99b2337152dc01b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/NaughtyCharacter/ScriptableObjects/PlayerController.asset
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 11c70a3eda9da1e49b4e2dcc673c8eda
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/JumpGoesDown.anim
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3ba412ea703bc2f4697ddcf06f7f13ec
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Health_STAT.asset
+  uploadId: 600198

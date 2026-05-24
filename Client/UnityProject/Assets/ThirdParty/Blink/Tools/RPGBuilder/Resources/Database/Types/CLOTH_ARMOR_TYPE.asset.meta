@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b3e9dece47ba97945968b015c97df10d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/CLOTH_ARMOR_TYPE.asset
+  uploadId: 600198

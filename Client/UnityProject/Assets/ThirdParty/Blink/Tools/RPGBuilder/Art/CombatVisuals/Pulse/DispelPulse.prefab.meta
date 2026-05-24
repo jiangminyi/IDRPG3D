@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 022d3360d1ad2b747b357e43e426f27b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Pulse/DispelPulse.prefab
+  uploadId: 600198

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a51fa861f18b65140901eef3f9641c08
+timeCreated: 1521213145
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Materials/Shockwave01_Add_4x4.mat
+  uploadId: 600198

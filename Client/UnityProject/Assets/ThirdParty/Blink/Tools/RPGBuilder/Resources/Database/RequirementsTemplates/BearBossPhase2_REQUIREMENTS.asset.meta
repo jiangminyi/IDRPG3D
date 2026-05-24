@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2637adf5586ef944f9b57133c7be550b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/RequirementsTemplates/BearBossPhase2_REQUIREMENTS.asset
+  uploadId: 600198

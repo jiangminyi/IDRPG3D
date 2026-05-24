@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c077fe71dfd39b64cb2a8714faeef8ad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Managers/TargetInfoDisplayManager.cs
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6dbb1ef66c75e944bb701771e10a342f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/AoE/FireKnockback.prefab
+  uploadId: 600198

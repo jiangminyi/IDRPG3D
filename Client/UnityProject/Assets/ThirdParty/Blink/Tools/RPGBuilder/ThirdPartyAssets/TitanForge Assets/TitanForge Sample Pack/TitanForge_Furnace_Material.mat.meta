@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b9dee61323f0c6e4f86e5479486128f6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/TitanForge_Furnace_Material.mat
+  uploadId: 600198

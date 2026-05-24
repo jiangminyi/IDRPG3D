@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 58caa9a2fc4f82845aee26bd9f9c2464
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/GearSets/Placeholder.txt
+  uploadId: 600198

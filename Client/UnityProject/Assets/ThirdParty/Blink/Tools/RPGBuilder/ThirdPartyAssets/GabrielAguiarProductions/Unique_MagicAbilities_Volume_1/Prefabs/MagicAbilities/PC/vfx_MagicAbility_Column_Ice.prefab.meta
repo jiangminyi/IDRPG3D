@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 241a83749909ade49b34adadf33fc882
+timeCreated: 1556879835
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Prefabs/MagicAbilities/PC/vfx_MagicAbility_Column_Ice.prefab
+  uploadId: 600198

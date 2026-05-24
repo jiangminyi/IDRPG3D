@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8e415c658b825cf4abad478bd8cf1efd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/AIData/AIStateTemplates/Combat IdleTemplate.asset
+  uploadId: 600198

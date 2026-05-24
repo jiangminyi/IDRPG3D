@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f6c4ab9c017ee9c42821931e3d4cf4dc
+timeCreated: 1541718158
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Animations/vfx_MagicAbility_Earthshatter_v1.anim
+  uploadId: 600198

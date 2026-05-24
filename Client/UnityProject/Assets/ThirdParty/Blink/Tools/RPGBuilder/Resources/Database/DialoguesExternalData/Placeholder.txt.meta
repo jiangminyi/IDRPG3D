@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ec2d93584ed0b2f449be8c40a3fc61ba
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/DialoguesExternalData/Placeholder.txt
+  uploadId: 600198

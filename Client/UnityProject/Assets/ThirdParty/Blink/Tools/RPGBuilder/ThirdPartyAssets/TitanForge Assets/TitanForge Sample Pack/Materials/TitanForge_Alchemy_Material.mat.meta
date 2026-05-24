@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bb80016cd562b9d4aae0f9b6d4f92e7a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Materials/TitanForge_Alchemy_Material.mat
+  uploadId: 600198

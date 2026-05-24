@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 50a92a0d583168949a6d3a497e9ae171
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Auras/ToxicAura.prefab
+  uploadId: 600198

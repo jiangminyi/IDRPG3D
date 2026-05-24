@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0ea021632abb7f54082291c53a064509
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/BoarThorn_EFFECT.asset
+  uploadId: 600198

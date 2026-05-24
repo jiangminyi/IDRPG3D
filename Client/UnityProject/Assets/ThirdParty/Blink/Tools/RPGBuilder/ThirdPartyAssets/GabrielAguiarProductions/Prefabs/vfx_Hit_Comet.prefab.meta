@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6acc16905de9ce644bebee77ca2f1f9b
+timeCreated: 1540302997
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Prefabs/vfx_Hit_Comet.prefab
+  uploadId: 600198

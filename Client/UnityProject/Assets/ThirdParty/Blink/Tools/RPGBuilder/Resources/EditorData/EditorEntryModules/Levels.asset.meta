@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 257e55ab9e83cb048a21d7ed4dbc698c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorEntryModules/Levels.asset
+  uploadId: 600198

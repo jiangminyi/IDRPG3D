@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fc53c887f3b00f94494629c507b0b6c7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Items/StarterMage_Pants_ITEM.asset
+  uploadId: 600198

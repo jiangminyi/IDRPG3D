@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cd2321995b79fbe48b83c7c539317332
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Abilities/BearAttack1_ABILITY.asset
+  uploadId: 600198

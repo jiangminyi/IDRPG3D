@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d23ec5541cfd74d4cbbf0bad4fb8936e
+timeCreated: 1569347606
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Muzzle/vfx_Muzzle_Fireball03_Orange.prefab
+  uploadId: 600198

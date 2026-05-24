@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b1a5bdc067bd3a419a7d4359ae1d82d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/GameActionsTemplates/BearBossPhase2_Remove_GAME_ACTIONS.asset
+  uploadId: 600198

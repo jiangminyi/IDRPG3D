@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a411da2131cf4b94681223cd1c0d7ab0
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Shaders/BL_Fresnel_Ice.shader
+  uploadId: 600198

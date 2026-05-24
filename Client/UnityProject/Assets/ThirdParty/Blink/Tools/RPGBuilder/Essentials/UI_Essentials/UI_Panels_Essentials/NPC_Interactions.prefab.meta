@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 347029b35051a694a94b5fa5b304f13b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/UI_Essentials/UI_Panels_Essentials/NPC_Interactions.prefab
+  uploadId: 600198

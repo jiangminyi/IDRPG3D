@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4c34a71cb577204082a01cae35fbf87
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Cryomancer/Mat/BL_Cryo_Splash_Fade.mat
+  uploadId: 600198

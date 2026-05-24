@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8bf2249e857c0944b9652d8fe6e6505d
+timeCreated: 1541723256
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Materials/UniqueMagicAbilities01_Add_8x10.mat
+  uploadId: 600198

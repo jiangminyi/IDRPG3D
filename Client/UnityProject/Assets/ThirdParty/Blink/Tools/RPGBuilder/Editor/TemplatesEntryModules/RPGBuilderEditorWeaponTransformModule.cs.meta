@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 17e50cbe771cdfa42a0b436396114115
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Editor/TemplatesEntryModules/RPGBuilderEditorWeaponTransformModule.cs
+  uploadId: 600198

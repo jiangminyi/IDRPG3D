@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cf79137fe5d606d4aa527313d647f344
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Utilities/UpgradeDatabase.asset
+  uploadId: 600198

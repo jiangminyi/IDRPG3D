@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 866d979f86413554c9aaa251ec2aec17
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/NPCEmptyAnimationClips/WalkForward.anim
+  uploadId: 600198

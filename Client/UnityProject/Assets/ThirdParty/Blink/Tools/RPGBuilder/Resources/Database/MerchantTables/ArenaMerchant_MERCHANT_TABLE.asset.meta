@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a8b4494bab3246f4ca1635e97d69cd5a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/MerchantTables/ArenaMerchant_MERCHANT_TABLE.asset
+  uploadId: 600198

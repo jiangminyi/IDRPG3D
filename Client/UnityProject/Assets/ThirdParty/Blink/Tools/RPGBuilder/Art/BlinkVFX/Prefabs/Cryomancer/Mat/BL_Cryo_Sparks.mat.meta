@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bde62d6a34bd0ea498454df68d4b427a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Cryomancer/Mat/BL_Cryo_Sparks.mat
+  uploadId: 600198

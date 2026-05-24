@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 04de744108e9f8643b9db689124d28d1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/Enchanting/BlessingMeshParticle.prefab
+  uploadId: 600198

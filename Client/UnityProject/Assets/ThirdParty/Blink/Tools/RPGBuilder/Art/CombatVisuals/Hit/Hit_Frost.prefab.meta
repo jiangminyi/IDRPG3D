@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f132995891d19db448281b49d7690bd7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Hit/Hit_Frost.prefab
+  uploadId: 600198

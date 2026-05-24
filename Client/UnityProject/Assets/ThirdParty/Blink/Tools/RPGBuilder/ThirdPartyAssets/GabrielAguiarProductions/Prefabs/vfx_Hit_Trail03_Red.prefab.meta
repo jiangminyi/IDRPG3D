@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2cba8f08683097b498117361c2776834
+timeCreated: 1571251735
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Prefabs/vfx_Hit_Trail03_Red.prefab
+  uploadId: 600198

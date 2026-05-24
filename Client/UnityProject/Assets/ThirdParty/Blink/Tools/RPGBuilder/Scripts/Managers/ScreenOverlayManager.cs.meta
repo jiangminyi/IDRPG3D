@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: aeb61b1eb11f0db4ab43b0ac9a20aac1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Managers/ScreenOverlayManager.cs
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c61523d3c2870114cbc48c1a62114148
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorCategories/Character.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4b2602f853fd3054ab077cbb8dce557e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Ground/Fire_Column.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: db266b86c86bc8643841b92b0774c2ee
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/BodyCullingTemplates/HideChestArms_BODY_CULLING.asset
+  uploadId: 600198

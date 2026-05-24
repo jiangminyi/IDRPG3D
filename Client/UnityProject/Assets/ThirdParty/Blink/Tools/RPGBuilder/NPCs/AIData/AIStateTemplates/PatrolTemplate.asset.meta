@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eba58e292acc3394b895d55ab98b3d6c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/AIData/AIStateTemplates/PatrolTemplate.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b12d9be1a44dfb14da83a23ec3c6207d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/SpellbookNodeSlot.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e85502e884f718b4b9893de29ba1eb0a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/BodyCullingTemplates/HideFeet_BODY_CULLING.asset
+  uploadId: 600198

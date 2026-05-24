@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3e281fcef953bf2429bdf99c8889dc1c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Meshes/spiral2.mesh
+  uploadId: 600198

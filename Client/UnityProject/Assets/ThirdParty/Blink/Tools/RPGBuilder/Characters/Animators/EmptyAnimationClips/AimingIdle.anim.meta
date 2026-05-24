@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3f8bdcf2ee8f2f245baed5d341362d45
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/AimingIdle.anim
+  uploadId: 600198

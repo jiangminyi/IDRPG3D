@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 40fa2fa90d1f7b749a41e5b400f6cad9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/Gathering.anim
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0f310bfb552240d42bde89f1c6d9c368
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/TreeNodeLine.prefab
+  uploadId: 600198

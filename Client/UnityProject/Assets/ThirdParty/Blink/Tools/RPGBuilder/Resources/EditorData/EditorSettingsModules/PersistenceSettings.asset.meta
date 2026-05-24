@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4b10eaec56e194e4d9692461c42022f3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorSettingsModules/PersistenceSettings.asset
+  uploadId: 600198

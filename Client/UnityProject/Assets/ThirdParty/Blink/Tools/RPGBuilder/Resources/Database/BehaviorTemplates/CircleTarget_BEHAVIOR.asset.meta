@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4e9612855d1f6c4bbe64762972535df
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/BehaviorTemplates/CircleTarget_BEHAVIOR.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 17597e9139f0ff14c88f4ea16b4eb922
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/UnitNameplate.prefab
+  uploadId: 600198

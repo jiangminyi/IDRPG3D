@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e985138446605194b9f9b6caeeb471ca
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Shaders/BL_Tower.shader
+  uploadId: 600198

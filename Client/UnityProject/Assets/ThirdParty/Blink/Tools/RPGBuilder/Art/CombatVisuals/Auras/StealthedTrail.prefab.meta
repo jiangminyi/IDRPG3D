@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 392779009677e6444b776af568c35328
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Auras/StealthedTrail.prefab
+  uploadId: 600198

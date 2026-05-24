@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 33e7ba81e5b53b7489b616c588fb23e7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Settings/Economy_Settings.asset
+  uploadId: 600198

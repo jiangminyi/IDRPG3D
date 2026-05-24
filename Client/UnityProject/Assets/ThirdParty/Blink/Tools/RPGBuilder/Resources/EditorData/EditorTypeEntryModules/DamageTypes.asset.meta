@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7adcee95d38e2e04a8225d82416ed4f3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTypeEntryModules/DamageTypes.asset
+  uploadId: 600198

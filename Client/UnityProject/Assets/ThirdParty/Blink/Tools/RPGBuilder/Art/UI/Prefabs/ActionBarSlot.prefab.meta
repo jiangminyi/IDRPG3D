@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02f7096faf73b054a8e468127aabe206
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/ActionBarSlot.prefab
+  uploadId: 600198

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 73f7f754e5d0b89409c9debabd4c48c6
+timeCreated: 1529273858
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_1/Prefabs/Muzzle/vfx_Muzzle_BulletGreen.prefab
+  uploadId: 600198

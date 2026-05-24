@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b783d6cedfce0df498265de3f0875b8d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Animations/GlowingText.anim
+  uploadId: 600198

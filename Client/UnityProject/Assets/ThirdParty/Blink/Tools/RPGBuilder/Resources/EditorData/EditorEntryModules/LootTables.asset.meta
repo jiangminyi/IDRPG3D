@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9406a83e32ac81744a769ebc4964f97c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorEntryModules/LootTables.asset
+  uploadId: 600198

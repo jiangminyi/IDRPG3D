@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b9f27be736ef5b04b9559d5a1531bc9c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Toxic Penetration_STAT.asset
+  uploadId: 600198

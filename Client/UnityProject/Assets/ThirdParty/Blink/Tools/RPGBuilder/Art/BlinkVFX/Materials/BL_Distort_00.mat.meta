@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c9ea9384b3c28e240bb8cca648969809
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Materials/BL_Distort_00.mat
+  uploadId: 600198

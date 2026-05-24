@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a123388c3f2aca14281fe639fd5a168c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/NPCEmptyAnimationClips/WalkBackward.anim
+  uploadId: 600198

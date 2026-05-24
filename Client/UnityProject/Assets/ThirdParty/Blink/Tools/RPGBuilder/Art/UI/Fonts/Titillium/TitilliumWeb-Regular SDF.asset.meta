@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 07e9019e5f2d0e3428d277026fa94813
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Fonts/Titillium/TitilliumWeb-Regular
+    SDF.asset
+  uploadId: 600198

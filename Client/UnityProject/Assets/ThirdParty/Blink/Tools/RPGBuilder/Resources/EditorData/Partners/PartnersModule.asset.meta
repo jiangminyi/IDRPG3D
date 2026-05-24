@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 14ec683bd07c1b14dbf70c8b371f0d4b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/Partners/PartnersModule.asset
+  uploadId: 600198

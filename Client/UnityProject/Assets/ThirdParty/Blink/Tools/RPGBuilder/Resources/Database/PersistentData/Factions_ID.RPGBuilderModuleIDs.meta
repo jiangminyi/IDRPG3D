@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e143ef5b1a2177840b8b0ef473b6483d
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/Factions_ID.RPGBuilderModuleIDs
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4a45b123a3d02c47ab962f484a810c9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Movement Speed_STAT.asset
+  uploadId: 600198

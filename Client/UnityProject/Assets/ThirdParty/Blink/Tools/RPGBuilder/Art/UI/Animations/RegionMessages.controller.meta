@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5e1d1ffe176815a48b59e5f4b000e314
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Animations/RegionMessages.controller
+  uploadId: 600198

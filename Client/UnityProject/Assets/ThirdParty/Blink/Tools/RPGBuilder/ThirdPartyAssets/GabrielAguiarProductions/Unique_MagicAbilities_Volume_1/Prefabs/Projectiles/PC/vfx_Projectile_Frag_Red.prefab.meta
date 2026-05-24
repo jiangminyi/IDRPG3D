@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e9306f326751b1a4f9ba1bafb9a933a3
+timeCreated: 1540426246
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Prefabs/Projectiles/PC/vfx_Projectile_Frag_Red.prefab
+  uploadId: 600198

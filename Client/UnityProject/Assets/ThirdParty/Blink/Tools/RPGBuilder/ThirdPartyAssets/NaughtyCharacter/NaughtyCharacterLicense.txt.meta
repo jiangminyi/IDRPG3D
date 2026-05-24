@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 47e6bb239e0a5a844a7541f2022ba238
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/NaughtyCharacter/NaughtyCharacterLicense.txt
+  uploadId: 600198

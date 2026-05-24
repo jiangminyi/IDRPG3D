@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0c439aa0666f7a6488a58259a0cffb06
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/Enchanting/FireMeshParticle.prefab
+  uploadId: 600198

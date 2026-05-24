@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f657c3479e2e064e8ffb5d5d8e5c6a6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/NPCPresetTemplates/Bear_NPC_PRESET.asset
+  uploadId: 600198

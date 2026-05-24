@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8dc3a65d76d4f7d4099f7b061f7c913f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/CastStart.anim
+  uploadId: 600198

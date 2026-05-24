@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 276989fd5d64ecc41998c0f7454c25d5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/RangedAttack1.anim
+  uploadId: 600198

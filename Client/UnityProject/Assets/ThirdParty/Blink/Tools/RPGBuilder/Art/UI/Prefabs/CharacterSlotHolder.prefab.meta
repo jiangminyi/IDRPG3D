@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 393be8205af34984596dc954675b950d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/CharacterSlotHolder.prefab
+  uploadId: 600198

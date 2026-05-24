@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3b53c52c6f5cb0f48b20027ac674d251
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/Enchanting/BehemothParticle.prefab
+  uploadId: 600198

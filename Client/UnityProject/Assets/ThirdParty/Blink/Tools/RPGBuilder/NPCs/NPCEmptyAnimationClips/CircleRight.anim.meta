@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3267d97b86a069449a27c1bfb696dd4e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/NPCEmptyAnimationClips/CircleRight.anim
+  uploadId: 600198

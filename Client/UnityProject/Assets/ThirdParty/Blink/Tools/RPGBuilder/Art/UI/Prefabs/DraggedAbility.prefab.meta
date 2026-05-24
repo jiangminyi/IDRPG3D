@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c282329e2fd9eee47a2b4688c4300d35
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/DraggedAbility.prefab
+  uploadId: 600198

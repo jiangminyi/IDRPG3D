@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 898e938e131e6c2459d142fababb9542
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTypeEntryModules/Genders.asset
+  uploadId: 600198

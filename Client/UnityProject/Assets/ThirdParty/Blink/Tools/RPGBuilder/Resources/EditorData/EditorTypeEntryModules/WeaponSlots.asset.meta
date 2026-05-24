@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80abf3b8f1edeb747ae181da44d69574
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTypeEntryModules/WeaponSlots.asset
+  uploadId: 600198

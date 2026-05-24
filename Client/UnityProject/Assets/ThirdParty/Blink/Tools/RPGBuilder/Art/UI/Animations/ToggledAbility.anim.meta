@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6b75fac5c9caadf46a4e67b711bbf194
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Animations/ToggledAbility.anim
+  uploadId: 600198

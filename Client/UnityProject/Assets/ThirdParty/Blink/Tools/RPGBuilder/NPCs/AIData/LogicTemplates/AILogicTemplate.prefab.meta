@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 42a8b97728201df44ba95376d46032e3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/AIData/LogicTemplates/AILogicTemplate.prefab
+  uploadId: 600198

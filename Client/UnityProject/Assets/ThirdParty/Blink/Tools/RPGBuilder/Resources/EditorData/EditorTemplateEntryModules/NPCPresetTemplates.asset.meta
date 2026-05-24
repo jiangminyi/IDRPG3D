@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ed3e3c3ca7caae24086eb96b85f2f8b0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTemplateEntryModules/NPCPresetTemplates.asset
+  uploadId: 600198

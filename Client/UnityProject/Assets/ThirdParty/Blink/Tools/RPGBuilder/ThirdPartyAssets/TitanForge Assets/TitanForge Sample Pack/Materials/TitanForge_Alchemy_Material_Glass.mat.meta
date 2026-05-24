@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5dac7512d289fdc4ab385a363cd78a6c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Materials/TitanForge_Alchemy_Material_Glass.mat
+  uploadId: 600198

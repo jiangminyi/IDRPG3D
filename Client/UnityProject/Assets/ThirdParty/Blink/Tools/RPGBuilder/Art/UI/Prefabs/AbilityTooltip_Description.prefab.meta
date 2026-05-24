@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 93a93a589365ff846b698234f92dec2c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/AbilityTooltip_Description.prefab
+  uploadId: 600198

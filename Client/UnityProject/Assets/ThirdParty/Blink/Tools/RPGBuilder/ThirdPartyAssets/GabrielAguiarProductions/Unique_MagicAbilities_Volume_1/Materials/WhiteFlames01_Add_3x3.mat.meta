@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9ced9883a492a5544b5275e8604821fb
+timeCreated: 1535028760
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Materials/WhiteFlames01_Add_3x3.mat
+  uploadId: 600198

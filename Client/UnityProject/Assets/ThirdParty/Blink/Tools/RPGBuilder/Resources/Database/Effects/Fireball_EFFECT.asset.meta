@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 51025b2118d92c44b9b7dd6393d3aa2c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/Fireball_EFFECT.asset
+  uploadId: 600198

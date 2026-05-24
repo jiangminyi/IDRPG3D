@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7dda03a92750ffc438d5e959f141ca7a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/NPCPresetTemplates/Merchant_NPC_PRESET.asset
+  uploadId: 600198

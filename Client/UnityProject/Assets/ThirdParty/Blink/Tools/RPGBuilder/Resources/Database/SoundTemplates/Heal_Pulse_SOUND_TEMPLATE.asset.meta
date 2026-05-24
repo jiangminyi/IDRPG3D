@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 73106ede8e8982a42b46e374e018a7ee
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/SoundTemplates/Heal_Pulse_SOUND_TEMPLATE.asset
+  uploadId: 600198

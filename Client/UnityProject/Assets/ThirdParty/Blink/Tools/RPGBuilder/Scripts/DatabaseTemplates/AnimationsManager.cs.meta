@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5a69e0899221fa04dbe0d946bbe07f76
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/DatabaseTemplates/AnimationsManager.cs
+  uploadId: 600198

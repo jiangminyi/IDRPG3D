@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f7b5b9bb0453b2440bc3cf7bbe7f68aa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/BodyCullingTemplates/HideHands_BODY_CULLING.asset
+  uploadId: 600198

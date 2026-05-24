@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 250a17fc78c80b443aef202f39f946ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Materials/TitanForge_Rock_Material_03.mat
+  uploadId: 600198

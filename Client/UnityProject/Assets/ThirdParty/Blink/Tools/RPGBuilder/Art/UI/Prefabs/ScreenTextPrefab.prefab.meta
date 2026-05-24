@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5467b0a6c4581e142972881ec17a8a9b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/ScreenTextPrefab.prefab
+  uploadId: 600198

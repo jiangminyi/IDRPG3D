@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4a18af7f08abd654eb345182b55f67ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/AIData/AIStates/Roaming_State.asset
+  uploadId: 600198

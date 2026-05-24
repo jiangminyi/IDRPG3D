@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ab5ec5239c3a9034983de8fc5fc017fb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/AoE/Explosion.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dd8425b2368b1d445882596978c75d16
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/SHOULDERS_ARMOR_SLOT.asset
+  uploadId: 600198

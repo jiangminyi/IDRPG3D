@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0dc1aee4c532b4f429284677c6ce8bf4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/Materials/DummyMat.mat
+  uploadId: 600198

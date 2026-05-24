@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 56138e2da8228eb4c9da9aa2dbbc9693
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/GameScenes/DEMO_RPGBuilder2.0_GAME_SCENE.asset
+  uploadId: 600198

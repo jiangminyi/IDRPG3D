@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d156b914596d0ae43ba2c7656cef2c47
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/NaughtyCharacter/Prefabs/SpringArm.prefab
+  uploadId: 600198

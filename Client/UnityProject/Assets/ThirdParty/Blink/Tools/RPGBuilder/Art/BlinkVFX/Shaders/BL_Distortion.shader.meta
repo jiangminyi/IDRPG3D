@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a0d42c052eed8b4488d17508f443a80
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Shaders/BL_Distortion.shader
+  uploadId: 600198

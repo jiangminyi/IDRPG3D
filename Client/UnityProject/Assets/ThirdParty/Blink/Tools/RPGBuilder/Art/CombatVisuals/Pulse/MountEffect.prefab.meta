@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0b9eadf5b37d5f34385663646f54959e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Pulse/MountEffect.prefab
+  uploadId: 600198

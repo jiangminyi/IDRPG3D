@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ca3f1289632061c4fb16944869f7120d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTypeEntryModules/WeaponHandSlots.asset
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 63b97186b7e501041a9732f9fb49e62c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/BehaviorTemplates/Bear_BEHAVIOR.asset
+  uploadId: 600198

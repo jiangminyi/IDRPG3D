@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 97f4d20d0de89eb4b9a5986b33b37896
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/AIData/AIStates/Combat_State.asset
+  uploadId: 600198

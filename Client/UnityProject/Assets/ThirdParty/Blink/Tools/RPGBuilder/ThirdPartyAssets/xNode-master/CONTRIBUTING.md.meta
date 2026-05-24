@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc1db8b29c76d44648c9c86c2dfade6d
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/xNode-master/CONTRIBUTING.md
+  uploadId: 600198

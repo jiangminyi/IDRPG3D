@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4c49fc01b97f1ef45a0c2ab7014f3f75
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Items/Blink Coin_ITEM.asset
+  uploadId: 600198

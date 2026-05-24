@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 13af6c1acbe82144196eec0867496641
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/Particles/LeavesParticleObject.prefab
+  uploadId: 600198

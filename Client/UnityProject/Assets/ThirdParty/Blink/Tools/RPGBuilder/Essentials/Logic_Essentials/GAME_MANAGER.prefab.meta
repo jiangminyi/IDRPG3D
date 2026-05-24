@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 91bd169e03d716447822cf20c76b9949
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/Logic_Essentials/GAME_MANAGER.prefab
+  uploadId: 600198

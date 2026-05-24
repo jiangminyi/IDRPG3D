@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a1f674a7062619b4d9e569e1a7c7969c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/QuestStateSlot.prefab
+  uploadId: 600198

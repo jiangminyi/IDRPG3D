@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8223126ad674fbe4da2a2cf3e6ecd3d2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Pulse/WolfShapeshiftEffect.prefab
+  uploadId: 600198

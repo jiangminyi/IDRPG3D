@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f4dc66c3b3884e84bba688ecb6e09712
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/TitanForge_Plant_Material_01.mat
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f20e77126e9cfd341be2b66e02763a4a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Slicing Resistance_STAT.asset
+  uploadId: 600198

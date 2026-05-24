@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 422b7670283a1754d8c6271b619aa811
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/GameModifierSlot.prefab
+  uploadId: 600198

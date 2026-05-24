@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 505faa6196714874e85fcdde94026304
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/FactionSlot.prefab
+  uploadId: 600198

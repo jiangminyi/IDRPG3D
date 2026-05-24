@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 35b6a0348666acc48ad3d7a24bb598df
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Thorn_STAT.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cb83ef3f80dbe1444bd5fa37b2ea4cdd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/Particles/SnowParticleObject.prefab
+  uploadId: 600198

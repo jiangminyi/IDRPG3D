@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ce4717a7b3fa53943b94e15d33f2999b
+timeCreated: 1535028760
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Materials/FireLine01_Add_3x3.mat
+  uploadId: 600198

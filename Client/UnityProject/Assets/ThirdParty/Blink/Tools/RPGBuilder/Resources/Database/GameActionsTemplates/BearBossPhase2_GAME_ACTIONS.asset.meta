@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 583a761d66681c1449ac05f62598bf6b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/GameActionsTemplates/BearBossPhase2_GAME_ACTIONS.asset
+  uploadId: 600198

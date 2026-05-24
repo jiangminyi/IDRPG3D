@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 76d5654c148c1f342b49cd2d5bb7303e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Damage Dealt_STAT.asset
+  uploadId: 600198

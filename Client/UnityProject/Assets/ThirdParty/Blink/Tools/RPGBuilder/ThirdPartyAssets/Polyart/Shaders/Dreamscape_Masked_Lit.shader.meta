@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 09acca735931207469ebf2183e339e6a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Shaders/Dreamscape_Masked_Lit.shader
+  uploadId: 600198

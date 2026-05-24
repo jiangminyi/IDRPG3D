@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a0b8b8ab13f2396448a1270a0471ab29
+timeCreated: 1535028760
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_1/Materials/GreenPoison01_ES1_3x3.mat
+  uploadId: 600198

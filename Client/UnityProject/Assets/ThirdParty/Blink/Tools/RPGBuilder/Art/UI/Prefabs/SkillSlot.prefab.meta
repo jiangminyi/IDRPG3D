@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a6fc8266ea683494db69c0fed8795a0a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/SkillSlot.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a86eeb23c144ef84ebfb8ce8fc263e9e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Fireball
+    1.prefab
+  uploadId: 600198

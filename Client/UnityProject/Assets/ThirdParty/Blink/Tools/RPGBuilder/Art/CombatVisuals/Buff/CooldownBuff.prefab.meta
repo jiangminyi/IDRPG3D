@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fa267e5593a8bb8438252f1e3d7002d9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Buff/CooldownBuff.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c3356cc5e0742d447b8b8ecae528520f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Trees/M_ConiferBB_01.mat
+  uploadId: 600198

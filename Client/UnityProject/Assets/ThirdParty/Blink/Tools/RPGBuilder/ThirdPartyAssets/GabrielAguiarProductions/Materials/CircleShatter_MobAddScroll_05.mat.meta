@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 35f7a296e6df568498eb456cbb36b931
+timeCreated: 1536706381
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Materials/CircleShatter_MobAddScroll_05.mat
+  uploadId: 600198

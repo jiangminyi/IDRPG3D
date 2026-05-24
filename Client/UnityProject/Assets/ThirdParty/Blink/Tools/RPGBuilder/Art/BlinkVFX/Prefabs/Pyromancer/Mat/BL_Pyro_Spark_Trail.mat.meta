@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5142573afff8d744c88078295c4f13bb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Pyromancer/Mat/BL_Pyro_Spark_Trail.mat
+  uploadId: 600198

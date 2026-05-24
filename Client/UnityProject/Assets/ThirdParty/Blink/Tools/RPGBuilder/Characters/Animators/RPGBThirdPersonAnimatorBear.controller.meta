@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dcb731e222fca554ca217dca85cdd13d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/RPGBThirdPersonAnimatorBear.controller
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2722e1b368e55924f8dd06b93a99b58b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Pulse/LevelUpGO.prefab
+  uploadId: 600198

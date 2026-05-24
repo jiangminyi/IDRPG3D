@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a1c8462e1fea7964799d61bbbf2941a0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Hit/Hit_Blood.prefab
+  uploadId: 600198

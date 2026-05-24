@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb3d34fa89728fe4ca88a02bcc9e57ce
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Stats/Summon Count_STAT.asset
+  uploadId: 600198

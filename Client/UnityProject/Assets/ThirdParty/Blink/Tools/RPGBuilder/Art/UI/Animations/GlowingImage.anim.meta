@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc0f16ba443faff4eaad2189362a4d29
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Animations/GlowingImage.anim
+  uploadId: 600198

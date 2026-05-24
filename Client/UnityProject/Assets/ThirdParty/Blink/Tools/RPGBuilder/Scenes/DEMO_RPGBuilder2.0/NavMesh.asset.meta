@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 136b091fbc5630943bcd09393596594a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scenes/DEMO_RPGBuilder2.0/NavMesh.asset
+  uploadId: 600198

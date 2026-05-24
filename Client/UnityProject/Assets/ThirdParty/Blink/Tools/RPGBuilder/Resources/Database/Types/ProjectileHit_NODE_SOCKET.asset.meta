@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4a517de52dcd19c49be72a961ec2ec8b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/ProjectileHit_NODE_SOCKET.asset
+  uploadId: 600198

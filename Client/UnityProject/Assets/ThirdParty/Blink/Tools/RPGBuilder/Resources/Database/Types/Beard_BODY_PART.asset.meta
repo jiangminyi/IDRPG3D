@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3b414c00bcec50a4396df1aa3e962fc8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/Beard_BODY_PART.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 12cc1659eb6a6434a850e548cef64409
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/UI_Essentials/UI_Panels_Essentials/Character.prefab
+  uploadId: 600198

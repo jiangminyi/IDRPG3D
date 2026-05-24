@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3ffa82e001eaf8840b728232e94a3b73
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Pulse/TeleportEffect.prefab
+  uploadId: 600198

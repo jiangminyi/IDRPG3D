@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 243efae3a6b7941ad8f8e54dcf38ce8c
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/xNode-master/README.md
+  uploadId: 600198

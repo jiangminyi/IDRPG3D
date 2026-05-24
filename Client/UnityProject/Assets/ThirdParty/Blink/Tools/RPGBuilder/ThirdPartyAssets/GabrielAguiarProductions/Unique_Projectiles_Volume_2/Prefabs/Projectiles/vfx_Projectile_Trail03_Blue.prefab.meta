@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a8fad54b1a6f5a94b88709088d86c264
+timeCreated: 1568591150
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Projectiles/vfx_Projectile_Trail03_Blue.prefab
+  uploadId: 600198

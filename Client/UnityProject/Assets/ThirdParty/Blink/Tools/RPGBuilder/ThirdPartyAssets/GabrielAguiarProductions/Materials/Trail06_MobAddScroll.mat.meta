@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7c58df9f529553b478642d5c26b7e3ed
+timeCreated: 1495151947
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Materials/Trail06_MobAddScroll.mat
+  uploadId: 600198

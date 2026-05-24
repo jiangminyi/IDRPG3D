@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: af3587d5a3c408843a6fd4b4c4616a18
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/Moustache_BODY_PART.asset
+  uploadId: 600198

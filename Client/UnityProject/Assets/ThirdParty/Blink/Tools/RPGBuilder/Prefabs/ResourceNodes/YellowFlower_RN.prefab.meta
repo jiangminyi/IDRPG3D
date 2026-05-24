@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bd4026ed7ee8ba145b81f270bb07fde0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/ResourceNodes/YellowFlower_RN.prefab
+  uploadId: 600198

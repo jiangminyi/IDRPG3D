@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e65ab66372ded244da490ce6e422a5af
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTemplateEntryModules/BodyCullingTemplates.asset
+  uploadId: 600198

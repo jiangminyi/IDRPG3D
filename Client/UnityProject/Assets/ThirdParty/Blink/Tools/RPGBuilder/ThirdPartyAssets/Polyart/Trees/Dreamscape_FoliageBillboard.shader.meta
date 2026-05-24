@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b28029cc52e10a0419b31f0b9b1bbc2d
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Trees/Dreamscape_FoliageBillboard.shader
+  uploadId: 600198

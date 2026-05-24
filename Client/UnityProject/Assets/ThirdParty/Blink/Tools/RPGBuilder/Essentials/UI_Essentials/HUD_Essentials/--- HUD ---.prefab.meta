@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a5487c1e62fdcaa479dc4367cb0a9497
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/UI_Essentials/HUD_Essentials/---
+    HUD ---.prefab
+  uploadId: 600198

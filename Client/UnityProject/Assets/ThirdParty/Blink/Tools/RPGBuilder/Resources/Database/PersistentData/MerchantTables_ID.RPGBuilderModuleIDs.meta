@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 21b6d6daa3cbf9b4e8fb8970f0ef3d40
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/MerchantTables_ID.RPGBuilderModuleIDs
+  uploadId: 600198

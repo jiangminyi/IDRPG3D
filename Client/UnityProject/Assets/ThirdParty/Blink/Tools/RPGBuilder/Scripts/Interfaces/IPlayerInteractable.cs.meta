@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a0a3dd8b70d55344c8b669fa8945b5f8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/Interfaces/IPlayerInteractable.cs
+  uploadId: 600198

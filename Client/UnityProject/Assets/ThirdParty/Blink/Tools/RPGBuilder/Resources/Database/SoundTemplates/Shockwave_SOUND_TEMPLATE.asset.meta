@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2991bce0c823f7248a90526f3b845e34
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/SoundTemplates/Shockwave_SOUND_TEMPLATE.asset
+  uploadId: 600198

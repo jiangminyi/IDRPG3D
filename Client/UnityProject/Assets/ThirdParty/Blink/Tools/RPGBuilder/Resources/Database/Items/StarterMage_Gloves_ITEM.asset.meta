@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cf3eb31f80c3dfe48a13012d8876160b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Items/StarterMage_Gloves_ITEM.asset
+  uploadId: 600198

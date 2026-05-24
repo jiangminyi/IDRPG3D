@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2739a57fd074bc24fa35db302c007e1d
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Enchantments/Placeholder.txt
+  uploadId: 600198

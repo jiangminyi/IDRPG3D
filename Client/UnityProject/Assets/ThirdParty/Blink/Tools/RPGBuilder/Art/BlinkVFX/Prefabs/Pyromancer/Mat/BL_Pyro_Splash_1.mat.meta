@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4db48bac22841af47a598f106d80ea90
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Prefabs/Pyromancer/Mat/BL_Pyro_Splash_1.mat
+  uploadId: 600198

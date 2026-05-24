@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: fe95cc8164149164bbcfda2abdc7aff1
+timeCreated: 1571260853
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Prefabs/vfx_Muzzle_Trail03_Red.prefab
+  uploadId: 600198

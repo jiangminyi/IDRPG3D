@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d5b23f8c15a67ba41b74abac205d4b93
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/CurrencySlot.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80844b2319340044da27db99208a9eac
+timeCreated: 1443265664
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/Controller_Essentials/CameraRig.prefab
+  uploadId: 600198

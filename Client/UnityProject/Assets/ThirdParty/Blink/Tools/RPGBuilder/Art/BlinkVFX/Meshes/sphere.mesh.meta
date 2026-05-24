@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 36df141fd3937b545aab78a2aa02ccc8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Meshes/sphere.mesh
+  uploadId: 600198

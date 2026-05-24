@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 51e49a936df7739409c2fc5718f9da7d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/DatabaseTypeEntries/RPGBArmorSlot.cs
+  uploadId: 600198

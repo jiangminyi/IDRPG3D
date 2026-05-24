@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5de7a3690dc112646a95a2a80c3df592
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/MerchantTableSlot.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e9b55622d7386f246b408b969dc04628
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/Knockback_EFFECT.asset
+  uploadId: 600198

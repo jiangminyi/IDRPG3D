@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a4c742b06ba9d6341a9434cfaa0901a4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/StateSlot.prefab
+  uploadId: 600198

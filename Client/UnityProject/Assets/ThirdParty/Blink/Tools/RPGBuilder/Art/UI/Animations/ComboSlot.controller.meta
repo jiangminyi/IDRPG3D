@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 16f0e7b007c1e8f41b95295f7b7f3844
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Animations/ComboSlot.controller
+  uploadId: 600198

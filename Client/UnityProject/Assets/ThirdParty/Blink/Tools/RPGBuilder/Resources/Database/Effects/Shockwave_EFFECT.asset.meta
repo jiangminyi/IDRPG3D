@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d276ed9f52cb43e45869e9825abaa37a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/Shockwave_EFFECT.asset
+  uploadId: 600198

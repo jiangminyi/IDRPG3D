@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ff9a2a81e3c1452428191d79bd8ccbe1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/RollRight.anim
+  uploadId: 600198

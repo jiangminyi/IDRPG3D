@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bce07712ca593f34f9c226bb6b2bcba4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/Overrides/HumanRestOverride.overrideController
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 21adbea3b6a1d71499bb488c5118bbb3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/NPCEmptyAnimationClips/LoopAbility.anim
+  uploadId: 600198

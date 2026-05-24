@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a4ca7bee005d59247a00c5490a74edf2
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Fonts/Acme/AcmeLicense.txt
+  uploadId: 600198

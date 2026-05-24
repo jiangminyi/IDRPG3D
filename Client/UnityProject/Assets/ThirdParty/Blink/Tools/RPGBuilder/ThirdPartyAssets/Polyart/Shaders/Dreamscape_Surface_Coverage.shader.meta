@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9e462be833276004095a6c0ca5194f33
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Shaders/Dreamscape_Surface_Coverage.shader
+  uploadId: 600198

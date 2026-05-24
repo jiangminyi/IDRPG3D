@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 08f3d3e61e97d8f49b39eabf6a9f0ead
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/ShapeshiftSlot.prefab
+  uploadId: 600198

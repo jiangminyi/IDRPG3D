@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dcfae75dda8d0b0479c4a53bef1334bd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/BlinkVFX/Meshes/ice3.mesh
+  uploadId: 600198

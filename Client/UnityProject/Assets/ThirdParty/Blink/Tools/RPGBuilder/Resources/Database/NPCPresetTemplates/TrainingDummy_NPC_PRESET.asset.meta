@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f2ba02ba38a0a4418ea9088f078e708
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/NPCPresetTemplates/TrainingDummy_NPC_PRESET.asset
+  uploadId: 600198

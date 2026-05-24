@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 32a4a7b9185ef3a4e887aef537ed7291
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Animators/EmptyAnimationClips/StrafeBackward.anim
+  uploadId: 600198

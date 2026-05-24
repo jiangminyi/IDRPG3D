@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a3c56775ee7b8ea4480dad0fa94225d2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Editor/TypeEntryModules/RPGBuilderEditorHealingTypeModule.cs
+  uploadId: 600198

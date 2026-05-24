@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e27e4682e382c4e478e3d990bd35bcda
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/TitanForge Assets/TitanForge
+    Sample Pack/Station_Enchanting_Simple.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d8fa4083aea515d4c93d838d0d21ac09
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/Uncommon_ITEM_RARITY.asset
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 27b112dd9f1ae2143b589909463ca2ad
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/BOW_WEAPON_TYPE.asset
+  uploadId: 600198

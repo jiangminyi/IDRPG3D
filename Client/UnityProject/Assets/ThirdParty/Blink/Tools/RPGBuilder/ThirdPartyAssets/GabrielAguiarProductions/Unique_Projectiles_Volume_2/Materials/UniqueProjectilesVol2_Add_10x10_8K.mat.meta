@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: cdaf8230cf63e564588ddac3ef58c964
+timeCreated: 1521213145
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Materials/UniqueProjectilesVol2_Add_10x10_8K.mat
+  uploadId: 600198

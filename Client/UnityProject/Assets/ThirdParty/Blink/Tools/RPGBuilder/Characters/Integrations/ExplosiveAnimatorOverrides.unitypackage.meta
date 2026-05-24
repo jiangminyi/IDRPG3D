@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0e6898b5fd47635478e4b51ea9e5a15d
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Integrations/ExplosiveAnimatorOverrides.unitypackage
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb427a4e2a1865141ba81ec6c8324597
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorEntryModules/WeaponTemplates.asset
+  uploadId: 600198

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 87db680216202b5478fef32943202865
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/Effects_ID.RPGBuilderModuleIDs
+  uploadId: 600198

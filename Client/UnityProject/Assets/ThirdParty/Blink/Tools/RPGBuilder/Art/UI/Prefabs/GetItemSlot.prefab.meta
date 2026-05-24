@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c66e7ed33c1c9804aba4f117aabcf9f3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Prefabs/GetItemSlot.prefab
+  uploadId: 600198

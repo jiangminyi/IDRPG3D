@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 68a0ef4dcae9aa14687734d594059d40
+timeCreated: 1543621781
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Prefabs/vfx_Projectile_ArrowFire.prefab
+  uploadId: 600198

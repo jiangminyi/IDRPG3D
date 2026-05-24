@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8d0bb93828a4c964a9565c472e19a10e
+timeCreated: 1556841737
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Animations/vfx_MagicAbility_Buff01_v1.anim
+  uploadId: 600198

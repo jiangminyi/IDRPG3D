@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ea001bcd68210d644a1e2bc2ebd9fa5a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/ResourceNodes/BlueFlower_RN.prefab
+  uploadId: 600198

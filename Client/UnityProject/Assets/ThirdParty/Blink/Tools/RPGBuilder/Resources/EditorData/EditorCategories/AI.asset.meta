@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80a19a8343b211f4a9264ecfd944c732
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorCategories/AI.asset
+  uploadId: 600198

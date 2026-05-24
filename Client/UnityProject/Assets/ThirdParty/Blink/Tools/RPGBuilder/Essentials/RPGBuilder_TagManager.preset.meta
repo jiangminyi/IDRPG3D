@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4f23f94ca1f2b54191a19f947affb2f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Essentials/RPGBuilder_TagManager.preset
+  uploadId: 600198

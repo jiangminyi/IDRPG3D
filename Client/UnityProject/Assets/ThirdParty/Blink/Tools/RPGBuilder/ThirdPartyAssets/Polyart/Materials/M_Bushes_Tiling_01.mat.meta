@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da6b51958c17d6e49a7354c1605d1914
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/Polyart/Materials/M_Bushes_Tiling_01.mat
+  uploadId: 600198

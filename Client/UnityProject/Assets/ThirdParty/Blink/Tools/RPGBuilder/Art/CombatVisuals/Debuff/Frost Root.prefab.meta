@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 30ceec6c4e113b34a95b4e6f4f198291
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Debuff/Frost Root.prefab
+  uploadId: 600198

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 21abf7def6e7144468d1480a3ca69850
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/Materials/BlinkPrototypeGrid.mat
+  uploadId: 600198

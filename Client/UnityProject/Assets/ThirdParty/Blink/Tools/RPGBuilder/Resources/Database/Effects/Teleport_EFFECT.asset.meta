@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 07a7f6a338957554a81f7eb5fb2a9f9c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Effects/Teleport_EFFECT.asset
+  uploadId: 600198

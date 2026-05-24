@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 313ea4b2f5237a4499c87747d2dc276f
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/GameScenes_ID.RPGBuilderModuleIDs
+  uploadId: 600198

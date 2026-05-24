@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: beed1bbf2aa857849b5e9d0abf4e70af
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Characters/Character_HumanMale.prefab
+  uploadId: 600198

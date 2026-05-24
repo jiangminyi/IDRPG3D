@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c01004d25cbcf94418911a11f9496f3d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Prefabs/CraftingStations/Anvil.prefab
+  uploadId: 600198

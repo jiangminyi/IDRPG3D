@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eed4a2eff0527714f984c0cc181014ba
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/Animators/Overrides/Bear.overrideController
+  uploadId: 600198

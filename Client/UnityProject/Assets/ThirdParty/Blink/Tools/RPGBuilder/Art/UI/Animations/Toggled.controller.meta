@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 20d3972f0fb1f7e47a4645fbc4d8d9cd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/UI/Animations/Toggled.controller
+  uploadId: 600198

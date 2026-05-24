@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 211615af50a386e4cbe7257578b22672
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Scripts/RPGBuilderSettings/RPGBuilderPartners.cs
+  uploadId: 600198

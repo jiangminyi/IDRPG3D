@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: acafe12c8d052264c92686ceac6a3c8c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/EditorData/EditorTemplateEntryModules/AIPhaseActionsTemplates.asset
+  uploadId: 600198

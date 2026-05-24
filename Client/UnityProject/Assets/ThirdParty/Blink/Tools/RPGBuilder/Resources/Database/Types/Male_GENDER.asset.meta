@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6af37385c57329640bdb53dd75cf6921
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/Types/Male_GENDER.asset
+  uploadId: 600198

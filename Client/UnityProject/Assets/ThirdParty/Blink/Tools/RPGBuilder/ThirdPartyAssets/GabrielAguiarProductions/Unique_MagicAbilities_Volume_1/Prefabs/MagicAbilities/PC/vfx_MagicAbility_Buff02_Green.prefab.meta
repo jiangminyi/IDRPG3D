@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6105e89f9bbb4894eb05adc2a8658637
+timeCreated: 1556882969
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Prefabs/MagicAbilities/PC/vfx_MagicAbility_Buff02_Green.prefab
+  uploadId: 600198

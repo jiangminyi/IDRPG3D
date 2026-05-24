@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: afa7725c646d7b445874a7d63c1ffb31
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Art/CombatVisuals/Ground/Fire_Charge.prefab
+  uploadId: 600198

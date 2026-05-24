@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 72abb1d0f434dde4f9d1336f288559af
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/Resources/Database/PersistentData/Races_ID.RPGBuilderModuleIDs
+  uploadId: 600198

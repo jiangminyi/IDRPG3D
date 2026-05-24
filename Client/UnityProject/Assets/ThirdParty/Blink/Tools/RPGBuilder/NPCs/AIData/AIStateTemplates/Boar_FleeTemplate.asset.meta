@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5f515443f156c4f4c8e6c9802646e07c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177657
+  packageName: RPG Builder
+  packageVersion: 2.1
+  assetPath: Assets/Blink/Tools/RPGBuilder/NPCs/AIData/AIStateTemplates/Boar_FleeTemplate.asset
+  uploadId: 600198
