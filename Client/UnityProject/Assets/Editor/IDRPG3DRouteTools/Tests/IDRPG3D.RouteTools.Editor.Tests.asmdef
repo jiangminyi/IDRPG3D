@@ -1,0 +1,26 @@
+{
+    "name": "IDRPG3D.RouteTools.Editor.Tests",
+    "rootNamespace": "",
+    "references": [
+        "IDRPG3D.RouteTools.Editor",
+        "Dreamteck.Splines"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

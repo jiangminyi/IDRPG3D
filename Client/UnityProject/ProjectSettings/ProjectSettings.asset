@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
-  m_ActiveColorSpace: 0
+  m_ActiveColorSpace: 1
   unsupportedMSAAFallback: 0
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
@@ -796,7 +796,7 @@ PlayerSettings:
     PS5: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     QNX: TextMeshPro
     Stadia: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
-    Standalone: ENABLE_LOG;TextMeshPro
+    Standalone: ENABLE_LOG;TextMeshPro;DREAMTECK_SPLINES
     VisionOS: TextMeshPro
     WebGL: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro;ENABLE_LOG
     Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro;ENABLE_LOG
@@ -805,7 +805,8 @@ PlayerSettings:
     tvOS: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
