@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2523eebf25157584abcdf56245fd0cbf, type: 3}
+  m_Name: AviaCenterBuildingData
+  m_EditorClassIdentifier: 
+  textId: Helipad
+  icon: {fileID: 21300000, guid: 9dcd2ee18dd9ab844a4de90790cfd143, type: 3}
+  unitModel: {fileID: 100000, guid: fa540fde80c0fae4f85a0e03e7f778a0, type: 3}
+  animatorController: {fileID: 9100000, guid: 016db8e3787f7524880293f626561ed5, type: 2}
+  canBeDestroyed: 1
+  maxHealth: 125
+  isHarvester: 0
+  isInfantry: 0
+  visionDistance: 15
+  price: 2000
+  buildTime: 7
+  hasMoveModule: 0
+  moveType: 0
+  moveSpeed: 0
+  rotationSpeed: 0
+  flyingFlyHeight: 6
+  canMoveWhileAttackingTarget: 0
+  hasAttackModule: 0
+  attackPossibility: 0
+  attackDistance: 5
+  usedDamageType: 0
+  attackDamage: 15
+  attackShell: {fileID: 0}
+  allowShootThroughUnitObstacles: 1
+  allowShootThroughAnyObstacles: 1
+  needAimToTargetToShoot: 1
+  stillTryRotateToTargetWhenNoAimNeeded: 1
+  reloadTime: 1
+  hasTurret: 0
+  towerRotationSpeed: 1
+  limitTowerRotationAngle: 0
+  maximumTowerRotationAngle: 15
+  addsElectricity: 0
+  usesElectricity: 5
+  canBeCarried: 0
+  canCarryUnitsCount: 0
+  explosionEffect: {fileID: 1444189580755094, guid: 0e4557f159442ff45b215522ee1afef1,
+    type: 2}
+  shootSoundVariations: []
+  selectionSoundVariations:
+  - {fileID: 8300000, guid: caf195c014c7c8943b585ddc9a480de7, type: 3}
+  orderSoundVariations: []
+  shootSoundPitchRandomization: 0.05
+  selfPrefab: {fileID: 1756450846382436, guid: 36eaac8110dbff74795a20fa7a10c734, type: 2}
+  isBuilding: 1
+  isRefinery: 0
+  isProduction: 1
+  productionCategories:
+  - {fileID: 11400000, guid: ba1ad44ef6fe5f34095fc8bf7d3cf7e0, type: 2}
+  drawerObject: {fileID: 1685535130073106, guid: f3f751ba79e1fc14591377354611dfa8,
+    type: 2}

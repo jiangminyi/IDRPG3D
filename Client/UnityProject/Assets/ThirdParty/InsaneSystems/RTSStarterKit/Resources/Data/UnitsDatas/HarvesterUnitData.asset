@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2523eebf25157584abcdf56245fd0cbf, type: 3}
+  m_Name: HarvesterUnitData
+  m_EditorClassIdentifier: 
+  textId: Harvester
+  icon: {fileID: 21300000, guid: 6a4f1dd0d44771a4c9aa1e5bd1291423, type: 3}
+  unitModel: {fileID: 0}
+  animatorController: {fileID: 0}
+  canBeDestroyed: 1
+  maxHealth: 100
+  isHarvester: 1
+  isInfantry: 0
+  visionDistance: 12
+  price: 400
+  buildTime: 3
+  hasMoveModule: 1
+  moveType: 0
+  moveSpeed: 2
+  rotationSpeed: 360
+  flyingFlyHeight: 6
+  canMoveWhileAttackingTarget: 1
+  hasAttackModule: 0
+  attackPossibility: 0
+  attackDistance: 0
+  usedDamageType: 0
+  attackDamage: 15
+  attackShell: {fileID: 0}
+  allowShootThroughUnitObstacles: 1
+  allowShootThroughAnyObstacles: 1
+  needAimToTargetToShoot: 1
+  stillTryRotateToTargetWhenNoAimNeeded: 1
+  reloadTime: 1
+  hasTurret: 0
+  towerRotationSpeed: 0
+  limitTowerRotationAngle: 0
+  maximumTowerRotationAngle: 15
+  addsElectricity: 0
+  usesElectricity: 0
+  explosionEffect: {fileID: 1095235177254582, guid: 396041383660ed14e864f26d897f68f1,
+    type: 2}
+  shootSoundVariations: []
+  selectionSoundVariations:
+  - {fileID: 8300000, guid: caf195c014c7c8943b585ddc9a480de7, type: 3}
+  orderSoundVariations: []
+  shootSoundPitchRandomization: 0.05
+  selfPrefab: {fileID: 1332937269014874, guid: 845cb95ad2cd3b64391da547ac5b7e2b, type: 2}
+  isBuilding: 0
+  isRefinery: 0
+  isProduction: 0
+  drawerObject: {fileID: 0}

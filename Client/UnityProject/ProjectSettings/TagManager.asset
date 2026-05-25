@@ -14,24 +14,24 @@ TagManager:
   - UI
   - 
   - 
+  - GroundTerrain
+  - Unit
+  - Terrain
+  - FogOfWar
+  - ResourceField
+  - Border
+  - TempCast
   - 
   - 
   - 
+  - MinimapUI
+  - HoverHealthBar
+  - MvtTargetObj
+  - AllCams
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - AirTerrain
+  - PostProcessing
+  - A*GridObstacle
   - 
   - 
   - 

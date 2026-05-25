@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2523eebf25157584abcdf56245fd0cbf, type: 3}
+  m_Name: PowerPlantBuildingData
+  m_EditorClassIdentifier: 
+  textId: Power Plant
+  icon: {fileID: 21300000, guid: 8a72ab26dc3510045828e2a67a532bee, type: 3}
+  unitModel: {fileID: 0}
+  animatorController: {fileID: 0}
+  canBeDestroyed: 1
+  maxHealth: 150
+  isHarvester: 0
+  isInfantry: 0
+  visionDistance: 18
+  price: 400
+  buildTime: 3
+  hasMoveModule: 0
+  moveType: 0
+  moveSpeed: 0
+  rotationSpeed: 0
+  flyingFlyHeight: 6
+  canMoveWhileAttackingTarget: 0
+  hasAttackModule: 0
+  attackPossibility: 0
+  attackDistance: 5
+  usedDamageType: 0
+  attackDamage: 15
+  attackShell: {fileID: 0}
+  allowShootThroughUnitObstacles: 1
+  allowShootThroughAnyObstacles: 1
+  needAimToTargetToShoot: 1
+  stillTryRotateToTargetWhenNoAimNeeded: 1
+  reloadTime: 1
+  hasTurret: 0
+  towerRotationSpeed: 1
+  limitTowerRotationAngle: 0
+  maximumTowerRotationAngle: 15
+  addsElectricity: 6
+  usesElectricity: 0
+  explosionEffect: {fileID: 1444189580755094, guid: 0e4557f159442ff45b215522ee1afef1,
+    type: 2}
+  shootSoundVariations: []
+  selectionSoundVariations:
+  - {fileID: 8300000, guid: caf195c014c7c8943b585ddc9a480de7, type: 3}
+  orderSoundVariations: []
+  shootSoundPitchRandomization: 0.05
+  selfPrefab: {fileID: 1463643171123718, guid: 33ab772107398494d9e42144f0edb3c4, type: 2}
+  isBuilding: 1
+  isRefinery: 0
+  isProduction: 0
+  drawerObject: {fileID: 1138714053284444, guid: 00a878ea4ff090a4c8e1fd7d65afef56,
+    type: 2}

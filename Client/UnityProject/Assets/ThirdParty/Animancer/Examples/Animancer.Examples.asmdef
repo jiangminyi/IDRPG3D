@@ -1,0 +1,19 @@
+{
+    "name": "Animancer.Examples",
+    "references": [
+        "Animancer",
+        "Animancer.FSM",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "IDRPG3D_COMPILE_THIRDPARTY_EXAMPLES"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

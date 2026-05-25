@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ThirdParty/Blink/Tools/RPGBuilder/Scenes/DEMO_RPGBuilder2.0.unity
     guid: 1f6bc91b6f0af0e4d9d9848d3c0323fa
+  - enabled: 1
+    path: Assets/ThirdParty/InsaneSystems/RTSStarterKit/Scenes/Lobby.unity
+    guid: 268c4a4f4392d5a4b8e6bf9c419300ba
+  - enabled: 1
+    path: Assets/ThirdParty/InsaneSystems/RTSStarterKit/Scenes/Example.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/ThirdParty/InsaneSystems/RTSStarterKit/Scenes/Example 2.unity
+    guid: 4046e46dab8aaed4caaaba7fd3630e08
   m_configObjects: {}

@@ -1,0 +1,19 @@
+{
+    "name": "IDRPG3D.LocalTest",
+    "rootNamespace": "IDRPG3D.LocalTest",
+    "references": [
+        "IDRPG3D.GameplayPrototype",
+        "Dreamteck.Splines",
+        "Unity.AI.Navigation",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,116 @@
+using UnityEngine;
+
+namespace IDRPG3D.GameplayPrototype
+{
+    [RequireComponent(typeof(IDRPG3DCombatUnit))]
+    [RequireComponent(typeof(IDRPG3DNavMoveAgent))]
+    public sealed class IDRPG3DAutoCombatBrain : MonoBehaviour
+    {
+        private IDRPG3DCombatUnit unit;
+        private IDRPG3DNavMoveAgent mover;
+        private IDRPG3DAnimatorBridge animatorBridge;
+        private IDRPG3DPrototypeSkillCaster skillCaster;
+        private IDRPG3DCombatUnit currentTarget;
+        private float nextAttackTime;
+
+        public bool HasTarget => currentTarget != null && currentTarget.IsAlive;
+
+        private void Awake()
+        {
+            Initialize();
+        }
+
+        private void Update()
+        {
+            Tick(Time.deltaTime);
+        }
+
+        public void Initialize()
+        {
+            unit = GetComponent<IDRPG3DCombatUnit>();
+            mover = GetComponent<IDRPG3DNavMoveAgent>();
+            animatorBridge = GetComponent<IDRPG3DAnimatorBridge>();
+            if (animatorBridge == null)
+            {
+                animatorBridge = gameObject.AddComponent<IDRPG3DAnimatorBridge>();
+            }
+            skillCaster = GetComponent<IDRPG3DPrototypeSkillCaster>();
+            mover.Initialize();
+            animatorBridge.Initialize();
+        }
+
+        public void SetTarget(IDRPG3DCombatUnit target)
+        {
+            if (target == unit)
+            {
+                return;
+            }
+
+            currentTarget = target;
+        }
+
+        public void ClearTarget()
+        {
+            currentTarget = null;
+        }
+
+        private void Tick(float deltaTime)
+        {
+            if (unit == null || !unit.IsAlive)
+            {
+                mover?.Stop();
+                return;
+            }
+
+            if (unit.Faction == IDRPG3DCombatFaction.Hero && !HasTarget)
+            {
+                return;
+            }
+
+            if (!HasTarget)
+            {
+                if (unit.ThreatTable.TryGetHighestThreatTarget(target => target != null && target.IsAlive, out var threatTarget))
+                {
+                    currentTarget = threatTarget;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            var targetPosition = currentTarget.transform.position;
+            var sqrDistance = (targetPosition - transform.position).sqrMagnitude;
+            if (skillCaster == null)
+            {
+                skillCaster = GetComponent<IDRPG3DPrototypeSkillCaster>();
+            }
+
+            var baseAttackRange = skillCaster != null && skillCaster.HasSkill ? skillCaster.Skill.Range : unit.AttackRange;
+            var attackRange = baseAttackRange + currentTarget.Radius;
+            if (sqrDistance > attackRange * attackRange)
+            {
+                mover.MoveTo(targetPosition, Mathf.Max(0.15f, baseAttackRange * 0.75f));
+                return;
+            }
+
+            mover.Stop();
+            mover.FacePosition(targetPosition);
+
+            if (Time.time < nextAttackTime)
+            {
+                return;
+            }
+
+            nextAttackTime = Time.time + (skillCaster != null && skillCaster.HasSkill ? skillCaster.Skill.Cooldown : unit.AttackInterval);
+            animatorBridge.PlayMeleeAttack();
+            if (skillCaster != null && skillCaster.HasSkill)
+            {
+                skillCaster.TryCast(currentTarget);
+                return;
+            }
+
+            currentTarget.TakeDamage(unit.AttackPower, unit);
+        }
+    }
+}

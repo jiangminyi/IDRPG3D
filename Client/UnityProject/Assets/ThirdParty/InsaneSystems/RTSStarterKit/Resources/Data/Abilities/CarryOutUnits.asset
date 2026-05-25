@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725ac2ab513980d48a019ad675d26fcd, type: 3}
+  m_Name: CarryOutUnits
+  m_EditorClassIdentifier: 
+  textId: CarryOut
+  abilityName: Carry out units
+  icon: {fileID: 21300000, guid: ab46f313ff449fc43b3f0dca9588ddce, type: 3}
+  soundToPlayOnUse: {fileID: 0}
+  isActiveByDefault: 1
+  newAttackRange: 0
+  newAttackReloadTime: 0
+  newAttackDamage: 0
+  customWeaponAbilityToEnable: {fileID: 0}

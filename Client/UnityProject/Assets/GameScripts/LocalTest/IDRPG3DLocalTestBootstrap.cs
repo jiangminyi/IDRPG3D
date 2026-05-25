@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Net.Sockets;
+using Dreamteck.Splines;
+using IDRPG3D.GameplayPrototype;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -15,6 +19,21 @@ namespace IDRPG3D.LocalTest
         private const int GameServerPort = 20000;
         private const int MongoPort = 27017;
         private const string GameServerProtocol = "KCP/UDP";
+        private const string DefaultRouteName = "Route_Main_01";
+        private const string DefaultHeroName = "Hero1";
+        private const string DefaultEnemyName = "Enemy";
+        private const string ProjectilesRootName = "Prototype_Projectiles";
+        private const string TerrainLayerName = "Terrain";
+        private const string GroundTerrainLayerName = "GroundTerrain";
+        private const string FrostboltProjectilePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Frostbolt.prefab";
+        private const string FrostboltMuzzlePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FrostMuzzle.prefab";
+        private const string FrostboltImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_IceSpike01_Blue.prefab";
+        private const string FireballProjectilePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Fireball.prefab";
+        private const string FireballMuzzlePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FireMuzzle.prefab";
+        private const string FireballImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_Fireball04_Orange.prefab";
+
+        private static readonly string[] HeroNames = { "Hero1", "Hero2", "Hero3" };
+        private static readonly string[] EnemyNames = { "Enemy", "Enemy1", "Enemy2", "Enemy3" };
 
         private InputField accountInput;
         private Text statusText;
@@ -28,23 +47,303 @@ namespace IDRPG3D.LocalTest
         private Button createTeamButton;
 
         private string currentAccount = "local_player_001";
-        private Process serverProcess;
         private Font defaultFont;
 
         private void Awake()
         {
             BuildSceneVisuals();
+            SetupGameplayPrototype();
             BuildUI();
             AppendStatus("Local test scene ready.");
+            AppendStatus("Gameplay prototype: Hero1 follows route, scans Enemy, and auto-combats.");
             StartCoroutine(CheckPortsRoutine());
         }
 
-        private void OnDestroy()
+        private void SetupGameplayPrototype()
         {
-            if (serverProcess != null && !serverProcess.HasExited)
+            var route = FindRoute();
+            var heroes = FindNamedObjects(HeroNames);
+            var enemies = FindNamedObjects(EnemyNames);
+            if (route == null || heroes.Count == 0 || enemies.Count == 0)
             {
-                AppendStatus("Leaving server process running for debugging.");
+                Debug.LogWarning($"[IDRPG3D LocalTest] Gameplay prototype skipped. Route found: {route != null}, Heroes: {heroes.Count}, Enemies: {enemies.Count}.");
+                return;
             }
+
+            for (var i = 0; i < heroes.Count; i++)
+            {
+                DisableLegacySplineFollower(heroes[i]);
+            }
+            EnsureNavMeshSurface();
+            var projectileRoot = EnsureProjectilesRoot();
+
+            var heroUnits = new List<IDRPG3DCombatUnit>(heroes.Count);
+            for (var i = 0; i < heroes.Count; i++)
+            {
+                var hero = heroes[i];
+                var unit = ConfigureUnit(hero, 1 + i, i, IDRPG3DCombatFaction.Hero, 100 - i * 10, 120f, 18f, 1.8f, 1.25f, 7f, 3.2f);
+                ConfigureHeroPrototypeSkill(hero, projectileRoot);
+                heroUnits.Add(unit);
+            }
+
+            for (var i = 0; i < enemies.Count; i++)
+            {
+                var enemy = enemies[i];
+                var unit = ConfigureUnit(enemy, 1001 + i, i, IDRPG3DCombatFaction.Enemy, 70, 120f, 10f, 1.6f, 1.8f, 6f, 2.4f);
+                ConfigureEnemyHealthBar(enemy, unit);
+            }
+
+            var routeController = GetComponent<IDRPG3DTeamRouteController>();
+            if (routeController == null)
+            {
+                routeController = gameObject.AddComponent<IDRPG3DTeamRouteController>();
+            }
+
+            routeController.Configure(route, heroUnits);
+            Debug.Log($"[IDRPG3D LocalTest] Gameplay prototype wired: {heroUnits.Count} heroes follow route, scan {enemies.Count} enemies, and auto-combat.");
+        }
+
+        private static SplineComputer FindRoute()
+        {
+            var routeObject = GameObject.Find(DefaultRouteName);
+            if (routeObject != null && routeObject.TryGetComponent<SplineComputer>(out var namedRoute))
+            {
+                return namedRoute;
+            }
+
+            return FindObjectOfType<SplineComputer>();
+        }
+
+        private static List<GameObject> FindNamedObjects(IReadOnlyList<string> names)
+        {
+            var results = new List<GameObject>(names.Count);
+            for (var i = 0; i < names.Count; i++)
+            {
+                var target = GameObject.Find(names[i]);
+                if (target != null)
+                {
+                    results.Add(target);
+                }
+            }
+
+            return results;
+        }
+
+        private static void DisableLegacySplineFollower(GameObject hero)
+        {
+            var follower = hero.GetComponent<SplineFollower>();
+            if (follower != null)
+            {
+                follower.follow = false;
+                follower.enabled = false;
+            }
+        }
+
+        private void EnsureNavMeshSurface()
+        {
+            var surface = FindObjectOfType<NavMeshSurface>();
+            if (surface == null)
+            {
+                surface = gameObject.AddComponent<NavMeshSurface>();
+                surface.collectObjects = CollectObjects.All;
+            }
+
+            surface.layerMask = ResolveNavMeshLayerMask();
+            if (surface.navMeshData == null)
+            {
+                surface.BuildNavMesh();
+            }
+        }
+
+        private static LayerMask ResolveNavMeshLayerMask()
+        {
+            var mask = 0;
+            AddLayerToMask(TerrainLayerName, ref mask);
+            AddLayerToMask(GroundTerrainLayerName, ref mask);
+            return mask != 0 ? mask : LayerMask.GetMask("Default");
+        }
+
+        private static void AddLayerToMask(string layerName, ref int mask)
+        {
+            var layer = LayerMask.NameToLayer(layerName);
+            if (layer >= 0)
+            {
+                mask |= 1 << layer;
+            }
+        }
+
+        private static IDRPG3DCombatUnit ConfigureUnit(
+            GameObject target,
+            int id,
+            int order,
+            IDRPG3DCombatFaction faction,
+            int priority,
+            float health,
+            float damage,
+            float range,
+            float interval,
+            float aggro,
+            float moveSpeed)
+        {
+            EnsureCollider(target);
+
+            var agent = target.GetComponent<NavMeshAgent>();
+            if (agent == null)
+            {
+                agent = target.AddComponent<NavMeshAgent>();
+            }
+            agent.radius = 0.35f;
+            agent.height = 1.8f;
+            agent.speed = moveSpeed;
+            agent.acceleration = 16f;
+            agent.angularSpeed = 720f;
+            agent.stoppingDistance = 0.08f;
+            if (NavMesh.SamplePosition(target.transform.position, out var navHit, 3f, NavMesh.AllAreas))
+            {
+                target.transform.position = navHit.position;
+            }
+
+            var animatorBridge = target.GetComponent<IDRPG3DAnimatorBridge>();
+            if (animatorBridge == null)
+            {
+                animatorBridge = target.AddComponent<IDRPG3DAnimatorBridge>();
+            }
+            TryConfigurePrototypeAnimationClips(animatorBridge);
+
+            var mover = target.GetComponent<IDRPG3DNavMoveAgent>();
+            if (mover == null)
+            {
+                mover = target.AddComponent<IDRPG3DNavMoveAgent>();
+            }
+            mover.Initialize();
+            mover.SetMoveStats(moveSpeed, 16f, 720f);
+
+            var unit = target.GetComponent<IDRPG3DCombatUnit>();
+            if (unit == null)
+            {
+                unit = target.AddComponent<IDRPG3DCombatUnit>();
+            }
+            unit.Configure(id, order, faction, priority, health, damage, range, interval, aggro);
+
+            var brain = target.GetComponent<IDRPG3DAutoCombatBrain>();
+            if (brain == null)
+            {
+                brain = target.AddComponent<IDRPG3DAutoCombatBrain>();
+            }
+            brain.Initialize();
+
+            if (target.GetComponent<IDRPG3DSelectableUnit>() == null)
+            {
+                target.AddComponent<IDRPG3DSelectableUnit>();
+            }
+
+            ConfigureGrounding(target);
+
+            return unit;
+        }
+
+        private static Transform EnsureProjectilesRoot()
+        {
+            var root = GameObject.Find(ProjectilesRootName);
+            if (root == null)
+            {
+                root = new GameObject(ProjectilesRootName);
+            }
+
+            return root.transform;
+        }
+
+        private static void ConfigureHeroPrototypeSkill(GameObject hero, Transform projectileRoot)
+        {
+            if (hero.name.Equals("Hero2", StringComparison.OrdinalIgnoreCase))
+            {
+                var skillCaster = EnsureSkillCaster(hero);
+                skillCaster.Configure(IDRPG3DPrototypeSkillDefinition.CreateFrostbolt(
+                    LoadEditorPrefab(FrostboltProjectilePath),
+                    LoadEditorPrefab(FrostboltMuzzlePath),
+                    LoadEditorPrefab(FrostboltImpactPath)), projectileRoot);
+            }
+            else if (hero.name.Equals("Hero3", StringComparison.OrdinalIgnoreCase))
+            {
+                var skillCaster = EnsureSkillCaster(hero);
+                skillCaster.Configure(IDRPG3DPrototypeSkillDefinition.CreateFireball(
+                    LoadEditorPrefab(FireballProjectilePath),
+                    LoadEditorPrefab(FireballMuzzlePath),
+                    LoadEditorPrefab(FireballImpactPath)), projectileRoot);
+            }
+        }
+
+        private static IDRPG3DPrototypeSkillCaster EnsureSkillCaster(GameObject hero)
+        {
+            var skillCaster = hero.GetComponent<IDRPG3DPrototypeSkillCaster>();
+            return skillCaster != null ? skillCaster : hero.AddComponent<IDRPG3DPrototypeSkillCaster>();
+        }
+
+        private static void ConfigureEnemyHealthBar(GameObject enemy, IDRPG3DCombatUnit unit)
+        {
+            var healthBar = enemy.GetComponent<IDRPG3DWorldHealthBar>();
+            if (healthBar == null)
+            {
+                healthBar = enemy.AddComponent<IDRPG3DWorldHealthBar>();
+            }
+
+            healthBar.Configure(unit, null, null, 2.6f, 0.36f, 2.25f);
+        }
+
+        private static GameObject LoadEditorPrefab(string assetPath)
+        {
+#if UNITY_EDITOR
+            return UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+#else
+            return null;
+#endif
+        }
+
+        private static void TryConfigurePrototypeAnimationClips(IDRPG3DAnimatorBridge animatorBridge)
+        {
+#if UNITY_EDITOR
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            for (var i = 0; i < assemblies.Length; i++)
+            {
+                var type = assemblies[i].GetType("IDRPG3D.EditorTools.IDRPG3DPrototypeAnimationClipLibrary");
+                var method = type?.GetMethod("Configure", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                if (method != null)
+                {
+                    method.Invoke(null, new object[] { animatorBridge });
+                    return;
+                }
+            }
+#endif
+        }
+
+        private static void ConfigureGrounding(GameObject target)
+        {
+            var animator = target.GetComponentInChildren<Animator>();
+            if (animator == null || animator.transform == target.transform)
+            {
+                return;
+            }
+
+            var grounder = target.GetComponent<IDRPG3DTerrainVisualGrounder>();
+            if (grounder == null)
+            {
+                grounder = target.AddComponent<IDRPG3DTerrainVisualGrounder>();
+            }
+
+            grounder.Configure(animator.transform, ResolveNavMeshLayerMask(), 0f);
+        }
+
+        private static void EnsureCollider(GameObject target)
+        {
+            if (target.GetComponent<Collider>() != null)
+            {
+                return;
+            }
+
+            var capsule = target.AddComponent<CapsuleCollider>();
+            capsule.center = new Vector3(0f, 0.9f, 0f);
+            capsule.height = 1.8f;
+            capsule.radius = 0.35f;
         }
 
         private void BuildSceneVisuals()
@@ -74,21 +373,31 @@ namespace IDRPG3D.LocalTest
             {
                 var floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 floor.name = "Arena_Floor";
+                SetGameObjectLayer(floor, TerrainLayerName);
                 floor.transform.localScale = new Vector3(5f, 1f, 5f);
             }
 
-            if (GameObject.Find("Hero_DebugCapsule") == null)
+            if (GameObject.Find(DefaultHeroName) == null && GameObject.Find("Hero_DebugCapsule") == null)
             {
                 var hero = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                 hero.name = "Hero_DebugCapsule";
                 hero.transform.position = new Vector3(-1.4f, 1f, 0f);
             }
 
-            if (GameObject.Find("Monster_DebugCapsule") == null)
+            if (GameObject.Find(DefaultEnemyName) == null && GameObject.Find("Monster_DebugCapsule") == null)
             {
                 var monster = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                 monster.name = "Monster_DebugCapsule";
                 monster.transform.position = new Vector3(1.4f, 1f, 0f);
+            }
+        }
+
+        private static void SetGameObjectLayer(GameObject target, string layerName)
+        {
+            var layer = LayerMask.NameToLayer(layerName);
+            if (layer >= 0)
+            {
+                target.layer = layer;
             }
         }
 
