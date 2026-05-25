@@ -8,6 +8,7 @@ namespace IDRPG3D.GameplayPrototype
             int configId,
             string skillKey,
             string displayName,
+            int effectId,
             float damage,
             float range,
             float cooldown,
@@ -15,11 +16,13 @@ namespace IDRPG3D.GameplayPrototype
             string projectilePrefabPath,
             string muzzlePrefabPath,
             string impactPrefabPath,
-            Color fallbackColor)
+            Color fallbackColor,
+            IDRPG3DPrototypeBuffDefinition buff = default)
         {
             ConfigId = configId;
             SkillKey = skillKey;
             DisplayName = displayName;
+            EffectId = effectId;
             Damage = damage;
             Range = range;
             Cooldown = cooldown;
@@ -28,11 +31,13 @@ namespace IDRPG3D.GameplayPrototype
             MuzzlePrefabPath = muzzlePrefabPath;
             ImpactPrefabPath = impactPrefabPath;
             FallbackColor = fallbackColor;
+            Buff = buff;
         }
 
         public int ConfigId { get; }
         public string SkillKey { get; }
         public string DisplayName { get; }
+        public int EffectId { get; }
         public float Damage { get; }
         public float Range { get; }
         public float Cooldown { get; }
@@ -41,5 +46,6 @@ namespace IDRPG3D.GameplayPrototype
         public string MuzzlePrefabPath { get; }
         public string ImpactPrefabPath { get; }
         public Color FallbackColor { get; }
+        public IDRPG3DPrototypeBuffDefinition Buff { get; }
     }
 }

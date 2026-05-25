@@ -6,6 +6,7 @@ using Luban;
 using UnityEngine;
 using SkillConfig = GameConfig.skill.Skill;
 using EffectConfig = GameConfig.skill.Effect;
+using BuffConfig = GameConfig.skill.Buff;
 using ProjectileConfig = GameConfig.skill.Projectile;
 
 namespace IDRPG3D.LocalTest
@@ -42,7 +43,17 @@ namespace IDRPG3D.LocalTest
                     return false;
                 }
 
-                record = BuildRecord(skill, effect, projectile);
+                BuffConfig buff = null;
+                if (effect.BuffId > 0)
+                {
+                    buff = loadedTables.TbBuff.GetOrDefault(effect.BuffId);
+                    if (buff == null)
+                    {
+                        return false;
+                    }
+                }
+
+                record = BuildRecord(skill, effect, projectile, buff);
                 return true;
             }
             catch (Exception exception)
@@ -77,12 +88,14 @@ namespace IDRPG3D.LocalTest
         private static IDRPG3DPrototypeSkillConfigRecord BuildRecord(
             SkillConfig skill,
             EffectConfig effect,
-            ProjectileConfig projectile)
+            ProjectileConfig projectile,
+            BuffConfig buff)
         {
             return new IDRPG3DPrototypeSkillConfigRecord(
                 skill.Id,
                 skill.SkillKey,
                 skill.Name,
+                effect.Id,
                 effect.Value,
                 skill.Range,
                 skill.Cooldown,
@@ -90,7 +103,45 @@ namespace IDRPG3D.LocalTest
                 projectile.ProjectilePrefabPath,
                 projectile.MuzzlePrefabPath,
                 projectile.ImpactPrefabPath,
-                ParseColor(projectile.FallbackColor));
+                ParseColor(projectile.FallbackColor),
+                BuildBuffDefinition(buff));
+        }
+
+        private static IDRPG3DPrototypeBuffDefinition BuildBuffDefinition(BuffConfig buff)
+        {
+            if (buff == null || buff.Id <= 0)
+            {
+                return default;
+            }
+
+            return IDRPG3DPrototypeBuffDefinition.StatModifier(
+                buff.Id,
+                buff.BuffKey,
+                buff.Name,
+                buff.Duration,
+                buff.MaxStack,
+                ParseStatType(buff.StatType),
+                ParseModifierType(buff.ModifierType),
+                buff.ModifierValue);
+        }
+
+        private static IDRPG3DPrototypeStatType ParseStatType(string value)
+        {
+            return Enum.TryParse(value, true, out IDRPG3DPrototypeStatType result)
+                ? result
+                : IDRPG3DPrototypeStatType.None;
+        }
+
+        private static IDRPG3DPrototypeModifierType ParseModifierType(string value)
+        {
+            if (string.Equals(value, "Mul", StringComparison.OrdinalIgnoreCase))
+            {
+                return IDRPG3DPrototypeModifierType.Multiply;
+            }
+
+            return Enum.TryParse(value, true, out IDRPG3DPrototypeModifierType result)
+                ? result
+                : IDRPG3DPrototypeModifierType.None;
         }
 
         private static Color ParseColor(string colorText)

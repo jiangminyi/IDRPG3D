@@ -142,6 +142,7 @@ namespace IDRPG3D.EditorTools.Tests
                 100101,
                 "frostbolt",
                 "Frostbolt",
+                200101,
                 18f,
                 8.5f,
                 1.45f,
@@ -155,12 +156,48 @@ namespace IDRPG3D.EditorTools.Tests
 
             Assert.AreEqual("frostbolt", skill.SkillId);
             Assert.AreEqual("Frostbolt", skill.DisplayName);
+            Assert.AreEqual(200101, skill.PrimaryEffect.EffectId);
             Assert.AreEqual(18f, skill.Damage, 0.001f);
             Assert.AreEqual(8.5f, skill.Range, 0.001f);
             Assert.AreEqual(1.45f, skill.Cooldown, 0.001f);
             Assert.AreEqual(12f, skill.ProjectileSpeed, 0.001f);
             Assert.AreEqual(new Color(0.25f, 0.78f, 1f, 1f), skill.FallbackColor);
             Assert.IsTrue(skill.IsValid);
+        }
+
+        [Test]
+        public void SkillConfigBuilderAttachesConfiguredBuffToPrimaryEffect()
+        {
+            var slow = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                500101,
+                "frost_slow",
+                "Frost Slow",
+                3f,
+                2,
+                IDRPG3DPrototypeStatType.MoveSpeed,
+                IDRPG3DPrototypeModifierType.Percent,
+                -0.3f);
+            var record = new IDRPG3DPrototypeSkillConfigRecord(
+                100101,
+                "frostbolt",
+                "Frostbolt",
+                200101,
+                18f,
+                8.5f,
+                1.45f,
+                12f,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                new Color(0.25f, 0.78f, 1f, 1f),
+                slow);
+
+            var skill = IDRPG3DPrototypeSkillConfigBuilder.Build(record);
+
+            Assert.IsTrue(skill.PrimaryEffect.HasBuff);
+            Assert.AreEqual(500101, skill.PrimaryEffect.Buff.BuffId);
+            Assert.AreEqual(2, skill.PrimaryEffect.Buff.MaxStack);
+            Assert.AreEqual(IDRPG3DPrototypeStatType.MoveSpeed, skill.PrimaryEffect.Buff.StatType);
         }
 
         [Test]
@@ -179,6 +216,20 @@ namespace IDRPG3D.EditorTools.Tests
                 casterUnitId: cast.CasterUnitId,
                 targetUnitId: cast.TargetUnitId,
                 skillId: cast.SkillId);
+            var effect = IDRPG3DCombatSyncEvents.ApplyEffect(
+                sequence: cast.Sequence,
+                effectId: 200101,
+                sourceUnitId: cast.CasterUnitId,
+                targetUnitId: cast.TargetUnitId,
+                value: 18f,
+                buffId: 0);
+            var buff = IDRPG3DCombatSyncEvents.ApplyBuff(
+                sequence: cast.Sequence,
+                buffId: 500101,
+                sourceUnitId: cast.CasterUnitId,
+                targetUnitId: cast.TargetUnitId,
+                stack: 1,
+                remainingTime: 3f);
 
             Assert.AreEqual(32, cast.Sequence);
             Assert.AreEqual(1, cast.CasterUnitId);
@@ -187,6 +238,12 @@ namespace IDRPG3D.EditorTools.Tests
             Assert.AreEqual("frostbolt", cast.SkillKey);
             Assert.AreEqual(300101, projectile.ProjectileId);
             Assert.AreEqual(100101, projectile.SkillId);
+            Assert.AreEqual(200101, effect.EffectId);
+            Assert.AreEqual(18f, effect.Value, 0.001f);
+            Assert.AreEqual(0, effect.BuffId);
+            Assert.AreEqual(500101, buff.BuffId);
+            Assert.AreEqual(1, buff.Stack);
+            Assert.AreEqual(3f, buff.RemainingTime, 0.001f);
         }
 
         [Test]
@@ -209,6 +266,121 @@ namespace IDRPG3D.EditorTools.Tests
                 Assert.AreEqual(56f, target.Health, 0.001f);
                 Assert.IsTrue(target.ThreatTable.TryGetHighestThreatTarget(unit => unit != null, out var threatTarget));
                 Assert.AreSame(caster, threatTarget);
+            }
+            finally
+            {
+                Object.DestroyImmediate(casterObject);
+                Object.DestroyImmediate(targetObject);
+                Object.DestroyImmediate(projectileObject);
+            }
+        }
+
+        [Test]
+        public void EffectRunnerAppliesDamageAndThreat()
+        {
+            var casterObject = new GameObject("Caster");
+            var targetObject = new GameObject("Target");
+            try
+            {
+                var caster = casterObject.AddComponent<IDRPG3DCombatUnit>();
+                caster.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 8f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 80f, 5f, 1.5f, 1f, 8f);
+                var effect = IDRPG3DPrototypeEffectDefinition.Damage(200101, 18f);
+
+                var result = IDRPG3DPrototypeEffectRunner.Apply(effect, caster, target);
+
+                Assert.IsTrue(result.Applied);
+                Assert.AreEqual(18f, result.Value, 0.001f);
+                Assert.AreEqual(62f, target.Health, 0.001f);
+                Assert.IsTrue(target.ThreatTable.TryGetHighestThreatTarget(unit => unit != null, out var threatTarget));
+                Assert.AreSame(caster, threatTarget);
+            }
+            finally
+            {
+                Object.DestroyImmediate(casterObject);
+                Object.DestroyImmediate(targetObject);
+            }
+        }
+
+        [Test]
+        public void BuffControllerStacksRefreshesAndExpiresMoveSpeedModifier()
+        {
+            var unitObject = new GameObject("Unit");
+            try
+            {
+                var controller = unitObject.AddComponent<IDRPG3DPrototypeBuffController>();
+                var slow = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                    500101,
+                    "frost_slow",
+                    "Frost Slow",
+                    duration: 3f,
+                    maxStack: 2,
+                    IDRPG3DPrototypeStatType.MoveSpeed,
+                    IDRPG3DPrototypeModifierType.Percent,
+                    -0.2f);
+
+                controller.ApplyBuff(slow, null);
+                controller.ApplyBuff(slow, null);
+
+                Assert.AreEqual(1, controller.ActiveBuffCount);
+                Assert.AreEqual(2, controller.GetStack(500101));
+                Assert.AreEqual(0.6f, controller.MoveSpeedMultiplier, 0.001f);
+
+                controller.Tick(2f);
+                Assert.AreEqual(1, controller.ActiveBuffCount);
+                Assert.AreEqual(0.6f, controller.MoveSpeedMultiplier, 0.001f);
+
+                controller.Tick(1.01f);
+                Assert.AreEqual(0, controller.ActiveBuffCount);
+                Assert.AreEqual(1f, controller.MoveSpeedMultiplier, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(unitObject);
+            }
+        }
+
+        [Test]
+        public void ProjectileRunsConfiguredEffectOnImpact()
+        {
+            var casterObject = new GameObject("Caster");
+            var targetObject = new GameObject("Target");
+            var projectileObject = new GameObject("Projectile");
+            try
+            {
+                var caster = casterObject.AddComponent<IDRPG3DCombatUnit>();
+                caster.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 8f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 80f, 5f, 1.5f, 1f, 8f);
+                var slow = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                    500101,
+                    "frost_slow",
+                    "Frost Slow",
+                    3f,
+                    1,
+                    IDRPG3DPrototypeStatType.MoveSpeed,
+                    IDRPG3DPrototypeModifierType.Percent,
+                    -0.3f);
+                var effect = IDRPG3DPrototypeEffectDefinition.DamageWithBuff(200101, 18f, slow);
+                var skill = new IDRPG3DPrototypeSkillDefinition(
+                    "frostbolt",
+                    "Frostbolt",
+                    effect,
+                    8.5f,
+                    1.45f,
+                    12f,
+                    new Color(0.25f, 0.78f, 1f, 1f));
+
+                var projectile = projectileObject.AddComponent<IDRPG3DPrototypeProjectile>();
+                projectile.Launch(caster, target, skill, Vector3.zero);
+                projectile.ApplyImpactForTest();
+
+                var buffs = target.GetComponent<IDRPG3DPrototypeBuffController>();
+                Assert.AreEqual(62f, target.Health, 0.001f);
+                Assert.IsNotNull(buffs);
+                Assert.AreEqual(1, buffs.GetStack(500101));
+                Assert.AreEqual(0.7f, buffs.MoveSpeedMultiplier, 0.001f);
             }
             finally
             {

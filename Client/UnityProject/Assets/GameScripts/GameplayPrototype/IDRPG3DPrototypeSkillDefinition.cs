@@ -8,6 +8,7 @@ namespace IDRPG3D.GameplayPrototype
         [SerializeField] private string skillId;
         [SerializeField] private string displayName;
         [SerializeField] private float damage;
+        [SerializeField] private IDRPG3DPrototypeEffectDefinition primaryEffect;
         [SerializeField] private float range;
         [SerializeField] private float cooldown;
         [SerializeField] private float projectileSpeed;
@@ -19,6 +20,9 @@ namespace IDRPG3D.GameplayPrototype
         public string SkillId => skillId;
         public string DisplayName => displayName;
         public float Damage => damage;
+        public IDRPG3DPrototypeEffectDefinition PrimaryEffect => primaryEffect.IsValid
+            ? primaryEffect
+            : IDRPG3DPrototypeEffectDefinition.Damage(0, damage);
         public float Range => range;
         public float Cooldown => cooldown;
         public float ProjectileSpeed => projectileSpeed;
@@ -39,10 +43,36 @@ namespace IDRPG3D.GameplayPrototype
             GameObject projectilePrefab = null,
             GameObject muzzlePrefab = null,
             GameObject impactPrefab = null)
+            : this(
+                skillId,
+                displayName,
+                IDRPG3DPrototypeEffectDefinition.Damage(0, damage),
+                range,
+                cooldown,
+                projectileSpeed,
+                fallbackColor,
+                projectilePrefab,
+                muzzlePrefab,
+                impactPrefab)
+        {
+        }
+
+        public IDRPG3DPrototypeSkillDefinition(
+            string skillId,
+            string displayName,
+            IDRPG3DPrototypeEffectDefinition primaryEffect,
+            float range,
+            float cooldown,
+            float projectileSpeed,
+            Color fallbackColor,
+            GameObject projectilePrefab = null,
+            GameObject muzzlePrefab = null,
+            GameObject impactPrefab = null)
         {
             this.skillId = skillId;
             this.displayName = displayName;
-            this.damage = Mathf.Max(0f, damage);
+            this.primaryEffect = primaryEffect;
+            this.damage = Mathf.Max(0f, primaryEffect.Value);
             this.range = Mathf.Max(0.1f, range);
             this.cooldown = Mathf.Max(0.1f, cooldown);
             this.projectileSpeed = Mathf.Max(0.1f, projectileSpeed);

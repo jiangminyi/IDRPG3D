@@ -72,7 +72,7 @@ namespace IDRPG3D.GameplayPrototype
             impacted = true;
             if (target != null && target.IsAlive)
             {
-                target.TakeDamage(skill.Damage, caster);
+                IDRPG3DPrototypeEffectRunner.Apply(skill.PrimaryEffect, caster, target);
                 SpawnImpact(GetTargetPoint());
             }
 
