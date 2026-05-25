@@ -25,6 +25,8 @@ namespace IDRPG3D.LocalTest
         private const string ProjectilesRootName = "Prototype_Projectiles";
         private const string TerrainLayerName = "Terrain";
         private const string GroundTerrainLayerName = "GroundTerrain";
+        private const int FrostboltSkillId = 100101;
+        private const int FireballSkillId = 100102;
         private const string FrostboltProjectilePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Frostbolt.prefab";
         private const string FrostboltMuzzlePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FrostMuzzle.prefab";
         private const string FrostboltImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_IceSpike01_Blue.prefab";
@@ -48,6 +50,7 @@ namespace IDRPG3D.LocalTest
 
         private string currentAccount = "local_player_001";
         private Font defaultFont;
+        private IDRPG3DLocalSkillConfigLoader skillConfigLoader;
 
         private void Awake()
         {
@@ -78,6 +81,7 @@ namespace IDRPG3D.LocalTest
             var projectileRoot = EnsureProjectilesRoot();
 
             var heroUnits = new List<IDRPG3DCombatUnit>(heroes.Count);
+            skillConfigLoader = new IDRPG3DLocalSkillConfigLoader();
             for (var i = 0; i < heroes.Count; i++)
             {
                 var hero = heroes[i];
@@ -253,24 +257,44 @@ namespace IDRPG3D.LocalTest
             return root.transform;
         }
 
-        private static void ConfigureHeroPrototypeSkill(GameObject hero, Transform projectileRoot)
+        private void ConfigureHeroPrototypeSkill(GameObject hero, Transform projectileRoot)
         {
             if (hero.name.Equals("Hero2", StringComparison.OrdinalIgnoreCase))
             {
                 var skillCaster = EnsureSkillCaster(hero);
-                skillCaster.Configure(IDRPG3DPrototypeSkillDefinition.CreateFrostbolt(
-                    LoadEditorPrefab(FrostboltProjectilePath),
-                    LoadEditorPrefab(FrostboltMuzzlePath),
-                    LoadEditorPrefab(FrostboltImpactPath)), projectileRoot);
+                skillCaster.Configure(CreateConfiguredOrFallbackSkill(
+                    FrostboltSkillId,
+                    IDRPG3DPrototypeSkillDefinition.CreateFrostbolt(
+                        LoadEditorPrefab(FrostboltProjectilePath),
+                        LoadEditorPrefab(FrostboltMuzzlePath),
+                        LoadEditorPrefab(FrostboltImpactPath))), projectileRoot);
             }
             else if (hero.name.Equals("Hero3", StringComparison.OrdinalIgnoreCase))
             {
                 var skillCaster = EnsureSkillCaster(hero);
-                skillCaster.Configure(IDRPG3DPrototypeSkillDefinition.CreateFireball(
-                    LoadEditorPrefab(FireballProjectilePath),
-                    LoadEditorPrefab(FireballMuzzlePath),
-                    LoadEditorPrefab(FireballImpactPath)), projectileRoot);
+                skillCaster.Configure(CreateConfiguredOrFallbackSkill(
+                    FireballSkillId,
+                    IDRPG3DPrototypeSkillDefinition.CreateFireball(
+                        LoadEditorPrefab(FireballProjectilePath),
+                        LoadEditorPrefab(FireballMuzzlePath),
+                        LoadEditorPrefab(FireballImpactPath))), projectileRoot);
             }
+        }
+
+        private IDRPG3DPrototypeSkillDefinition CreateConfiguredOrFallbackSkill(
+            int skillId,
+            IDRPG3DPrototypeSkillDefinition fallback)
+        {
+            if (skillConfigLoader != null && skillConfigLoader.TryBuildSkill(skillId, out var record))
+            {
+                return IDRPG3DPrototypeSkillConfigBuilder.Build(
+                    record,
+                    LoadEditorPrefab(record.ProjectilePrefabPath),
+                    LoadEditorPrefab(record.MuzzlePrefabPath),
+                    LoadEditorPrefab(record.ImpactPrefabPath));
+            }
+
+            return fallback;
         }
 
         private static IDRPG3DPrototypeSkillCaster EnsureSkillCaster(GameObject hero)

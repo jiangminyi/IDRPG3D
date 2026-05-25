@@ -3,6 +3,7 @@
     "rootNamespace": "IDRPG3D.LocalTest",
     "references": [
         "IDRPG3D.GameplayPrototype",
+        "GUID:af760644fe07b7945b1afa1ccb7cff14",
         "Dreamteck.Splines",
         "Unity.AI.Navigation",
         "UnityEngine.UI"

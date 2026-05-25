@@ -1,6 +1,7 @@
 # Local download/cache area used while preparing framework baselines.
 _downloads/
 .cache/
+luban/
 
 # .NET build outputs.
 Bin/

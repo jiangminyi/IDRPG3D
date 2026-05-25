@@ -136,6 +136,60 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void SkillConfigBuilderCreatesRuntimeDefinitionFromConfigRecord()
+        {
+            var record = new IDRPG3DPrototypeSkillConfigRecord(
+                100101,
+                "frostbolt",
+                "Frostbolt",
+                18f,
+                8.5f,
+                1.45f,
+                12f,
+                "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Frostbolt.prefab",
+                "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FrostMuzzle.prefab",
+                "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_IceSpike01_Blue.prefab",
+                new Color(0.25f, 0.78f, 1f, 1f));
+
+            var skill = IDRPG3DPrototypeSkillConfigBuilder.Build(record);
+
+            Assert.AreEqual("frostbolt", skill.SkillId);
+            Assert.AreEqual("Frostbolt", skill.DisplayName);
+            Assert.AreEqual(18f, skill.Damage, 0.001f);
+            Assert.AreEqual(8.5f, skill.Range, 0.001f);
+            Assert.AreEqual(1.45f, skill.Cooldown, 0.001f);
+            Assert.AreEqual(12f, skill.ProjectileSpeed, 0.001f);
+            Assert.AreEqual(new Color(0.25f, 0.78f, 1f, 1f), skill.FallbackColor);
+            Assert.IsTrue(skill.IsValid);
+        }
+
+        [Test]
+        public void CombatSyncEventsUseStableIds()
+        {
+            var cast = IDRPG3DCombatSyncEvents.CastSkill(
+                sequence: 32,
+                casterUnitId: 1,
+                targetUnitId: 1001,
+                skillId: 100101,
+                skillKey: "frostbolt");
+
+            var projectile = IDRPG3DCombatSyncEvents.SpawnProjectile(
+                sequence: cast.Sequence,
+                projectileId: 300101,
+                casterUnitId: cast.CasterUnitId,
+                targetUnitId: cast.TargetUnitId,
+                skillId: cast.SkillId);
+
+            Assert.AreEqual(32, cast.Sequence);
+            Assert.AreEqual(1, cast.CasterUnitId);
+            Assert.AreEqual(1001, cast.TargetUnitId);
+            Assert.AreEqual(100101, cast.SkillId);
+            Assert.AreEqual("frostbolt", cast.SkillKey);
+            Assert.AreEqual(300101, projectile.ProjectileId);
+            Assert.AreEqual(100101, projectile.SkillId);
+        }
+
+        [Test]
         public void ProjectileAppliesDamageOnImpact()
         {
             var casterObject = new GameObject("Caster");
