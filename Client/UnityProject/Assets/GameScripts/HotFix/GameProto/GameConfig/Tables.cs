@@ -34,7 +34,7 @@ public partial class Tables
         }
     }
     /// <summary>
-    /// 技能主表：原型阶段优先编辑这里。配置技能ID、显示名、冷却、距离、动画Key，并引用效果和投射物。
+    /// ??????????????ID???????????????????? skill_level.xlsx?
     /// </summary>
     private skill.TbSkill m_TbSkill;
     public skill.TbSkill TbSkill 
@@ -55,7 +55,28 @@ public partial class Tables
         }
     }
     /// <summary>
-    /// 高级预留：一个技能多个效果/多个触发阶段时再启用。当前运行时还主要读取 skill.effectId。
+    /// ????????? skillId ??? level ???????????????????
+    /// </summary>
+    private skill.TbSkillLevel m_TbSkillLevel;
+    public skill.TbSkillLevel TbSkillLevel
+    {
+        get
+        {
+            if (m_TbSkillLevel == null)
+            {
+                m_TbSkillLevel = new skill.TbSkillLevel(defaultLoader("skill_tbskilllevel"));
+                m_TbSkillLevel.ResolveRef(this);
+            }
+            return m_TbSkillLevel;
+        }
+        set
+        {
+            m_TbSkillLevel = value;
+            m_TbSkillLevel.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// ????????? skillId + level + order ???? effect?
     /// </summary>
     private skill.TbSkillEffect m_TbSkillEffect;
     public skill.TbSkillEffect TbSkillEffect 
@@ -76,7 +97,7 @@ public partial class Tables
         }
     }
     /// <summary>
-    /// 效果表：配置命中后造成什么逻辑效果，例如伤害、治疗、击退、控制、加Buff。
+    /// ?????????????Buff???????
     /// </summary>
     private skill.TbEffect m_TbEffect;
     public skill.TbEffect TbEffect 
@@ -97,7 +118,7 @@ public partial class Tables
         }
     }
     /// <summary>
-    /// Buff预留表：配置持续效果、减速、眩晕、光环、属性加成等。当前原型可以先不改。
+    /// Buff???????????????????????
     /// </summary>
     private skill.TbBuff m_TbBuff;
     public skill.TbBuff TbBuff 
@@ -118,7 +139,7 @@ public partial class Tables
         }
     }
     /// <summary>
-    /// 投射物表现表：配置技能飞行速度、飞行Prefab、出手特效、命中特效和备用颜色。
+    /// ??????????????Prefab????????
     /// </summary>
     private skill.TbProjectile m_TbProjectile;
     public skill.TbProjectile TbProjectile 

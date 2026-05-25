@@ -36,51 +36,51 @@ public sealed partial class Effect : Luban.BeanBase
     }
 
     /// <summary>
-    /// 效果ID。被 skill.xlsx 的 effectId 引用。
+    /// Effect id.
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// 效果类型。当前 Damage=造成伤害；后续可扩展 Heal/AddBuff/Knockback/Stun。
+    /// Effect type.
     /// </summary>
     public readonly string EffectType;
     /// <summary>
-    /// 效果数值。Damage 时表示伤害数值。
+    /// Value.
     /// </summary>
     public readonly float Value;
     /// <summary>
-    /// 数值类型。Flat=固定值；后续可扩展 AttackPercent/MaxHpPercent 等。
+    /// Value type.
     /// </summary>
     public readonly string ValueType;
     /// <summary>
-    /// 关联Buff ID。0表示不附加Buff；非0时指向 buff.xlsx。
+    /// Buff id.
     /// </summary>
     public readonly int BuffId;
     /// <summary>
-    /// 效果持续时间，单位秒。瞬时伤害填0；持续效果可填持续秒数。
+    /// Duration.
     /// </summary>
     public readonly float Duration;
     /// <summary>
-    /// 范围半径，单位米。0表示单体；大于0可作为AOE半径。
+    /// Radius.
     /// </summary>
     public readonly float Radius;
     /// <summary>
-    /// 击退距离，单位米。0表示不击退。
+    /// Knockback distance.
     /// </summary>
     public readonly float KnockbackDistance;
     /// <summary>
-    /// 控制类型。None/Stun/Slow/Silence 等，当前原型先用 None。
+    /// Control type.
     /// </summary>
     public readonly string ControlType;
     /// <summary>
-    /// 属性类型。None/Attack/MoveSpeed/CastSpeed 等，给属性修改类效果用。
+    /// Stat type.
     /// </summary>
     public readonly string StatType;
     /// <summary>
-    /// 修改方式。None/Add/Percent/Mul 等，给属性修改类效果用。
+    /// Modifier type.
     /// </summary>
     public readonly string ModifierType;
     /// <summary>
-    /// 修改值。比如减速30%可以约定 modifierType=Percent，modifierValue=-0.3。
+    /// Modifier value.
     /// </summary>
     public readonly float ModifierValue;
    

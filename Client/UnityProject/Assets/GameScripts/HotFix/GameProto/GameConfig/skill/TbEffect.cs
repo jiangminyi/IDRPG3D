@@ -13,7 +13,7 @@ using Luban;
 namespace GameConfig.skill
 {
 /// <summary>
-/// 效果表：配置命中后造成什么逻辑效果，例如伤害、治疗、击退、控制、加Buff。
+/// ?????????????Buff???????
 /// </summary>
 public partial class TbEffect
 {

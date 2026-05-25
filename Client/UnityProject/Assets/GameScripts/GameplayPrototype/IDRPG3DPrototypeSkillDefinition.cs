@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IDRPG3D.GameplayPrototype
@@ -7,6 +8,7 @@ namespace IDRPG3D.GameplayPrototype
     {
         [SerializeField] private string skillId;
         [SerializeField] private string displayName;
+        [SerializeField] private int level;
         [SerializeField] private float damage;
         [SerializeField] private IDRPG3DPrototypeEffectDefinition primaryEffect;
         [SerializeField] private float range;
@@ -19,10 +21,12 @@ namespace IDRPG3D.GameplayPrototype
 
         public string SkillId => skillId;
         public string DisplayName => displayName;
+        public int Level => level;
         public float Damage => damage;
         public IDRPG3DPrototypeEffectDefinition PrimaryEffect => primaryEffect.IsValid
             ? primaryEffect
             : IDRPG3DPrototypeEffectDefinition.Damage(0, damage);
+        public IReadOnlyList<IDRPG3DPrototypeEffectDefinition> Effects { get; private set; }
         public float Range => range;
         public float Cooldown => cooldown;
         public float ProjectileSpeed => projectileSpeed;
@@ -30,7 +34,8 @@ namespace IDRPG3D.GameplayPrototype
         public GameObject ProjectilePrefab => projectilePrefab;
         public GameObject MuzzlePrefab => muzzlePrefab;
         public GameObject ImpactPrefab => impactPrefab;
-        public bool IsValid => damage > 0f && range > 0f && cooldown > 0f;
+        public bool UsesProjectile => projectilePrefab != null || projectileSpeed > 0f;
+        public bool IsValid => Effects != null && Effects.Count > 0 && range > 0f && cooldown > 0f;
 
         public IDRPG3DPrototypeSkillDefinition(
             string skillId,
@@ -68,18 +73,65 @@ namespace IDRPG3D.GameplayPrototype
             GameObject projectilePrefab = null,
             GameObject muzzlePrefab = null,
             GameObject impactPrefab = null)
+            : this(
+                skillId,
+                displayName,
+                level: 1,
+                new[] { primaryEffect },
+                range,
+                cooldown,
+                projectileSpeed,
+                fallbackColor,
+                projectilePrefab,
+                muzzlePrefab,
+                impactPrefab)
+        {
+        }
+
+        public IDRPG3DPrototypeSkillDefinition(
+            string skillId,
+            string displayName,
+            int level,
+            IReadOnlyList<IDRPG3DPrototypeEffectDefinition> effects,
+            float range,
+            float cooldown,
+            float projectileSpeed,
+            Color fallbackColor,
+            GameObject projectilePrefab = null,
+            GameObject muzzlePrefab = null,
+            GameObject impactPrefab = null)
         {
             this.skillId = skillId;
             this.displayName = displayName;
-            this.primaryEffect = primaryEffect;
-            this.damage = Mathf.Max(0f, primaryEffect.Value);
+            this.level = Mathf.Max(1, level);
+            Effects = effects ?? System.Array.Empty<IDRPG3DPrototypeEffectDefinition>();
+            this.primaryEffect = Effects.Count > 0 ? Effects[0] : default;
+            this.damage = FindPrimaryDamage(Effects);
             this.range = Mathf.Max(0.1f, range);
             this.cooldown = Mathf.Max(0.1f, cooldown);
-            this.projectileSpeed = Mathf.Max(0.1f, projectileSpeed);
+            this.projectileSpeed = Mathf.Max(0f, projectileSpeed);
             this.fallbackColor = fallbackColor;
             this.projectilePrefab = projectilePrefab;
             this.muzzlePrefab = muzzlePrefab;
             this.impactPrefab = impactPrefab;
+        }
+
+        private static float FindPrimaryDamage(IReadOnlyList<IDRPG3DPrototypeEffectDefinition> effects)
+        {
+            if (effects == null)
+            {
+                return 0f;
+            }
+
+            for (var i = 0; i < effects.Count; i++)
+            {
+                if (effects[i].EffectType == IDRPG3DPrototypeEffectType.Damage)
+                {
+                    return Mathf.Max(0f, effects[i].Value);
+                }
+            }
+
+            return 0f;
         }
 
         public static IDRPG3DPrototypeSkillDefinition CreateFrostbolt(

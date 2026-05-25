@@ -10,14 +10,11 @@ namespace IDRPG3D.GameplayPrototype
             GameObject muzzlePrefab = null,
             GameObject impactPrefab = null)
         {
-            var effect = record.Buff.IsValid
-                ? IDRPG3DPrototypeEffectDefinition.DamageWithBuff(record.EffectId, record.Damage, record.Buff)
-                : IDRPG3DPrototypeEffectDefinition.Damage(record.EffectId, record.Damage);
-
             return new IDRPG3DPrototypeSkillDefinition(
                 record.SkillKey,
                 record.DisplayName,
-                effect,
+                record.Level,
+                record.Effects,
                 record.Range,
                 record.Cooldown,
                 record.ProjectileSpeed,

@@ -47,6 +47,12 @@ namespace IDRPG3D.GameplayPrototype
             var startPosition = transform.TransformPoint(castOffset);
             SpawnMuzzle(startPosition);
 
+            if (!skill.UsesProjectile)
+            {
+                ApplyEffects(target);
+                return true;
+            }
+
             var projectileObject = CreateProjectileObject(startPosition);
             var projectile = projectileObject.GetComponent<IDRPG3DPrototypeProjectile>();
             if (projectile == null)
@@ -56,6 +62,22 @@ namespace IDRPG3D.GameplayPrototype
 
             projectile.Launch(unit, target, skill, startPosition);
             return true;
+        }
+
+        private void ApplyEffects(IDRPG3DCombatUnit target)
+        {
+            var effects = skill.Effects;
+            if (effects != null && effects.Count > 0)
+            {
+                for (var i = 0; i < effects.Count; i++)
+                {
+                    IDRPG3DPrototypeEffectRunner.Apply(effects[i], unit, target);
+                }
+
+                return;
+            }
+
+            IDRPG3DPrototypeEffectRunner.Apply(skill.PrimaryEffect, unit, target);
         }
 
         private GameObject CreateProjectileObject(Vector3 startPosition)

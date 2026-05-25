@@ -21,10 +21,7 @@ public sealed partial class Skill : Luban.BeanBase
         Name = _buf.ReadString();
         Desc = _buf.ReadString();
         TargetType = _buf.ReadString();
-        EffectId = _buf.ReadInt();
-        ProjectileId = _buf.ReadInt();
-        Cooldown = _buf.ReadFloat();
-        Range = _buf.ReadFloat();
+        DefaultLevel = _buf.ReadInt();
         AnimationKey = _buf.ReadString();
         SyncEventKey = _buf.ReadString();
     }
@@ -35,47 +32,35 @@ public sealed partial class Skill : Luban.BeanBase
     }
 
     /// <summary>
-    /// 技能ID。必须唯一；同步、存档、日志都用这个稳定ID。
+    /// Stable skill id.
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// 程序用Key。建议英文小写，下划线分隔；不要随意改已上线Key。
+    /// Program key.
     /// </summary>
     public readonly string SkillKey;
     /// <summary>
-    /// 技能显示名。UI和调试日志给人看的名字。
+    /// Display name.
     /// </summary>
     public readonly string Name;
     /// <summary>
-    /// 技能描述。策划备注/UI描述都可以先写这里。
+    /// Description.
     /// </summary>
     public readonly string Desc;
     /// <summary>
-    /// 目标类型。当前支持 EnemySingle：敌方单体。后续可扩展 Self/Ally/AOE。
+    /// Target type.
     /// </summary>
     public readonly string TargetType;
     /// <summary>
-    /// 效果ID。指向 effect.xlsx，决定伤害、治疗、控制、加Buff等逻辑效果。
+    /// Default level.
     /// </summary>
-    public readonly int EffectId;
+    public readonly int DefaultLevel;
     /// <summary>
-    /// 投射物ID。指向 projectile.xlsx，决定飞行速度、特效Prefab、命中特效。
-    /// </summary>
-    public readonly int ProjectileId;
-    /// <summary>
-    /// 冷却时间，单位秒。AI自动战斗会按这个判断能不能释放。
-    /// </summary>
-    public readonly float Cooldown;
-    /// <summary>
-    /// 施法距离，单位米。目标超出范围时会先靠近。
-    /// </summary>
-    public readonly float Range;
-    /// <summary>
-    /// 动画Key。当前原型用 Attack1，后续通过配置映射到具体动画片段。
+    /// Animation key.
     /// </summary>
     public readonly string AnimationKey;
     /// <summary>
-    /// 同步事件Key。联机时用于表达这次释放技能是什么事件。
+    /// Sync event key.
     /// </summary>
     public readonly string SyncEventKey;
    
@@ -94,10 +79,7 @@ public sealed partial class Skill : Luban.BeanBase
         + "name:" + Name + ","
         + "desc:" + Desc + ","
         + "targetType:" + TargetType + ","
-        + "effectId:" + EffectId + ","
-        + "projectileId:" + ProjectileId + ","
-        + "cooldown:" + Cooldown + ","
-        + "range:" + Range + ","
+        + "defaultLevel:" + DefaultLevel + ","
         + "animationKey:" + AnimationKey + ","
         + "syncEventKey:" + SyncEventKey + ","
         + "}";

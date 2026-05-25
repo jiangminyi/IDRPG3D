@@ -16,6 +16,7 @@ namespace IDRPG3D.GameplayPrototype
     {
         None,
         MoveSpeed,
+        Armor,
         Attack,
         AttackSpeed,
         CastSpeed
@@ -29,6 +30,14 @@ namespace IDRPG3D.GameplayPrototype
         Multiply
     }
 
+    public enum IDRPG3DPrototypeBuffType
+    {
+        None,
+        StatModifier,
+        DamageOverTime,
+        Aura
+    }
+
     [Serializable]
     public readonly struct IDRPG3DPrototypeBuffDefinition
     {
@@ -40,7 +49,18 @@ namespace IDRPG3D.GameplayPrototype
             int maxStack,
             IDRPG3DPrototypeStatType statType,
             IDRPG3DPrototypeModifierType modifierType,
-            float modifierValue)
+            float modifierValue,
+            IDRPG3DPrototypeBuffType buffType = IDRPG3DPrototypeBuffType.StatModifier,
+            float tickInterval = 0f,
+            float tickValue = 0f,
+            float auraRadius = 0f,
+            int auraBuffId = 0,
+            string auraBuffKey = null,
+            string auraBuffDisplayName = null,
+            float auraBuffDuration = 0f,
+            IDRPG3DPrototypeStatType auraStatType = IDRPG3DPrototypeStatType.None,
+            IDRPG3DPrototypeModifierType auraModifierType = IDRPG3DPrototypeModifierType.None,
+            float auraModifierValue = 0f)
         {
             BuffId = buffId;
             BuffKey = buffKey;
@@ -50,6 +70,17 @@ namespace IDRPG3D.GameplayPrototype
             StatType = statType;
             ModifierType = modifierType;
             ModifierValue = modifierValue;
+            BuffType = buffType;
+            TickInterval = Mathf.Max(0f, tickInterval);
+            TickValue = Mathf.Max(0f, tickValue);
+            AuraRadius = Mathf.Max(0f, auraRadius);
+            AuraBuffId = auraBuffId;
+            AuraBuffKey = auraBuffKey;
+            AuraBuffDisplayName = auraBuffDisplayName;
+            AuraBuffDuration = Mathf.Max(0f, auraBuffDuration);
+            AuraStatType = auraStatType;
+            AuraModifierType = auraModifierType;
+            AuraModifierValue = auraModifierValue;
         }
 
         public int BuffId { get; }
@@ -60,7 +91,19 @@ namespace IDRPG3D.GameplayPrototype
         public IDRPG3DPrototypeStatType StatType { get; }
         public IDRPG3DPrototypeModifierType ModifierType { get; }
         public float ModifierValue { get; }
+        public IDRPG3DPrototypeBuffType BuffType { get; }
+        public float TickInterval { get; }
+        public float TickValue { get; }
+        public float AuraRadius { get; }
+        public int AuraBuffId { get; }
+        public string AuraBuffKey { get; }
+        public string AuraBuffDisplayName { get; }
+        public float AuraBuffDuration { get; }
+        public IDRPG3DPrototypeStatType AuraStatType { get; }
+        public IDRPG3DPrototypeModifierType AuraModifierType { get; }
+        public float AuraModifierValue { get; }
         public bool IsValid => BuffId > 0 && Duration > 0f;
+        public bool HasAuraBuff => AuraBuffId > 0 && AuraBuffDuration > 0f;
 
         public static IDRPG3DPrototypeBuffDefinition StatModifier(
             int buffId,
@@ -81,6 +124,73 @@ namespace IDRPG3D.GameplayPrototype
                 statType,
                 modifierType,
                 modifierValue);
+        }
+
+        public static IDRPG3DPrototypeBuffDefinition DamageOverTime(
+            int buffId,
+            string buffKey,
+            string displayName,
+            float duration,
+            int maxStack,
+            float tickInterval,
+            float tickValue)
+        {
+            return new IDRPG3DPrototypeBuffDefinition(
+                buffId,
+                buffKey,
+                displayName,
+                duration,
+                maxStack,
+                IDRPG3DPrototypeStatType.None,
+                IDRPG3DPrototypeModifierType.None,
+                0f,
+                IDRPG3DPrototypeBuffType.DamageOverTime,
+                tickInterval,
+                tickValue);
+        }
+
+        public static IDRPG3DPrototypeBuffDefinition Aura(
+            int buffId,
+            string buffKey,
+            string displayName,
+            float duration,
+            float tickInterval,
+            float auraRadius,
+            IDRPG3DPrototypeBuffDefinition auraBuff)
+        {
+            return new IDRPG3DPrototypeBuffDefinition(
+                buffId,
+                buffKey,
+                displayName,
+                duration,
+                1,
+                IDRPG3DPrototypeStatType.None,
+                IDRPG3DPrototypeModifierType.None,
+                0f,
+                IDRPG3DPrototypeBuffType.Aura,
+                tickInterval,
+                0f,
+                auraRadius,
+                auraBuff.BuffId,
+                auraBuff.BuffKey,
+                auraBuff.DisplayName,
+                auraBuff.Duration,
+                auraBuff.StatType,
+                auraBuff.ModifierType,
+                auraBuff.ModifierValue);
+        }
+
+        public IDRPG3DPrototypeBuffDefinition CreateAuraBuff()
+        {
+            return StatModifier(
+                AuraBuffId,
+                AuraBuffKey,
+                AuraBuffDisplayName,
+                AuraBuffDuration,
+                1,
+                AuraStatType,
+                AuraModifierType,
+                AuraModifierValue);
         }
     }
 
@@ -126,6 +236,26 @@ namespace IDRPG3D.GameplayPrototype
                 value,
                 buff);
         }
+
+        public static IDRPG3DPrototypeEffectDefinition Heal(int effectId, float value)
+        {
+            return new IDRPG3DPrototypeEffectDefinition(
+                effectId,
+                IDRPG3DPrototypeEffectType.Heal,
+                value,
+                default);
+        }
+
+        public static IDRPG3DPrototypeEffectDefinition AddBuff(
+            int effectId,
+            IDRPG3DPrototypeBuffDefinition buff)
+        {
+            return new IDRPG3DPrototypeEffectDefinition(
+                effectId,
+                IDRPG3DPrototypeEffectType.AddBuff,
+                0f,
+                buff);
+        }
     }
 
     public readonly struct IDRPG3DPrototypeEffectResult
@@ -166,6 +296,10 @@ namespace IDRPG3D.GameplayPrototype
                 target.TakeDamage(effect.Value, source);
                 appliedValue = effect.Value;
             }
+            else if (effect.EffectType == IDRPG3DPrototypeEffectType.Heal)
+            {
+                appliedValue = target.Heal(effect.Value, source);
+            }
 
             var buffId = 0;
             if (effect.HasBuff)
@@ -190,6 +324,7 @@ namespace IDRPG3D.GameplayPrototype
 
         public int ActiveBuffCount => activeBuffs.Count;
         public float MoveSpeedMultiplier => CalculateMultiplier(IDRPG3DPrototypeStatType.MoveSpeed);
+        public float ArmorBonus => CalculateAdditive(IDRPG3DPrototypeStatType.Armor);
 
         private void Update()
         {
@@ -209,7 +344,7 @@ namespace IDRPG3D.GameplayPrototype
                 return;
             }
 
-            activeBuffs.Add(definition.BuffId, new ActiveBuff(definition));
+            activeBuffs.Add(definition.BuffId, new ActiveBuff(definition, source));
         }
 
         public void Tick(float deltaTime)
@@ -222,7 +357,7 @@ namespace IDRPG3D.GameplayPrototype
             List<int> expired = null;
             foreach (var pair in activeBuffs)
             {
-                pair.Value.Tick(deltaTime);
+                pair.Value.Tick(deltaTime, this);
                 if (pair.Value.RemainingTime <= 0f)
                 {
                     expired ??= new List<int>();
@@ -270,18 +405,47 @@ namespace IDRPG3D.GameplayPrototype
             return Mathf.Max(0.05f, multiplier);
         }
 
+        private float CalculateAdditive(IDRPG3DPrototypeStatType statType)
+        {
+            var value = 0f;
+            foreach (var pair in activeBuffs)
+            {
+                var active = pair.Value;
+                if (active.Definition.StatType != statType)
+                {
+                    continue;
+                }
+
+                if (active.Definition.ModifierType == IDRPG3DPrototypeModifierType.Add)
+                {
+                    value += active.Definition.ModifierValue * active.Stack;
+                }
+            }
+
+            return value;
+        }
+
+        private static IDRPG3DPrototypeBuffController GetOrAdd(IDRPG3DCombatUnit unit)
+        {
+            var controller = unit.GetComponent<IDRPG3DPrototypeBuffController>();
+            return controller != null ? controller : unit.gameObject.AddComponent<IDRPG3DPrototypeBuffController>();
+        }
+
         private sealed class ActiveBuff
         {
-            public ActiveBuff(IDRPG3DPrototypeBuffDefinition definition)
+            public ActiveBuff(IDRPG3DPrototypeBuffDefinition definition, IDRPG3DCombatUnit source)
             {
                 Definition = definition;
                 Stack = 1;
                 RemainingTime = definition.Duration;
+                this.source = source;
             }
 
             public IDRPG3DPrototypeBuffDefinition Definition { get; private set; }
             public int Stack { get; private set; }
             public float RemainingTime { get; private set; }
+            private IDRPG3DCombatUnit source;
+            private float tickAccumulator;
 
             public void Refresh(IDRPG3DPrototypeBuffDefinition definition)
             {
@@ -290,9 +454,63 @@ namespace IDRPG3D.GameplayPrototype
                 RemainingTime = definition.Duration;
             }
 
-            public void Tick(float deltaTime)
+            public void Tick(float deltaTime, IDRPG3DPrototypeBuffController owner)
             {
                 RemainingTime -= deltaTime;
+                if (Definition.TickInterval <= 0f)
+                {
+                    return;
+                }
+
+                tickAccumulator += deltaTime;
+                while (tickAccumulator >= Definition.TickInterval)
+                {
+                    tickAccumulator -= Definition.TickInterval;
+                    ApplyPeriodicTick(owner);
+                }
+            }
+
+            private void ApplyPeriodicTick(IDRPG3DPrototypeBuffController owner)
+            {
+                if (Definition.BuffType == IDRPG3DPrototypeBuffType.DamageOverTime)
+                {
+                    var target = owner.GetComponent<IDRPG3DCombatUnit>();
+                    target?.TakeDamage(Definition.TickValue * Stack, source);
+                }
+                else if (Definition.BuffType == IDRPG3DPrototypeBuffType.Aura)
+                {
+                    var auraSource = owner.GetComponent<IDRPG3DCombatUnit>();
+                    if (auraSource == null || !auraSource.IsAlive || !Definition.HasAuraBuff)
+                    {
+                        return;
+                    }
+
+                    var radius = Definition.AuraRadius;
+                    var units = UnityEngine.Object.FindObjectsOfType<IDRPG3DCombatUnit>();
+                    for (var i = 0; i < units.Length; i++)
+                    {
+                        var unit = units[i];
+                        if (unit == null
+                            || unit == auraSource
+                            || !unit.IsAlive
+                            || unit.Faction != auraSource.Faction)
+                        {
+                            continue;
+                        }
+
+                        if ((unit.transform.position - auraSource.transform.position).sqrMagnitude > radius * radius)
+                        {
+                            continue;
+                        }
+
+                        GetOrAdd(unit).ApplyBuff(Definition.CreateAuraBuff(), auraSource);
+                    }
+                }
+            }
+
+            public void SetSource(IDRPG3DCombatUnit value)
+            {
+                source = value;
             }
         }
     }

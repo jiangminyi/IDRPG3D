@@ -28,6 +28,7 @@ public sealed partial class Buff : Luban.BeanBase
         ModifierValue = _buf.ReadFloat();
         ControlFlags = _buf.ReadString();
         AuraRadius = _buf.ReadFloat();
+        AuraBuffId = _buf.ReadInt();
     }
 
     public static Buff DeserializeBuff(ByteBuf _buf)
@@ -36,53 +37,57 @@ public sealed partial class Buff : Luban.BeanBase
     }
 
     /// <summary>
-    /// Buff ID。0固定表示没有Buff。
+    /// Buff id.
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// Buff Key。程序识别用。
+    /// Buff key.
     /// </summary>
     public readonly string BuffKey;
     /// <summary>
-    /// Buff显示名。
+    /// Display name.
     /// </summary>
     public readonly string Name;
     /// <summary>
-    /// Buff类型。None/Dot/Hot/StatModifier/Control/Aura 等。
+    /// Buff type.
     /// </summary>
     public readonly string BuffType;
     /// <summary>
-    /// 持续时间，单位秒。0表示无持续时间。
+    /// Duration.
     /// </summary>
     public readonly float Duration;
     /// <summary>
-    /// 最大叠层。0或1表示不可叠加；大于1表示可叠层。
+    /// Max stack.
     /// </summary>
     public readonly int MaxStack;
     /// <summary>
-    /// 跳频，单位秒。持续伤害/治疗每隔多久结算一次。
+    /// Tick interval.
     /// </summary>
     public readonly float TickInterval;
     /// <summary>
-    /// 影响的属性。None/Attack/MoveSpeed/CastSpeed 等。
+    /// Stat type.
     /// </summary>
     public readonly string StatType;
     /// <summary>
-    /// 修改方式。None/Add/Percent/Mul 等。
+    /// Modifier type.
     /// </summary>
     public readonly string ModifierType;
     /// <summary>
-    /// 修改值。比如移速-30%可填 -0.3。
+    /// Modifier value.
     /// </summary>
     public readonly float ModifierValue;
     /// <summary>
-    /// 控制标记。None/Stun/Silence/Root 等，可用逗号组合。
+    /// Control flags.
     /// </summary>
     public readonly string ControlFlags;
     /// <summary>
-    /// 光环半径，单位米。0表示不是光环。
+    /// Aura radius.
     /// </summary>
     public readonly float AuraRadius;
+    /// <summary>
+    /// Aura child buff id.
+    /// </summary>
+    public readonly int AuraBuffId;
    
     public const int __ID__ = 1560804848;
     public override int GetTypeId() => __ID__;
@@ -106,6 +111,7 @@ public sealed partial class Buff : Luban.BeanBase
         + "modifierValue:" + ModifierValue + ","
         + "controlFlags:" + ControlFlags + ","
         + "auraRadius:" + AuraRadius + ","
+        + "auraBuffId:" + AuraBuffId + ","
         + "}";
     }
 }

@@ -16,6 +16,7 @@ namespace IDRPG3D.GameplayPrototype
         [SerializeField] private float aggroRadius = 7f;
 
         private IDRPG3DAnimatorBridge animatorBridge;
+        private IDRPG3DPrototypeBuffController buffController;
 
         public int UnitId => unitId;
         public int TeamOrder => teamOrder;
@@ -28,6 +29,18 @@ namespace IDRPG3D.GameplayPrototype
         public float AttackRange => attackRange;
         public float AttackInterval => attackInterval;
         public float AggroRadius => aggroRadius;
+        public float BonusArmor
+        {
+            get
+            {
+                if (buffController == null)
+                {
+                    buffController = GetComponent<IDRPG3DPrototypeBuffController>();
+                }
+
+                return buffController != null ? buffController.ArmorBonus : 0f;
+            }
+        }
         public bool IsAlive => Health > 0f;
         public IDRPG3DThreatTable<IDRPG3DCombatUnit> ThreatTable { get; } = new IDRPG3DThreatTable<IDRPG3DCombatUnit>();
 
@@ -74,6 +87,7 @@ namespace IDRPG3D.GameplayPrototype
             }
             animatorBridge.Initialize();
             animatorBridge.SetDead(false);
+            buffController = GetComponent<IDRPG3DPrototypeBuffController>();
 
             var agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             if (agent != null)
@@ -89,19 +103,38 @@ namespace IDRPG3D.GameplayPrototype
                 return;
             }
 
-            Health = Mathf.Max(0f, Health - amount);
+            var finalAmount = Mathf.Max(1f, amount - BonusArmor);
+            Health = Mathf.Max(0f, Health - finalAmount);
             if (attacker != null)
             {
-                ThreatTable.AddThreat(attacker, amount);
+                ThreatTable.AddThreat(attacker, finalAmount);
             }
 
-            Debug.Log($"[IDRPG3D Combat] {name} took {amount:0.#} damage from {(attacker != null ? attacker.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
+            Debug.Log($"[IDRPG3D Combat] {name} took {finalAmount:0.#} damage from {(attacker != null ? attacker.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
             Damaged?.Invoke(this, attacker);
 
             if (Health <= 0f)
             {
                 Die();
             }
+        }
+
+        public float Heal(float amount, IDRPG3DCombatUnit healer)
+        {
+            if (!IsAlive || amount <= 0f)
+            {
+                return 0f;
+            }
+
+            var before = Health;
+            Health = Mathf.Min(maxHealth, Health + amount);
+            var healed = Health - before;
+            if (healed > 0f)
+            {
+                Debug.Log($"[IDRPG3D Combat] {name} healed {healed:0.#} from {(healer != null ? healer.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
+            }
+
+            return healed;
         }
 
         private void Die()

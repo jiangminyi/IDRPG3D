@@ -25,8 +25,10 @@ namespace IDRPG3D.LocalTest
         private const string ProjectilesRootName = "Prototype_Projectiles";
         private const string TerrainLayerName = "Terrain";
         private const string GroundTerrainLayerName = "GroundTerrain";
-        private const int FrostboltSkillId = 100101;
-        private const int FireballSkillId = 100102;
+        private const int FrostboltSkillId = 1001;
+        private const int FireballSkillId = 1002;
+        private const int HealSkillId = 1003;
+        private const int DevotionAuraSkillId = 1004;
         private const string FrostboltProjectilePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Frostbolt.prefab";
         private const string FrostboltMuzzlePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FrostMuzzle.prefab";
         private const string FrostboltImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_IceSpike01_Blue.prefab";
@@ -89,6 +91,7 @@ namespace IDRPG3D.LocalTest
                 ConfigureHeroPrototypeSkill(hero, projectileRoot);
                 heroUnits.Add(unit);
             }
+            ConfigureHeroSupportPrototype(heroUnits);
 
             for (var i = 0; i < enemies.Count; i++)
             {
@@ -279,6 +282,44 @@ namespace IDRPG3D.LocalTest
                         LoadEditorPrefab(FireballMuzzlePath),
                         LoadEditorPrefab(FireballImpactPath))), projectileRoot);
             }
+        }
+
+        private void ConfigureHeroSupportPrototype(IReadOnlyList<IDRPG3DCombatUnit> heroUnits)
+        {
+            if (heroUnits.Count == 0)
+            {
+                return;
+            }
+
+            ApplyConfiguredEffects(DevotionAuraSkillId, heroUnits[0], heroUnits[0], "Devotion Aura");
+
+            if (heroUnits.Count <= 1)
+            {
+                return;
+            }
+
+            heroUnits[1].TakeDamage(20f, null);
+            ApplyConfiguredEffects(HealSkillId, heroUnits[0], heroUnits[1], "Heal");
+        }
+
+        private void ApplyConfiguredEffects(
+            int skillId,
+            IDRPG3DCombatUnit caster,
+            IDRPG3DCombatUnit target,
+            string debugName)
+        {
+            if (skillConfigLoader == null || !skillConfigLoader.TryBuildSkill(skillId, out var record))
+            {
+                Debug.LogWarning($"[IDRPG3D LocalTest] {debugName} config not found. SkillId={skillId}");
+                return;
+            }
+
+            for (var i = 0; i < record.Effects.Count; i++)
+            {
+                IDRPG3DPrototypeEffectRunner.Apply(record.Effects[i], caster, target);
+            }
+
+            Debug.Log($"[IDRPG3D LocalTest] Applied configured {debugName} SkillId={skillId} Lv{record.Level}.");
         }
 
         private IDRPG3DPrototypeSkillDefinition CreateConfiguredOrFallbackSkill(

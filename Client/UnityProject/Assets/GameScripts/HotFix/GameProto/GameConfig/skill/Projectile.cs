@@ -33,39 +33,39 @@ public sealed partial class Projectile : Luban.BeanBase
     }
 
     /// <summary>
-    /// 投射物ID。被 skill.xlsx 的 projectileId 引用。
+    /// Projectile id. 0 means none.
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// 投射物Key。程序/日志识别用。
+    /// Projectile key.
     /// </summary>
     public readonly string ProjectileKey;
     /// <summary>
-    /// 飞行速度，单位米/秒。数值越大飞得越快。
+    /// Speed.
     /// </summary>
     public readonly float Speed;
     /// <summary>
-    /// 命中半径，单位米。原型一般 0.2 到 0.5。
+    /// Hit radius.
     /// </summary>
     public readonly float HitRadius;
     /// <summary>
-    /// 最大存活时间，单位秒。超过后自动销毁，避免特效残留。
+    /// Max lifetime.
     /// </summary>
     public readonly float MaxLifetime;
     /// <summary>
-    /// 飞行中特效Prefab路径。Blink资源先放在 ThirdParty 下引用。
+    /// Projectile prefab path.
     /// </summary>
     public readonly string ProjectilePrefabPath;
     /// <summary>
-    /// 出手/枪口/施法点特效Prefab路径。可以为空。
+    /// Muzzle prefab path.
     /// </summary>
     public readonly string MuzzlePrefabPath;
     /// <summary>
-    /// 命中特效Prefab路径。可以为空。
+    /// Impact prefab path.
     /// </summary>
     public readonly string ImpactPrefabPath;
     /// <summary>
-    /// Prefab加载失败时的备用颜色，HTML颜色格式，例如 #40C7FFFF。
+    /// Fallback color.
     /// </summary>
     public readonly string FallbackColor;
    

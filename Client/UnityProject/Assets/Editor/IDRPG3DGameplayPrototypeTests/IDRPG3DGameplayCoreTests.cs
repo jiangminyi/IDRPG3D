@@ -136,6 +136,45 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void SkillCasterAppliesNonProjectileSkillImmediately()
+        {
+            var casterObject = new GameObject("Caster");
+            var targetObject = new GameObject("Target");
+            var projectilesRoot = new GameObject("Projectiles");
+            try
+            {
+                var caster = casterObject.AddComponent<IDRPG3DCombatUnit>();
+                caster.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 8f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(2, 1, IDRPG3DCombatFaction.Hero, 90, 100f, 5f, 1.5f, 1f, 8f);
+                target.TakeDamage(45f, null);
+
+                var skillCaster = casterObject.AddComponent<IDRPG3DPrototypeSkillCaster>();
+                skillCaster.Configure(
+                    new IDRPG3DPrototypeSkillDefinition(
+                        "heal",
+                        "Heal",
+                        level: 1,
+                        new[] { IDRPG3DPrototypeEffectDefinition.Heal(200301, 35f) },
+                        range: 7f,
+                        cooldown: 2.2f,
+                        projectileSpeed: 0f,
+                        fallbackColor: Color.green),
+                    projectilesRoot.transform);
+
+                Assert.IsTrue(skillCaster.TryCast(target));
+                Assert.AreEqual(90f, target.Health, 0.001f);
+                Assert.AreEqual(0, projectilesRoot.transform.childCount);
+            }
+            finally
+            {
+                Object.DestroyImmediate(casterObject);
+                Object.DestroyImmediate(targetObject);
+                Object.DestroyImmediate(projectilesRoot);
+            }
+        }
+
+        [Test]
         public void SkillConfigBuilderCreatesRuntimeDefinitionFromConfigRecord()
         {
             var record = new IDRPG3DPrototypeSkillConfigRecord(
@@ -198,6 +237,47 @@ namespace IDRPG3D.EditorTools.Tests
             Assert.AreEqual(500101, skill.PrimaryEffect.Buff.BuffId);
             Assert.AreEqual(2, skill.PrimaryEffect.Buff.MaxStack);
             Assert.AreEqual(IDRPG3DPrototypeStatType.MoveSpeed, skill.PrimaryEffect.Buff.StatType);
+        }
+
+        [Test]
+        public void SkillConfigBuilderCreatesLevelAwareMultiEffectSkill()
+        {
+            var slow = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                500101,
+                "frost_slow",
+                "Frost Slow",
+                3f,
+                1,
+                IDRPG3DPrototypeStatType.MoveSpeed,
+                IDRPG3DPrototypeModifierType.Percent,
+                -0.25f);
+            var record = new IDRPG3DPrototypeSkillConfigRecord(
+                1001,
+                "frostbolt",
+                "Frostbolt",
+                level: 2,
+                range: 9f,
+                cooldown: 1.3f,
+                projectileSpeed: 13f,
+                projectilePrefabPath: string.Empty,
+                muzzlePrefabPath: string.Empty,
+                impactPrefabPath: string.Empty,
+                fallbackColor: new Color(0.25f, 0.78f, 1f, 1f),
+                effects: new[]
+                {
+                    IDRPG3DPrototypeEffectDefinition.Damage(200111, 26f),
+                    IDRPG3DPrototypeEffectDefinition.AddBuff(200112, slow)
+                });
+
+            var skill = IDRPG3DPrototypeSkillConfigBuilder.Build(record);
+
+            Assert.AreEqual("frostbolt", skill.SkillId);
+            Assert.AreEqual(2, skill.Level);
+            Assert.AreEqual(2, skill.Effects.Count);
+            Assert.AreEqual(26f, skill.Damage, 0.001f);
+            Assert.AreEqual(200111, skill.PrimaryEffect.EffectId);
+            Assert.AreEqual(200112, skill.Effects[1].EffectId);
+            Assert.AreEqual(500101, skill.Effects[1].Buff.BuffId);
         }
 
         [Test]
@@ -304,6 +384,72 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void EffectRunnerHealsWithoutExceedingMaxHealth()
+        {
+            var healerObject = new GameObject("Healer");
+            var targetObject = new GameObject("Target");
+            try
+            {
+                var healer = healerObject.AddComponent<IDRPG3DCombatUnit>();
+                healer.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 8f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(2, 1, IDRPG3DCombatFaction.Hero, 90, 100f, 5f, 1.5f, 1f, 8f);
+                target.TakeDamage(55f, null);
+
+                var result = IDRPG3DPrototypeEffectRunner.Apply(
+                    IDRPG3DPrototypeEffectDefinition.Heal(200301, 40f),
+                    healer,
+                    target);
+
+                Assert.IsTrue(result.Applied);
+                Assert.AreEqual(40f, result.Value, 0.001f);
+                Assert.AreEqual(85f, target.Health, 0.001f);
+
+                IDRPG3DPrototypeEffectRunner.Apply(IDRPG3DPrototypeEffectDefinition.Heal(200302, 40f), healer, target);
+                Assert.AreEqual(100f, target.Health, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(healerObject);
+                Object.DestroyImmediate(targetObject);
+            }
+        }
+
+        [Test]
+        public void ArmorBuffReducesIncomingDamage()
+        {
+            var attackerObject = new GameObject("Attacker");
+            var targetObject = new GameObject("Target");
+            try
+            {
+                var attacker = attackerObject.AddComponent<IDRPG3DCombatUnit>();
+                attacker.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 8f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 1.5f, 1f, 8f);
+                var armor = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                    500401,
+                    "devotion_aura_armor",
+                    "Devotion Aura",
+                    3f,
+                    1,
+                    IDRPG3DPrototypeStatType.Armor,
+                    IDRPG3DPrototypeModifierType.Add,
+                    6f);
+
+                targetObject.AddComponent<IDRPG3DPrototypeBuffController>().ApplyBuff(armor, target);
+                target.TakeDamage(20f, attacker);
+
+                Assert.AreEqual(6f, target.BonusArmor, 0.001f);
+                Assert.AreEqual(86f, target.Health, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(attackerObject);
+                Object.DestroyImmediate(targetObject);
+            }
+        }
+
+        [Test]
         public void BuffControllerStacksRefreshesAndExpiresMoveSpeedModifier()
         {
             var unitObject = new GameObject("Unit");
@@ -338,6 +484,99 @@ namespace IDRPG3D.EditorTools.Tests
             finally
             {
                 Object.DestroyImmediate(unitObject);
+            }
+        }
+
+        [Test]
+        public void DotBuffTicksDamageOverTime()
+        {
+            var casterObject = new GameObject("Caster");
+            var targetObject = new GameObject("Target");
+            try
+            {
+                var caster = casterObject.AddComponent<IDRPG3DCombatUnit>();
+                caster.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 8f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+                var burn = IDRPG3DPrototypeBuffDefinition.DamageOverTime(
+                    500201,
+                    "fire_burn",
+                    "Burn",
+                    duration: 4f,
+                    maxStack: 1,
+                    tickInterval: 1f,
+                    tickValue: 5f);
+                var controller = targetObject.AddComponent<IDRPG3DPrototypeBuffController>();
+
+                controller.ApplyBuff(burn, caster);
+                controller.Tick(0.5f);
+                Assert.AreEqual(100f, target.Health, 0.001f);
+
+                controller.Tick(0.5f);
+                Assert.AreEqual(95f, target.Health, 0.001f);
+
+                controller.Tick(2f);
+                Assert.AreEqual(85f, target.Health, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(casterObject);
+                Object.DestroyImmediate(targetObject);
+            }
+        }
+
+        [Test]
+        public void AuraBuffAppliesArmorToNearbyAllies()
+        {
+            var sourceObject = new GameObject("AuraSource");
+            var allyObject = new GameObject("Ally");
+            var farAllyObject = new GameObject("FarAlly");
+            var enemyObject = new GameObject("Enemy");
+            try
+            {
+                var source = sourceObject.AddComponent<IDRPG3DCombatUnit>();
+                source.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 8f, 1f, 8f);
+                var ally = allyObject.AddComponent<IDRPG3DCombatUnit>();
+                ally.Configure(2, 1, IDRPG3DCombatFaction.Hero, 90, 100f, 5f, 8f, 1f, 8f);
+                var farAlly = farAllyObject.AddComponent<IDRPG3DCombatUnit>();
+                farAlly.Configure(3, 2, IDRPG3DCombatFaction.Hero, 80, 100f, 5f, 8f, 1f, 8f);
+                var enemy = enemyObject.AddComponent<IDRPG3DCombatUnit>();
+                enemy.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 8f, 1f, 8f);
+                allyObject.transform.position = new Vector3(2f, 0f, 0f);
+                farAllyObject.transform.position = new Vector3(8f, 0f, 0f);
+                enemyObject.transform.position = new Vector3(2f, 0f, 1f);
+                var armor = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                    500401,
+                    "devotion_aura_armor",
+                    "Devotion Aura",
+                    2f,
+                    1,
+                    IDRPG3DPrototypeStatType.Armor,
+                    IDRPG3DPrototypeModifierType.Add,
+                    5f);
+                var aura = IDRPG3DPrototypeBuffDefinition.Aura(
+                    500400,
+                    "devotion_aura",
+                    "Devotion Aura",
+                    duration: 10f,
+                    tickInterval: 1f,
+                    auraRadius: 4f,
+                    armor);
+
+                var controller = sourceObject.AddComponent<IDRPG3DPrototypeBuffController>();
+                controller.ApplyBuff(aura, source);
+                controller.Tick(1f);
+
+                Assert.AreEqual(5f, ally.BonusArmor, 0.001f);
+                Assert.AreEqual(0f, farAlly.BonusArmor, 0.001f);
+                Assert.AreEqual(0f, enemy.BonusArmor, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(sourceObject);
+                Object.DestroyImmediate(allyObject);
+                Object.DestroyImmediate(farAllyObject);
+                Object.DestroyImmediate(enemyObject);
             }
         }
 

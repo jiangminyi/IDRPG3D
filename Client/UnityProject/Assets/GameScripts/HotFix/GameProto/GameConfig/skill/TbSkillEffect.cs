@@ -13,7 +13,7 @@ using Luban;
 namespace GameConfig.skill
 {
 /// <summary>
-/// 高级预留：一个技能多个效果/多个触发阶段时再启用。当前运行时还主要读取 skill.effectId。
+/// ????????? skillId + level + order ???? effect?
 /// </summary>
 public partial class TbSkillEffect
 {
