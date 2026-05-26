@@ -55,6 +55,52 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void CameraTargetFollowerTracksAliveHeroCenterWithoutChangingRotation()
+        {
+            var targetObject = new GameObject("CameraTarget");
+            var heroObject = new GameObject("Hero");
+            var secondHeroObject = new GameObject("SecondHero");
+            var enemyObject = new GameObject("Enemy");
+            var deadObject = new GameObject("DeadHero");
+            try
+            {
+                targetObject.transform.rotation = Quaternion.Euler(12f, 34f, 56f);
+                heroObject.transform.position = new Vector3(2f, 1f, 4f);
+                secondHeroObject.transform.position = new Vector3(8f, 3f, 10f);
+                enemyObject.transform.position = new Vector3(100f, 100f, 100f);
+                deadObject.transform.position = new Vector3(100f, 100f, 100f);
+
+                var hero = heroObject.AddComponent<IDRPG3DCombatUnit>();
+                hero.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 1.5f, 1f, 8f);
+                var secondHero = secondHeroObject.AddComponent<IDRPG3DCombatUnit>();
+                secondHero.Configure(2, 1, IDRPG3DCombatFaction.Hero, 90, 100f, 5f, 1.5f, 1f, 8f);
+                var enemy = enemyObject.AddComponent<IDRPG3DCombatUnit>();
+                enemy.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+                var dead = deadObject.AddComponent<IDRPG3DCombatUnit>();
+                dead.Configure(3, 2, IDRPG3DCombatFaction.Hero, 80, 100f, 5f, 1.5f, 1f, 8f);
+                dead.TakeDamage(200f, null);
+
+                var follower = targetObject.AddComponent<IDRPG3DCameraTargetFollower>();
+                follower.Configure(new[] { hero, secondHero, enemy, dead });
+                var originalRotation = targetObject.transform.rotation;
+
+                follower.TickForTest();
+
+                Assert.AreEqual(new Vector3(5f, 2f, 7f), targetObject.transform.position);
+                Assert.AreEqual(originalRotation, targetObject.transform.rotation);
+                Assert.AreEqual(2, follower.TrackedUnitCountForTest);
+            }
+            finally
+            {
+                Object.DestroyImmediate(targetObject);
+                Object.DestroyImmediate(heroObject);
+                Object.DestroyImmediate(secondHeroObject);
+                Object.DestroyImmediate(enemyObject);
+                Object.DestroyImmediate(deadObject);
+            }
+        }
+
+        [Test]
         public void WaveSpawnResolverPlacesNormalWaveAheadOfRouteAnchor()
         {
             var wave = new IDRPG3DWaveDefinition(
@@ -253,6 +299,43 @@ namespace IDRPG3D.EditorTools.Tests
                 root.AddComponent<IDRPG3DAnimatorBridge>().Initialize();
 
                 Assert.IsFalse(animator.applyRootMotion);
+            }
+            finally
+            {
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        [Test]
+        public void AnimatorBridgeAppliesMoveSpeedMultiplierToPlaybackSpeed()
+        {
+            var root = new GameObject("AnimatorBridgeMoveSpeedRoot");
+            try
+            {
+                var bridge = root.AddComponent<IDRPG3DAnimatorBridge>();
+
+                bridge.SetMoveSpeed(2f, 0.4f);
+
+                Assert.AreEqual(0.4f, bridge.CurrentPlaybackSpeed, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        [Test]
+        public void AnimatorBridgeAppliesAttackSpeedMultiplierToAttackPlaybackSpeed()
+        {
+            var root = new GameObject("AnimatorBridgeAttackSpeedRoot");
+            try
+            {
+                var bridge = root.AddComponent<IDRPG3DAnimatorBridge>();
+                bridge.ConfigureClips(null, null, null, new AnimationClip(), null);
+
+                bridge.PlayMeleeAttack(1.8f);
+
+                Assert.AreEqual(1.8f, bridge.CurrentPlaybackSpeed, 0.001f);
             }
             finally
             {
@@ -752,6 +835,33 @@ namespace IDRPG3D.EditorTools.Tests
 
                 Assert.AreEqual(0.4f, controller.MoveSpeedMultiplier, 0.001f);
                 Assert.AreEqual(0.4f, controller.AttackSpeedMultiplier, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(unitObject);
+            }
+        }
+
+        [Test]
+        public void BuffControllerCalculatesCastSpeedMultiplier()
+        {
+            var unitObject = new GameObject("CasterSpeedUnit");
+            try
+            {
+                var controller = unitObject.AddComponent<IDRPG3DPrototypeBuffController>();
+                var haste = IDRPG3DPrototypeBuffDefinition.StatModifier(
+                    500301,
+                    "cast_haste",
+                    "Cast Haste",
+                    duration: 3f,
+                    maxStack: 1,
+                    IDRPG3DPrototypeStatType.CastSpeed,
+                    IDRPG3DPrototypeModifierType.Percent,
+                    0.35f);
+
+                controller.ApplyBuff(haste, null);
+
+                Assert.AreEqual(1.35f, controller.CastSpeedMultiplier, 0.001f);
             }
             finally
             {

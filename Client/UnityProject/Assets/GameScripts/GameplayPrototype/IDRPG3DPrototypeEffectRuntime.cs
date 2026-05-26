@@ -331,6 +331,7 @@ namespace IDRPG3D.GameplayPrototype
         public int ActiveBuffCount => activeBuffs.Count;
         public float MoveSpeedMultiplier => CalculateMultiplier(IDRPG3DPrototypeStatType.MoveSpeed);
         public float AttackSpeedMultiplier => CalculateAttackSpeedMultiplier();
+        public float CastSpeedMultiplier => CalculateMultiplier(IDRPG3DPrototypeStatType.CastSpeed);
         public float ArmorBonus => CalculateAdditive(IDRPG3DPrototypeStatType.Armor);
 
         private void Update()

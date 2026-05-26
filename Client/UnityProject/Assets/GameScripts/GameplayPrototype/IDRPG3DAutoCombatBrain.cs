@@ -104,12 +104,13 @@ namespace IDRPG3D.GameplayPrototype
                 return;
             }
 
-            var attackSpeedMultiplier = Mathf.Max(0.05f, GetAttackSpeedMultiplier());
-            var baseInterval = skillCaster != null && skillCaster.HasSkill ? skillCaster.Skill.Cooldown : unit.AttackInterval;
+            var usesSkill = skillCaster != null && skillCaster.HasSkill;
+            var attackSpeedMultiplier = Mathf.Max(0.05f, usesSkill ? GetCastSpeedMultiplier() : GetAttackSpeedMultiplier());
+            var baseInterval = usesSkill ? skillCaster.Skill.Cooldown : unit.AttackInterval;
             nextAttackTime = Time.time + baseInterval / attackSpeedMultiplier;
-            animatorBridge.PlayMeleeAttack();
+            animatorBridge.PlayMeleeAttack(attackSpeedMultiplier);
             Debug.Log($"[IDRPG3D Combat] {name} attacks {currentTarget.name}.");
-            if (skillCaster != null && skillCaster.HasSkill)
+            if (usesSkill)
             {
                 skillCaster.TryCast(currentTarget);
                 return;
@@ -122,6 +123,12 @@ namespace IDRPG3D.GameplayPrototype
         {
             var buffController = GetComponent<IDRPG3DPrototypeBuffController>();
             return buffController != null ? buffController.AttackSpeedMultiplier : 1f;
+        }
+
+        private float GetCastSpeedMultiplier()
+        {
+            var buffController = GetComponent<IDRPG3DPrototypeBuffController>();
+            return buffController != null ? buffController.CastSpeedMultiplier : 1f;
         }
     }
 }

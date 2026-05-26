@@ -15,13 +15,19 @@ namespace IDRPG3D.LocalTest
 {
     public sealed class IDRPG3DLocalTestBootstrap : MonoBehaviour
     {
+        [SerializeField] private bool showLocalFlowWindow;
+        [SerializeField] private bool createFallbackArenaFloor;
+
         private const string ServerHost = "127.0.0.1";
         private const int GameServerPort = 20000;
         private const int MongoPort = 27017;
         private const string GameServerProtocol = "KCP/UDP";
         private const string DefaultRouteName = "Route_Main_01";
-        private const string DefaultHeroName = "Hero1";
         private const string DefaultEnemyName = "Enemy";
+        private const string ActorRootName = "Prototype_Actors";
+        private const string CameraTargetName = "CameraTarget";
+        private const string HeroPrefabPath = "Assets/AssetRaw/Actor/Hero.prefab";
+        private const string EnemyPrefabPath = "Assets/AssetRaw/Actor/Enemy.prefab";
         private const string BossAnchorId = "stage_01_boss_01";
         private const string SpawnedEnemiesRootName = "Prototype_WaveEnemies";
         private const string ProjectilesRootName = "Prototype_Projectiles";
@@ -41,7 +47,7 @@ namespace IDRPG3D.LocalTest
         private const string FireballImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_Fireball04_Orange.prefab";
 
         private static readonly string[] HeroNames = { "Hero1", "Hero2", "Hero3" };
-        private static readonly string[] EnemyNames = { "Enemy", "Enemy1", "Enemy2", "Enemy3", "Monster_DebugCapsule" };
+        private static readonly string[] SceneActorNamesToHide = { "Hero1", "Hero2", "Hero3", "Enemy", "Enemy1", "Enemy2", "Enemy3", "Hero_DebugCapsule", "Monster_DebugCapsule" };
 
         private InputField accountInput;
         private Text statusText;
@@ -60,28 +66,36 @@ namespace IDRPG3D.LocalTest
         private IDRPG3DLocalWaveConfigLoader waveConfigLoader;
         private Dictionary<string, GameObject> enemyTemplates;
         private IReadOnlyList<IDRPG3DCombatUnit> activeHeroUnits = Array.Empty<IDRPG3DCombatUnit>();
+        private IDRPG3DCameraTargetFollower cameraTargetFollower;
 
         private void Awake()
         {
             BuildSceneVisuals();
             SetupGameplayPrototype();
-            BuildUI();
-            AppendStatus("Local test scene ready.");
-            AppendStatus("Gameplay prototype: heroes follow route, clear waves, and fight a fixed boss anchor.");
-            StartCoroutine(CheckPortsRoutine());
+            if (showLocalFlowWindow)
+            {
+                BuildUI();
+                AppendStatus("Local test scene ready.");
+                AppendStatus("Gameplay prototype: heroes follow route, clear waves, and fight a fixed boss anchor.");
+                StartCoroutine(CheckPortsRoutine());
+            }
         }
 
         private void SetupGameplayPrototype()
         {
             var route = FindRoute();
-            var heroes = FindNamedObjects(HeroNames);
-            var enemies = FindNamedObjects(EnemyNames);
-            if (route == null || heroes.Count == 0 || enemies.Count == 0)
+            var heroPrefab = LoadEditorPrefab(HeroPrefabPath);
+            var enemyPrefab = LoadEditorPrefab(EnemyPrefabPath);
+            if (route == null || heroPrefab == null || enemyPrefab == null)
             {
-                Debug.LogWarning($"[IDRPG3D LocalTest] Gameplay prototype skipped. Route found: {route != null}, Heroes: {heroes.Count}, Enemies: {enemies.Count}.");
+                Debug.LogWarning($"[IDRPG3D LocalTest] Gameplay prototype skipped. Route found: {route != null}, HeroPrefab: {heroPrefab != null}, EnemyPrefab: {enemyPrefab != null}.");
                 return;
             }
 
+            var actorRoot = EnsureActorRoot();
+            HideSceneAuthoredPrototypeActors(actorRoot);
+            ClearChildren(actorRoot);
+            var heroes = SpawnHeroActors(heroPrefab, route, actorRoot);
             for (var i = 0; i < heroes.Count; i++)
             {
                 DisableLegacySplineFollower(heroes[i]);
@@ -100,6 +114,7 @@ namespace IDRPG3D.LocalTest
             }
             ConfigureHeroSupportPrototype(heroUnits);
             activeHeroUnits = heroUnits;
+            ConfigureCameraTarget(heroUnits);
 
             var routeController = GetComponent<IDRPG3DTeamRouteController>();
             if (routeController == null)
@@ -110,7 +125,7 @@ namespace IDRPG3D.LocalTest
             routeController.Configure(route, heroUnits);
             routeController.SetDetectionRadius(PrototypeHeroDetectionRadius);
             waveConfigLoader = new IDRPG3DLocalWaveConfigLoader();
-            enemyTemplates = BuildEnemyTemplates(enemies);
+            enemyTemplates = BuildEnemyTemplates(enemyPrefab);
             var anchors = new List<IDRPG3DSpawnAnchor> { EnsureBossSpawnAnchor(route) };
             ConfigureWaveController(routeController, anchors);
             Debug.Log($"[IDRPG3D LocalTest] Gameplay prototype wired: {heroUnits.Count} heroes follow route and clear configured waves.");
@@ -127,42 +142,117 @@ namespace IDRPG3D.LocalTest
             return FindObjectOfType<SplineComputer>();
         }
 
-        private static List<GameObject> FindNamedObjects(IReadOnlyList<string> names)
+        private static Transform EnsureActorRoot()
         {
-            var results = new List<GameObject>(names.Count);
-            for (var i = 0; i < names.Count; i++)
+            var root = GameObject.Find(ActorRootName);
+            if (root == null)
             {
-                var target = GameObject.Find(names[i]);
-                if (target != null)
-                {
-                    results.Add(target);
-                }
+                root = new GameObject(ActorRootName);
             }
 
-            return results;
+            return root.transform;
         }
 
-        private static Dictionary<string, GameObject> BuildEnemyTemplates(IReadOnlyList<GameObject> enemies)
+        private static void HideSceneAuthoredPrototypeActors(Transform actorRoot)
         {
-            var templates = new Dictionary<string, GameObject>(StringComparer.OrdinalIgnoreCase);
-            for (var i = 0; i < enemies.Count; i++)
+            var transforms = FindObjectsOfType<Transform>(true);
+            for (var i = 0; i < transforms.Length; i++)
             {
-                var enemy = enemies[i];
-                if (enemy == null)
+                var actor = transforms[i];
+                if (actor == null || actorRoot != null && actor.IsChildOf(actorRoot))
                 {
                     continue;
                 }
 
-                templates[enemy.name] = enemy;
-                if (!templates.ContainsKey(DefaultEnemyName))
+                if (ShouldHideSceneAuthoredPrototypeActor(actor.name))
                 {
-                    templates[DefaultEnemyName] = enemy;
+                    actor.gameObject.SetActive(false);
                 }
+            }
+        }
 
-                enemy.SetActive(false);
+        private static bool ShouldHideSceneAuthoredPrototypeActor(string actorName)
+        {
+            for (var i = 0; i < SceneActorNamesToHide.Length; i++)
+            {
+                if (string.Equals(SceneActorNamesToHide[i], actorName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
             }
 
+            return false;
+        }
+
+        private static List<GameObject> SpawnHeroActors(GameObject heroPrefab, SplineComputer route, Transform root)
+        {
+            var heroes = new List<GameObject>(HeroNames.Length);
+            var start = ResolveHeroStart(route);
+            var right = Vector3.Cross(Vector3.up, start.Forward).normalized;
+            if (right.sqrMagnitude < 0.0001f)
+            {
+                right = Vector3.right;
+            }
+
+            var sideStart = -(HeroNames.Length - 1) * 0.5f;
+            for (var i = 0; i < HeroNames.Length; i++)
+            {
+                var position = start.Position + right * (sideStart + i) * 1.2f;
+                var hero = Instantiate(heroPrefab, position, Quaternion.LookRotation(start.Forward, Vector3.up), root);
+                hero.name = HeroNames[i];
+                hero.SetActive(true);
+                heroes.Add(hero);
+            }
+
+            return heroes;
+        }
+
+        private static IDRPG3DRouteStart ResolveHeroStart(SplineComputer route)
+        {
+            if (route != null)
+            {
+                var sample = new SplineSample();
+                route.Evaluate(0.0, ref sample);
+                var forward = sample.forward;
+                forward.y = 0f;
+                if (forward.sqrMagnitude < 0.0001f)
+                {
+                    forward = Vector3.forward;
+                }
+
+                return new IDRPG3DRouteStart(sample.position, forward.normalized);
+            }
+
+            return new IDRPG3DRouteStart(Vector3.zero, Vector3.forward);
+        }
+
+        private static Dictionary<string, GameObject> BuildEnemyTemplates(GameObject enemyPrefab)
+        {
+            var templates = new Dictionary<string, GameObject>(StringComparer.OrdinalIgnoreCase);
+            if (enemyPrefab == null)
+            {
+                return templates;
+            }
+
+            templates[DefaultEnemyName] = enemyPrefab;
+            templates[enemyPrefab.name] = enemyPrefab;
+            templates["Enemy1"] = enemyPrefab;
+            templates["Enemy2"] = enemyPrefab;
+            templates["Enemy3"] = enemyPrefab;
+            templates["Monster_DebugCapsule"] = enemyPrefab;
             return templates;
+        }
+
+        private readonly struct IDRPG3DRouteStart
+        {
+            public IDRPG3DRouteStart(Vector3 position, Vector3 forward)
+            {
+                Position = position;
+                Forward = forward.sqrMagnitude > 0.0001f ? forward.normalized : Vector3.forward;
+            }
+
+            public Vector3 Position { get; }
+            public Vector3 Forward { get; }
         }
 
         private IDRPG3DSpawnAnchor EnsureBossSpawnAnchor(SplineComputer route)
@@ -281,6 +371,23 @@ namespace IDRPG3D.LocalTest
             }
 
             return spawnedUnits;
+        }
+
+        private void ConfigureCameraTarget(IReadOnlyList<IDRPG3DCombatUnit> heroUnits)
+        {
+            var targetObject = GameObject.Find(CameraTargetName);
+            if (targetObject == null)
+            {
+                targetObject = new GameObject(CameraTargetName);
+            }
+
+            cameraTargetFollower = targetObject.GetComponent<IDRPG3DCameraTargetFollower>();
+            if (cameraTargetFollower == null)
+            {
+                cameraTargetFollower = targetObject.AddComponent<IDRPG3DCameraTargetFollower>();
+            }
+
+            cameraTargetFollower.Configure(heroUnits);
         }
 
         private void TryStartWaveEnemyEngage(IDRPG3DCombatUnit enemy, IDRPG3DWaveDefinition wave)
@@ -696,18 +803,6 @@ namespace IDRPG3D.LocalTest
 
         private void BuildSceneVisuals()
         {
-            var cameraObject = GameObject.Find("Main Camera");
-            if (cameraObject == null)
-            {
-                cameraObject = new GameObject("Main Camera");
-                cameraObject.AddComponent<Camera>();
-                cameraObject.tag = "MainCamera";
-            }
-
-            cameraObject.transform.SetPositionAndRotation(new Vector3(0f, 4.8f, -8.5f), Quaternion.Euler(28f, 0f, 0f));
-            cameraObject.GetComponent<Camera>().fieldOfView = 45f;
-            cameraObject.GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-
             if (GameObject.Find("Directional Light") == null)
             {
                 var lightObject = new GameObject("Directional Light");
@@ -717,7 +812,7 @@ namespace IDRPG3D.LocalTest
                 lightObject.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
             }
 
-            if (GameObject.Find("Arena_Floor") == null)
+            if (createFallbackArenaFloor && GameObject.Find("Arena_Floor") == null)
             {
                 var floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 floor.name = "Arena_Floor";
@@ -725,19 +820,6 @@ namespace IDRPG3D.LocalTest
                 floor.transform.localScale = new Vector3(5f, 1f, 5f);
             }
 
-            if (GameObject.Find(DefaultHeroName) == null && GameObject.Find("Hero_DebugCapsule") == null)
-            {
-                var hero = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                hero.name = "Hero_DebugCapsule";
-                hero.transform.position = new Vector3(-1.4f, 1f, 0f);
-            }
-
-            if (GameObject.Find(DefaultEnemyName) == null && GameObject.Find("Monster_DebugCapsule") == null)
-            {
-                var monster = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                monster.name = DefaultEnemyName;
-                monster.transform.position = new Vector3(1.4f, 1f, 0f);
-            }
         }
 
         private static void SetGameObjectLayer(GameObject target, string layerName)

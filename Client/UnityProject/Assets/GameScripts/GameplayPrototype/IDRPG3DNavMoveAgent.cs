@@ -31,7 +31,7 @@ namespace IDRPG3D.GameplayPrototype
         private void Update()
         {
             TickForTest();
-            animatorBridge?.SetMoveSpeed(CurrentSpeed);
+            animatorBridge?.SetMoveSpeed(CurrentSpeed, CurrentSpeedMultiplier);
         }
 
         public void Initialize()
