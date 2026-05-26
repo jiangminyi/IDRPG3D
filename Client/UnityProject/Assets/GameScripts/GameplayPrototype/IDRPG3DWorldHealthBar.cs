@@ -92,7 +92,7 @@ namespace IDRPG3D.GameplayPrototype
                 return;
             }
 
-            unit.Damaged += OnDamaged;
+            unit.HealthChanged += OnHealthChanged;
             unit.Died += OnDied;
         }
 
@@ -103,11 +103,11 @@ namespace IDRPG3D.GameplayPrototype
                 return;
             }
 
-            unit.Damaged -= OnDamaged;
+            unit.HealthChanged -= OnHealthChanged;
             unit.Died -= OnDied;
         }
 
-        private void OnDamaged(IDRPG3DCombatUnit damagedUnit, IDRPG3DCombatUnit attacker)
+        private void OnHealthChanged(IDRPG3DCombatUnit changedUnit, IDRPG3DCombatUnit source)
         {
             Refresh();
         }

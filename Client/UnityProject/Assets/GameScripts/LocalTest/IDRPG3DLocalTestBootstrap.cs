@@ -22,9 +22,13 @@ namespace IDRPG3D.LocalTest
         private const string DefaultRouteName = "Route_Main_01";
         private const string DefaultHeroName = "Hero1";
         private const string DefaultEnemyName = "Enemy";
+        private const string BossAnchorId = "stage_01_boss_01";
+        private const string SpawnedEnemiesRootName = "Prototype_WaveEnemies";
         private const string ProjectilesRootName = "Prototype_Projectiles";
         private const string TerrainLayerName = "Terrain";
         private const string GroundTerrainLayerName = "GroundTerrain";
+        private const int PrototypeStageId = 1;
+        private const float PrototypeHeroDetectionRadius = 24f;
         private const int FrostboltSkillId = 1001;
         private const int FireballSkillId = 1002;
         private const int HealSkillId = 1003;
@@ -37,7 +41,7 @@ namespace IDRPG3D.LocalTest
         private const string FireballImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_Fireball04_Orange.prefab";
 
         private static readonly string[] HeroNames = { "Hero1", "Hero2", "Hero3" };
-        private static readonly string[] EnemyNames = { "Enemy", "Enemy1", "Enemy2", "Enemy3" };
+        private static readonly string[] EnemyNames = { "Enemy", "Enemy1", "Enemy2", "Enemy3", "Monster_DebugCapsule" };
 
         private InputField accountInput;
         private Text statusText;
@@ -53,6 +57,9 @@ namespace IDRPG3D.LocalTest
         private string currentAccount = "local_player_001";
         private Font defaultFont;
         private IDRPG3DLocalSkillConfigLoader skillConfigLoader;
+        private IDRPG3DLocalWaveConfigLoader waveConfigLoader;
+        private Dictionary<string, GameObject> enemyTemplates;
+        private IReadOnlyList<IDRPG3DCombatUnit> activeHeroUnits = Array.Empty<IDRPG3DCombatUnit>();
 
         private void Awake()
         {
@@ -60,7 +67,7 @@ namespace IDRPG3D.LocalTest
             SetupGameplayPrototype();
             BuildUI();
             AppendStatus("Local test scene ready.");
-            AppendStatus("Gameplay prototype: Hero1 follows route, scans Enemy, and auto-combats.");
+            AppendStatus("Gameplay prototype: heroes follow route, clear waves, and fight a fixed boss anchor.");
             StartCoroutine(CheckPortsRoutine());
         }
 
@@ -87,18 +94,12 @@ namespace IDRPG3D.LocalTest
             for (var i = 0; i < heroes.Count; i++)
             {
                 var hero = heroes[i];
-                var unit = ConfigureUnit(hero, 1 + i, i, IDRPG3DCombatFaction.Hero, 100 - i * 10, 120f, 18f, 1.8f, 1.25f, 7f, 3.2f);
+                var unit = ConfigureUnit(hero, 1 + i, i, IDRPG3DCombatFaction.Hero, 100 - i * 10, 220f, 118f, 1.8f, 1.25f, 7f, 3.2f, 10f);
                 ConfigureHeroPrototypeSkill(hero, projectileRoot);
                 heroUnits.Add(unit);
             }
             ConfigureHeroSupportPrototype(heroUnits);
-
-            for (var i = 0; i < enemies.Count; i++)
-            {
-                var enemy = enemies[i];
-                var unit = ConfigureUnit(enemy, 1001 + i, i, IDRPG3DCombatFaction.Enemy, 70, 120f, 10f, 1.6f, 1.8f, 6f, 2.4f);
-                ConfigureEnemyHealthBar(enemy, unit);
-            }
+            activeHeroUnits = heroUnits;
 
             var routeController = GetComponent<IDRPG3DTeamRouteController>();
             if (routeController == null)
@@ -107,7 +108,12 @@ namespace IDRPG3D.LocalTest
             }
 
             routeController.Configure(route, heroUnits);
-            Debug.Log($"[IDRPG3D LocalTest] Gameplay prototype wired: {heroUnits.Count} heroes follow route, scan {enemies.Count} enemies, and auto-combat.");
+            routeController.SetDetectionRadius(PrototypeHeroDetectionRadius);
+            waveConfigLoader = new IDRPG3DLocalWaveConfigLoader();
+            enemyTemplates = BuildEnemyTemplates(enemies);
+            var anchors = new List<IDRPG3DSpawnAnchor> { EnsureBossSpawnAnchor(route) };
+            ConfigureWaveController(routeController, anchors);
+            Debug.Log($"[IDRPG3D LocalTest] Gameplay prototype wired: {heroUnits.Count} heroes follow route and clear configured waves.");
         }
 
         private static SplineComputer FindRoute()
@@ -134,6 +140,270 @@ namespace IDRPG3D.LocalTest
             }
 
             return results;
+        }
+
+        private static Dictionary<string, GameObject> BuildEnemyTemplates(IReadOnlyList<GameObject> enemies)
+        {
+            var templates = new Dictionary<string, GameObject>(StringComparer.OrdinalIgnoreCase);
+            for (var i = 0; i < enemies.Count; i++)
+            {
+                var enemy = enemies[i];
+                if (enemy == null)
+                {
+                    continue;
+                }
+
+                templates[enemy.name] = enemy;
+                if (!templates.ContainsKey(DefaultEnemyName))
+                {
+                    templates[DefaultEnemyName] = enemy;
+                }
+
+                enemy.SetActive(false);
+            }
+
+            return templates;
+        }
+
+        private IDRPG3DSpawnAnchor EnsureBossSpawnAnchor(SplineComputer route)
+        {
+            var anchors = FindObjectsOfType<IDRPG3DSpawnAnchor>(true);
+            for (var i = 0; i < anchors.Length; i++)
+            {
+                if (anchors[i] != null && string.Equals(anchors[i].AnchorId, BossAnchorId, StringComparison.OrdinalIgnoreCase))
+                {
+                    return anchors[i];
+                }
+            }
+
+            var anchorObject = GameObject.Find("BossSpawn_Stage01");
+            if (anchorObject == null)
+            {
+                anchorObject = new GameObject("BossSpawn_Stage01");
+            }
+
+            var anchor = anchorObject.GetComponent<IDRPG3DSpawnAnchor>();
+            if (anchor == null)
+            {
+                anchor = anchorObject.AddComponent<IDRPG3DSpawnAnchor>();
+            }
+
+            anchor.Configure(BossAnchorId);
+            PlaceBossAnchor(anchorObject.transform, route);
+            return anchor;
+        }
+
+        private static void PlaceBossAnchor(Transform anchor, SplineComputer route)
+        {
+            if (anchor == null)
+            {
+                return;
+            }
+
+            if (route != null)
+            {
+                var sample = new SplineSample();
+                route.Evaluate(0.82, ref sample);
+                var forward = sample.forward;
+                forward.y = 0f;
+                if (forward.sqrMagnitude < 0.0001f)
+                {
+                    forward = Vector3.forward;
+                }
+
+                anchor.SetPositionAndRotation(sample.position, Quaternion.LookRotation(forward.normalized, Vector3.up));
+                return;
+            }
+
+            anchor.SetPositionAndRotation(new Vector3(0f, 0f, 18f), Quaternion.identity);
+        }
+
+        private void ConfigureWaveController(
+            IDRPG3DTeamRouteController routeController,
+            IReadOnlyList<IDRPG3DSpawnAnchor> anchors)
+        {
+            if (routeController == null || waveConfigLoader == null)
+            {
+                return;
+            }
+
+            if (!waveConfigLoader.TryBuildStage(PrototypeStageId, out var stageConfig))
+            {
+                Debug.LogWarning($"[IDRPG3D LocalTest] Stage wave config not found. StageId={PrototypeStageId}");
+                return;
+            }
+
+            var waveController = GetComponent<IDRPG3DWaveController>();
+            if (waveController == null)
+            {
+                waveController = gameObject.AddComponent<IDRPG3DWaveController>();
+            }
+
+            waveController.Configure(
+                stageConfig.Waves,
+                () => routeController.AnchorPosition,
+                () => routeController.AnchorForward,
+                anchors,
+                SpawnWaveEnemies,
+                stageConfig.LoopStage);
+            waveController.StartStage();
+            Debug.Log($"[IDRPG3D LocalTest] Wave controller started. Stage={stageConfig.StageKey}, Waves={stageConfig.Waves.Count}, Loop={stageConfig.LoopStage}.");
+        }
+
+        private IReadOnlyList<IDRPG3DCombatUnit> SpawnWaveEnemies(
+            IDRPG3DWaveDefinition wave,
+            IDRPG3DWaveSpawnPoint spawnPoint)
+        {
+            var spawnedUnits = new List<IDRPG3DCombatUnit>(wave.Count);
+            if (waveConfigLoader == null || !waveConfigLoader.TryBuildEnemyStats(wave.EnemyId, wave.EnemyLevel, out var enemyConfig))
+            {
+                Debug.LogWarning($"[IDRPG3D LocalTest] Enemy config not found. EnemyId={wave.EnemyId}, Lv={wave.EnemyLevel}");
+                return spawnedUnits;
+            }
+
+            if (!TryGetEnemyTemplate(enemyConfig.TemplateKey, out var template))
+            {
+                Debug.LogWarning($"[IDRPG3D LocalTest] Enemy template not found. TemplateKey={enemyConfig.TemplateKey}");
+                return spawnedUnits;
+            }
+
+            var root = EnsureSpawnedEnemiesRoot();
+            for (var i = 0; i < wave.Count; i++)
+            {
+                var position = CalculateEnemySpawnPosition(spawnPoint, wave, i);
+                var enemyObject = Instantiate(template, position, Quaternion.LookRotation(-spawnPoint.Forward, Vector3.up), root);
+                IDRPG3DUnitVisualScale.Apply(enemyObject.transform, enemyConfig.VisualScale);
+                enemyObject.name = $"{enemyConfig.EnemyKey}_Lv{enemyConfig.Level}_Wave{wave.WaveIndex}_{i + 1}";
+                enemyObject.SetActive(true);
+                var unit = ConfigureEnemyFromConfig(enemyObject, enemyConfig, wave, i);
+                TryStartWaveEnemyEngage(unit, wave);
+                spawnedUnits.Add(unit);
+            }
+
+            return spawnedUnits;
+        }
+
+        private void TryStartWaveEnemyEngage(IDRPG3DCombatUnit enemy, IDRPG3DWaveDefinition wave)
+        {
+            if (enemy == null || wave.SpawnEngageMode != IDRPG3DWaveEngageMode.RushTeam)
+            {
+                return;
+            }
+
+            if (!TryFindNearestAliveHero(enemy.transform.position, out var target))
+            {
+                return;
+            }
+
+            var brain = enemy.GetComponent<IDRPG3DAutoCombatBrain>();
+            if (brain == null)
+            {
+                brain = enemy.gameObject.AddComponent<IDRPG3DAutoCombatBrain>();
+            }
+
+            brain.Initialize();
+            brain.SetTarget(target);
+            Debug.Log($"[IDRPG3D LocalTest] Enemy {enemy.name} rushes {target.name}. Wave={wave.WaveIndex}");
+        }
+
+        private bool TryFindNearestAliveHero(Vector3 position, out IDRPG3DCombatUnit hero)
+        {
+            hero = null;
+            var bestSqrDistance = float.MaxValue;
+            if (activeHeroUnits == null)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < activeHeroUnits.Count; i++)
+            {
+                var candidate = activeHeroUnits[i];
+                if (candidate == null || !candidate.IsAlive)
+                {
+                    continue;
+                }
+
+                var sqrDistance = (candidate.transform.position - position).sqrMagnitude;
+                if (sqrDistance >= bestSqrDistance)
+                {
+                    continue;
+                }
+
+                bestSqrDistance = sqrDistance;
+                hero = candidate;
+            }
+
+            return hero != null;
+        }
+
+        private bool TryGetEnemyTemplate(string templateKey, out GameObject template)
+        {
+            template = null;
+            if (enemyTemplates == null || enemyTemplates.Count == 0)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrWhiteSpace(templateKey) && enemyTemplates.TryGetValue(templateKey, out template))
+            {
+                return template != null;
+            }
+
+            return enemyTemplates.TryGetValue(DefaultEnemyName, out template) && template != null;
+        }
+
+        private static Transform EnsureSpawnedEnemiesRoot()
+        {
+            var root = GameObject.Find(SpawnedEnemiesRootName);
+            if (root == null)
+            {
+                root = new GameObject(SpawnedEnemiesRootName);
+            }
+
+            return root.transform;
+        }
+
+        private static Vector3 CalculateEnemySpawnPosition(
+            IDRPG3DWaveSpawnPoint spawnPoint,
+            IDRPG3DWaveDefinition wave,
+            int index)
+        {
+            if (wave.Count <= 1 || wave.SpawnRadius <= 0f)
+            {
+                return spawnPoint.Position;
+            }
+
+            var forward = spawnPoint.Forward.sqrMagnitude > 0.0001f ? spawnPoint.Forward.normalized : Vector3.forward;
+            var right = Vector3.Cross(Vector3.up, forward).normalized;
+            var row = index / 3;
+            var column = index % 3 - 1;
+            var sideOffset = right * column * Mathf.Min(1.25f, wave.SpawnRadius);
+            var depthOffset = -forward * row * 1.2f;
+            return spawnPoint.Position + sideOffset + depthOffset;
+        }
+
+        private static IDRPG3DCombatUnit ConfigureEnemyFromConfig(
+            GameObject enemyObject,
+            IDRPG3DLocalEnemyConfig enemyConfig,
+            IDRPG3DWaveDefinition wave,
+            int order)
+        {
+            var unitId = wave.WaveId * 100 + order + 1;
+            var unit = ConfigureUnit(
+                enemyObject,
+                unitId,
+                order,
+                IDRPG3DCombatFaction.Enemy,
+                enemyConfig.MovePriority,
+                enemyConfig.Health,
+                enemyConfig.Attack,
+                enemyConfig.AttackRange,
+                enemyConfig.AttackInterval,
+                enemyConfig.AggroRadius,
+                enemyConfig.MoveSpeed);
+            unit.SetBoss(wave.IsBoss);
+            ConfigureEnemyHealthBar(enemyObject, unit, enemyConfig.VisualScale);
+            return unit;
         }
 
         private static void DisableLegacySplineFollower(GameObject hero)
@@ -190,7 +460,8 @@ namespace IDRPG3D.LocalTest
             float range,
             float interval,
             float aggro,
-            float moveSpeed)
+            float moveSpeed,
+            float healthRegenPerSecond = 0f)
         {
             EnsureCollider(target);
 
@@ -230,7 +501,7 @@ namespace IDRPG3D.LocalTest
             {
                 unit = target.AddComponent<IDRPG3DCombatUnit>();
             }
-            unit.Configure(id, order, faction, priority, health, damage, range, interval, aggro);
+            unit.Configure(id, order, faction, priority, health, damage, range, interval, aggro, healthRegenPerSecond);
 
             var brain = target.GetComponent<IDRPG3DAutoCombatBrain>();
             if (brain == null)
@@ -355,6 +626,18 @@ namespace IDRPG3D.LocalTest
             healthBar.Configure(unit, null, null, 2.6f, 0.36f, 2.25f);
         }
 
+        private static void ConfigureEnemyHealthBar(GameObject enemy, IDRPG3DCombatUnit unit, float visualScale)
+        {
+            var healthBar = enemy.GetComponent<IDRPG3DWorldHealthBar>();
+            if (healthBar == null)
+            {
+                healthBar = enemy.AddComponent<IDRPG3DWorldHealthBar>();
+            }
+
+            var scale = Mathf.Max(1f, visualScale);
+            healthBar.Configure(unit, null, null, 2.6f * scale, 0.36f * Mathf.Min(1.5f, scale), 2.25f * scale);
+        }
+
         private static GameObject LoadEditorPrefab(string assetPath)
         {
 #if UNITY_EDITOR
@@ -452,7 +735,7 @@ namespace IDRPG3D.LocalTest
             if (GameObject.Find(DefaultEnemyName) == null && GameObject.Find("Monster_DebugCapsule") == null)
             {
                 var monster = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                monster.name = "Monster_DebugCapsule";
+                monster.name = DefaultEnemyName;
                 monster.transform.position = new Vector3(1.4f, 1f, 0f);
             }
         }

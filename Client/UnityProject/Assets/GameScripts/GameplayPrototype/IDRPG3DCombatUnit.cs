@@ -14,6 +14,8 @@ namespace IDRPG3D.GameplayPrototype
         [SerializeField] private float attackRange = 1.7f;
         [SerializeField] private float attackInterval = 1.4f;
         [SerializeField] private float aggroRadius = 7f;
+        [SerializeField] private float healthRegenPerSecond = 0f;
+        [SerializeField] private bool isBoss;
 
         private IDRPG3DAnimatorBridge animatorBridge;
         private IDRPG3DPrototypeBuffController buffController;
@@ -29,6 +31,9 @@ namespace IDRPG3D.GameplayPrototype
         public float AttackRange => attackRange;
         public float AttackInterval => attackInterval;
         public float AggroRadius => aggroRadius;
+        public float HealthRegenPerSecond => healthRegenPerSecond;
+        public bool IsBoss => isBoss;
+        public bool IsControlImmune => isBoss;
         public float BonusArmor
         {
             get
@@ -45,6 +50,7 @@ namespace IDRPG3D.GameplayPrototype
         public IDRPG3DThreatTable<IDRPG3DCombatUnit> ThreatTable { get; } = new IDRPG3DThreatTable<IDRPG3DCombatUnit>();
 
         public event Action<IDRPG3DCombatUnit, IDRPG3DCombatUnit> Damaged;
+        public event Action<IDRPG3DCombatUnit, IDRPG3DCombatUnit> HealthChanged;
         public event Action<IDRPG3DCombatUnit> Died;
 
         public void Configure(
@@ -56,7 +62,8 @@ namespace IDRPG3D.GameplayPrototype
             float damage,
             float range,
             float interval,
-            float aggro)
+            float aggro,
+            float regenPerSecond = 0f)
         {
             unitId = id;
             teamOrder = order;
@@ -67,12 +74,23 @@ namespace IDRPG3D.GameplayPrototype
             attackRange = Mathf.Max(0.1f, range);
             attackInterval = Mathf.Max(0.1f, interval);
             aggroRadius = Mathf.Max(0.1f, aggro);
+            healthRegenPerSecond = Mathf.Max(0f, regenPerSecond);
             Initialize();
+        }
+
+        public void SetBoss(bool value)
+        {
+            isBoss = value;
         }
 
         private void Awake()
         {
             Initialize();
+        }
+
+        private void Update()
+        {
+            TickForTest(Time.deltaTime);
         }
 
         public void Initialize()
@@ -96,6 +114,16 @@ namespace IDRPG3D.GameplayPrototype
             }
         }
 
+        public void TickForTest(float deltaTime)
+        {
+            if (deltaTime <= 0f || healthRegenPerSecond <= 0f || !IsAlive || Health >= maxHealth)
+            {
+                return;
+            }
+
+            HealInternal(healthRegenPerSecond * deltaTime, null, false);
+        }
+
         public void TakeDamage(float amount, IDRPG3DCombatUnit attacker)
         {
             if (!IsAlive || amount <= 0f)
@@ -112,6 +140,7 @@ namespace IDRPG3D.GameplayPrototype
 
             Debug.Log($"[IDRPG3D Combat] {name} took {finalAmount:0.#} damage from {(attacker != null ? attacker.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
             Damaged?.Invoke(this, attacker);
+            HealthChanged?.Invoke(this, attacker);
 
             if (Health <= 0f)
             {
@@ -120,6 +149,11 @@ namespace IDRPG3D.GameplayPrototype
         }
 
         public float Heal(float amount, IDRPG3DCombatUnit healer)
+        {
+            return HealInternal(amount, healer, true);
+        }
+
+        private float HealInternal(float amount, IDRPG3DCombatUnit healer, bool log)
         {
             if (!IsAlive || amount <= 0f)
             {
@@ -131,7 +165,12 @@ namespace IDRPG3D.GameplayPrototype
             var healed = Health - before;
             if (healed > 0f)
             {
-                Debug.Log($"[IDRPG3D Combat] {name} healed {healed:0.#} from {(healer != null ? healer.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
+                if (log)
+                {
+                    Debug.Log($"[IDRPG3D Combat] {name} healed {healed:0.#} from {(healer != null ? healer.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
+                }
+
+                HealthChanged?.Invoke(this, healer);
             }
 
             return healed;

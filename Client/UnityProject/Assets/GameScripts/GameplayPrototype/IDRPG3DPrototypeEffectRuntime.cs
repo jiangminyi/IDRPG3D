@@ -104,6 +104,7 @@ namespace IDRPG3D.GameplayPrototype
         public float AuraModifierValue { get; }
         public bool IsValid => BuffId > 0 && Duration > 0f;
         public bool HasAuraBuff => AuraBuffId > 0 && AuraBuffDuration > 0f;
+        public bool IsControl => BuffKey != null && BuffKey.IndexOf("slow", StringComparison.OrdinalIgnoreCase) >= 0;
 
         public static IDRPG3DPrototypeBuffDefinition StatModifier(
             int buffId,
@@ -304,6 +305,11 @@ namespace IDRPG3D.GameplayPrototype
             var buffId = 0;
             if (effect.HasBuff)
             {
+                if (target.IsControlImmune && effect.Buff.IsControl)
+                {
+                    return new IDRPG3DPrototypeEffectResult(false, effect.EffectId, 0, appliedValue);
+                }
+
                 var controller = target.GetComponent<IDRPG3DPrototypeBuffController>();
                 if (controller == null)
                 {
@@ -324,6 +330,7 @@ namespace IDRPG3D.GameplayPrototype
 
         public int ActiveBuffCount => activeBuffs.Count;
         public float MoveSpeedMultiplier => CalculateMultiplier(IDRPG3DPrototypeStatType.MoveSpeed);
+        public float AttackSpeedMultiplier => CalculateAttackSpeedMultiplier();
         public float ArmorBonus => CalculateAdditive(IDRPG3DPrototypeStatType.Armor);
 
         private void Update()
@@ -388,6 +395,30 @@ namespace IDRPG3D.GameplayPrototype
             {
                 var active = pair.Value;
                 if (active.Definition.StatType != statType)
+                {
+                    continue;
+                }
+
+                if (active.Definition.ModifierType == IDRPG3DPrototypeModifierType.Percent)
+                {
+                    multiplier += active.Definition.ModifierValue * active.Stack;
+                }
+                else if (active.Definition.ModifierType == IDRPG3DPrototypeModifierType.Multiply)
+                {
+                    multiplier *= Mathf.Pow(active.Definition.ModifierValue, active.Stack);
+                }
+            }
+
+            return Mathf.Max(0.05f, multiplier);
+        }
+
+        private float CalculateAttackSpeedMultiplier()
+        {
+            var multiplier = CalculateMultiplier(IDRPG3DPrototypeStatType.AttackSpeed);
+            foreach (var pair in activeBuffs)
+            {
+                var active = pair.Value;
+                if (active.Definition.StatType != IDRPG3DPrototypeStatType.MoveSpeed || !active.Definition.IsControl)
                 {
                     continue;
                 }

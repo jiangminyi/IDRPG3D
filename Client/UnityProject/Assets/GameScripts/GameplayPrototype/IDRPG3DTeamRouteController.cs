@@ -30,6 +30,12 @@ namespace IDRPG3D.GameplayPrototype
         private SplineSample routeSample;
 
         public Vector3 AnchorPosition => anchorPosition;
+        public Vector3 AnchorForward => anchorForward;
+
+        public void SetDetectionRadius(float radius)
+        {
+            detectionRadius = Mathf.Max(0.1f, radius);
+        }
 
         public void Configure(SplineComputer targetRoute, IReadOnlyList<IDRPG3DCombatUnit> teamHeroes)
         {

@@ -16,7 +16,7 @@ public partial class Tables
     #region The Tables
 
     private item.TbItem m_TbItem;
-    public item.TbItem TbItem 
+    public item.TbItem TbItem
     {
         get
         {
@@ -37,7 +37,7 @@ public partial class Tables
     /// ??????????????ID???????????????????? skill_level.xlsx?
     /// </summary>
     private skill.TbSkill m_TbSkill;
-    public skill.TbSkill TbSkill 
+    public skill.TbSkill TbSkill
     {
         get
         {
@@ -79,7 +79,7 @@ public partial class Tables
     /// ????????? skillId + level + order ???? effect?
     /// </summary>
     private skill.TbSkillEffect m_TbSkillEffect;
-    public skill.TbSkillEffect TbSkillEffect 
+    public skill.TbSkillEffect TbSkillEffect
     {
         get
         {
@@ -100,7 +100,7 @@ public partial class Tables
     /// ?????????????Buff???????
     /// </summary>
     private skill.TbEffect m_TbEffect;
-    public skill.TbEffect TbEffect 
+    public skill.TbEffect TbEffect
     {
         get
         {
@@ -121,7 +121,7 @@ public partial class Tables
     /// Buff???????????????????????
     /// </summary>
     private skill.TbBuff m_TbBuff;
-    public skill.TbBuff TbBuff 
+    public skill.TbBuff TbBuff
     {
         get
         {
@@ -142,7 +142,7 @@ public partial class Tables
     /// ??????????????Prefab????????
     /// </summary>
     private skill.TbProjectile m_TbProjectile;
-    public skill.TbProjectile TbProjectile 
+    public skill.TbProjectile TbProjectile
     {
         get
         {
@@ -159,6 +159,90 @@ public partial class Tables
             m_TbProjectile.ResolveRef(this);
         }
     }
+    /// <summary>
+    /// Stage config.
+    /// </summary>
+    private stage.TbStage m_TbStage;
+    public stage.TbStage TbStage
+    {
+        get
+        {
+            if (m_TbStage == null)
+            {
+                m_TbStage = new stage.TbStage(defaultLoader("stage_tbstage"));
+                m_TbStage.ResolveRef(this);
+            }
+            return m_TbStage;
+        }
+        set
+        {
+            m_TbStage = value;
+            m_TbStage.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// Enemy base config.
+    /// </summary>
+    private stage.TbEnemy m_TbEnemy;
+    public stage.TbEnemy TbEnemy
+    {
+        get
+        {
+            if (m_TbEnemy == null)
+            {
+                m_TbEnemy = new stage.TbEnemy(defaultLoader("stage_tbenemy"));
+                m_TbEnemy.ResolveRef(this);
+            }
+            return m_TbEnemy;
+        }
+        set
+        {
+            m_TbEnemy = value;
+            m_TbEnemy.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// Enemy level growth config.
+    /// </summary>
+    private stage.TbEnemyLevel m_TbEnemyLevel;
+    public stage.TbEnemyLevel TbEnemyLevel
+    {
+        get
+        {
+            if (m_TbEnemyLevel == null)
+            {
+                m_TbEnemyLevel = new stage.TbEnemyLevel(defaultLoader("stage_tbenemylevel"));
+                m_TbEnemyLevel.ResolveRef(this);
+            }
+            return m_TbEnemyLevel;
+        }
+        set
+        {
+            m_TbEnemyLevel = value;
+            m_TbEnemyLevel.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// Wave spawn config.
+    /// </summary>
+    private stage.TbWave m_TbWave;
+    public stage.TbWave TbWave
+    {
+        get
+        {
+            if (m_TbWave == null)
+            {
+                m_TbWave = new stage.TbWave(defaultLoader("stage_tbwave"));
+                m_TbWave.ResolveRef(this);
+            }
+            return m_TbWave;
+        }
+        set
+        {
+            m_TbWave = value;
+            m_TbWave.ResolveRef(this);
+        }
+    }
 
     #endregion
 
@@ -169,7 +253,7 @@ public partial class Tables
         SetDefaultLoader(loader);
         Init();
     }
-    
+
     public void SetDefaultLoader(System.Func<string, ByteBuf> loader)
     {
         defaultLoader = null;
