@@ -42,7 +42,9 @@ Shader "GAP/AdditiveMobileDistortionScroll" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #ifndef UNITY_PASS_FORWARDBASE
             #define UNITY_PASS_FORWARDBASE
+            #endif
             #include "UnityCG.cginc"
             #pragma multi_compile_fwdbase
             #pragma only_renderers d3d11 glcore gles gles3 metal 

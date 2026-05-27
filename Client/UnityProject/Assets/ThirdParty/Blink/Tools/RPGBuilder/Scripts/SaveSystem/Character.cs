@@ -432,14 +432,14 @@ namespace BLINK.RPGBuilder.Characters
                 indentifier = saver.GetIdentifier(),
                 Dynamic = saver.IsDynamic(),
                 Mass = saver.Rigidbody.mass,
-                Drag = saver.Rigidbody.drag,
-                AngularDrag = saver.Rigidbody.angularDrag,
+                Drag = saver.Rigidbody.linearDamping,
+                AngularDrag = saver.Rigidbody.angularDamping,
                 UseGravity = saver.Rigidbody.useGravity,
                 IsKinematic = saver.Rigidbody.isKinematic,
                 Interpolation = saver.Rigidbody.interpolation,
                 CollisionDetection = saver.Rigidbody.collisionDetectionMode,
                 Constraints = saver.Rigidbody.constraints,
-                Velocity = saver.Rigidbody.velocity,
+                Velocity = saver.Rigidbody.linearVelocity,
             };
 
             if (newRigidbody.Dynamic)
@@ -464,14 +464,14 @@ namespace BLINK.RPGBuilder.Characters
             {
                 if (savedRigidbody.indentifier != saver.GetIdentifier()) continue;
                 savedRigidbody.Mass = saver.Rigidbody.mass;
-                savedRigidbody.Drag = saver.Rigidbody.drag;
-                savedRigidbody.AngularDrag = saver.Rigidbody.angularDrag;
+                savedRigidbody.Drag = saver.Rigidbody.linearDamping;
+                savedRigidbody.AngularDrag = saver.Rigidbody.angularDamping;
                 savedRigidbody.UseGravity = saver.Rigidbody.useGravity;
                 savedRigidbody.IsKinematic = saver.Rigidbody.isKinematic;
                 savedRigidbody.Interpolation = saver.Rigidbody.interpolation;
                 savedRigidbody.CollisionDetection = saver.Rigidbody.collisionDetectionMode;
                 savedRigidbody.Constraints = saver.Rigidbody.constraints;
-                savedRigidbody.Velocity = saver.Rigidbody.velocity;
+                savedRigidbody.Velocity = saver.Rigidbody.linearVelocity;
             }
         }
 

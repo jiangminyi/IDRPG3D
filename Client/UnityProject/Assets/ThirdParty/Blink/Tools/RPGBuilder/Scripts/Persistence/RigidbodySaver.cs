@@ -54,14 +54,14 @@ namespace BLINK.RPGBuilder.WorldPersistence
             if (!PersistenceManager.Instance.RigidbodyListContainsIdentifier(GetIdentifier())) return;
             RigidbodySaverTemplate template = PersistenceManager.Instance.GetRigidbodyTemplateData(GetIdentifier());
             if (SaveMass) Rigidbody.mass = template.Mass;
-            if (SaveDrag) Rigidbody.drag = template.Drag;
-            if (SaveAngularDrag) Rigidbody.angularDrag = template.AngularDrag;
+            if (SaveDrag) Rigidbody.linearDamping = template.Drag;
+            if (SaveAngularDrag) Rigidbody.angularDamping = template.AngularDrag;
             if (SaveUseGravity) Rigidbody.useGravity = template.UseGravity;
             if (SaveIsKinematic) Rigidbody.isKinematic = template.IsKinematic;
             if (SaveInterpolation) Rigidbody.interpolation = template.Interpolation;
             if (SaveCollisionDetection) Rigidbody.collisionDetectionMode = template.CollisionDetection;
             if (SaveConstraints) Rigidbody.constraints = template.Constraints;
-            if (SaveVelocity) Rigidbody.velocity = template.Velocity;
+            if (SaveVelocity) Rigidbody.linearVelocity = template.Velocity;
         }
     }
 }

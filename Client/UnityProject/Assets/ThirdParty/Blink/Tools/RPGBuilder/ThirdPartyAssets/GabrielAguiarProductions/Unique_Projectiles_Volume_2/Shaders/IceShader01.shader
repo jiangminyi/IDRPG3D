@@ -32,7 +32,9 @@ Shader "GAP/IceShader01" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #ifndef UNITY_PASS_FORWARDBASE
             #define UNITY_PASS_FORWARDBASE
+            #endif
             #define _GLOSSYENV 1
             #include "UnityCG.cginc"
             #include "UnityPBSLighting.cginc"

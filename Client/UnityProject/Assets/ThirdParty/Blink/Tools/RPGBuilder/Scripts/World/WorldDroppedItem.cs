@@ -37,7 +37,7 @@ namespace BLINK.RPGBuilder.World
             }
             
 
-            rb.drag = 1;
+            rb.linearDamping = 1;
             rb.AddRelativeForce(new Vector3(Random.Range(-5, 5), 4, Random.Range(-5, 5)), ForceMode.VelocityChange);
             rb.AddRelativeTorque(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)), ForceMode.Impulse);
             ScreenSpaceWorldDroppedItems.Instance.RegisterNewNameplate(GetComponent<Renderer>(), gameObject, item);

@@ -224,7 +224,7 @@ namespace IDRPG3D.EditorTools
 
         private static void SetupCameraAndLight()
         {
-            var light = Object.FindObjectOfType<Light>();
+            var light = FindFirstLight();
             if (light == null)
             {
                 var lightObject = new GameObject("Directional Light");
@@ -250,6 +250,15 @@ namespace IDRPG3D.EditorTools
             camera.fieldOfView = 42f;
             camera.nearClipPlane = 0.1f;
             camera.farClipPlane = 200f;
+        }
+
+        private static Light FindFirstLight()
+        {
+#if UNITY_2023_1_OR_NEWER
+            return Object.FindFirstObjectByType<Light>();
+#else
+            return Object.FindObjectOfType<Light>();
+#endif
         }
     }
 }

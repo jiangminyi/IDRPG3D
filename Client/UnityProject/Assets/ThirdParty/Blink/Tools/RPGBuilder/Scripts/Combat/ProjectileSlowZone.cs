@@ -23,9 +23,9 @@ public class ProjectileSlowZone : MonoBehaviour
         if (projRef.RB == null) return;
         ProjectileList newProjectileList = new ProjectileList();
         newProjectileList.GO = other.gameObject;
-        newProjectileList.cachedVelocity = projRef.RB.velocity;
+        newProjectileList.cachedVelocity = projRef.RB.linearVelocity;
         projectileList.Add(newProjectileList);
-        projRef.RB.velocity *= velocityModifier;
+        projRef.RB.linearVelocity *= velocityModifier;
     }
     
     private void OnTriggerExit(Collider other)
@@ -36,7 +36,7 @@ public class ProjectileSlowZone : MonoBehaviour
         foreach (var proj in projectileList)
         {
             if(proj.GO != other.gameObject) continue;
-            projRef.RB.velocity = proj.cachedVelocity;
+            projRef.RB.linearVelocity = proj.cachedVelocity;
             projectileList.Remove(proj);
             break;
         }

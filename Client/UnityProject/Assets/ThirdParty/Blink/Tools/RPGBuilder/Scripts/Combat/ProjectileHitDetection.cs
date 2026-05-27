@@ -78,7 +78,7 @@ namespace BLINK.RPGBuilder.LogicMono
             {
                 //reflect
                 projREF.curReflectedProjectileAmount++;
-                RB.velocity = -RB.velocity;
+                RB.linearVelocity = -RB.linearVelocity;
                 if (projREF.curReflectedProjectileAmount >= projREF.maxRelfectedProjectileAmount)
                     Destroy(projREF.gameObject);
                 return;
@@ -153,7 +153,7 @@ namespace BLINK.RPGBuilder.LogicMono
                 if (!didHitFirstUnit)
                 {
                     didHitFirstUnit = true;
-                    RB.velocity = Vector3.zero;
+                    RB.linearVelocity = Vector3.zero;
                 }
 
                 lookForNextUnit();
@@ -252,7 +252,7 @@ namespace BLINK.RPGBuilder.LogicMono
             }
             else
             {
-                RB.velocity = Vector3.zero;
+                RB.linearVelocity = Vector3.zero;
                 Vector3 targetPOS = new Vector3(casterTransform.position.x, casterTransform.position.y + 1.25f,
                     casterTransform.position.z);
                 transform.LookAt(targetPOS);

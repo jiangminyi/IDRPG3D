@@ -11,7 +11,7 @@ public class GameModule
     /// </summary>
     public static RootModule Base
     {
-        get => _base ??= Object.FindObjectOfType<RootModule>();
+        get => _base ??= FindRootModule();
         private set => _base = value;
     }
 
@@ -98,6 +98,15 @@ public class GameModule
         Log.Assert(condition: module != null, $"{typeof(T)} is null");
 
         return module;
+    }
+
+    private static RootModule FindRootModule()
+    {
+#if UNITY_2023_1_OR_NEWER
+        return Object.FindFirstObjectByType<RootModule>();
+#else
+        return Object.FindObjectOfType<RootModule>();
+#endif
     }
     
     public static void Shutdown()

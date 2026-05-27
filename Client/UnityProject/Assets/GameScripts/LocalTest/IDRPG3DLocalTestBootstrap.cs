@@ -139,7 +139,7 @@ namespace IDRPG3D.LocalTest
                 return namedRoute;
             }
 
-            return FindObjectOfType<SplineComputer>();
+            return FindFirstSplineComputer();
         }
 
         private static Transform EnsureActorRoot()
@@ -155,7 +155,7 @@ namespace IDRPG3D.LocalTest
 
         private static void HideSceneAuthoredPrototypeActors(Transform actorRoot)
         {
-            var transforms = FindObjectsOfType<Transform>(true);
+            var transforms = FindAllSceneTransforms();
             for (var i = 0; i < transforms.Length; i++)
             {
                 var actor = transforms[i];
@@ -182,6 +182,51 @@ namespace IDRPG3D.LocalTest
             }
 
             return false;
+        }
+
+        private static SplineComputer FindFirstSplineComputer()
+        {
+#if UNITY_2023_1_OR_NEWER
+            return FindFirstObjectByType<SplineComputer>();
+#else
+            return FindObjectOfType<SplineComputer>();
+#endif
+        }
+
+        private static Transform[] FindAllSceneTransforms()
+        {
+#if UNITY_2023_1_OR_NEWER
+            return FindObjectsByType<Transform>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+#else
+            return FindObjectsOfType<Transform>(true);
+#endif
+        }
+
+        private static IDRPG3DSpawnAnchor[] FindAllSpawnAnchors()
+        {
+#if UNITY_2023_1_OR_NEWER
+            return FindObjectsByType<IDRPG3DSpawnAnchor>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+#else
+            return FindObjectsOfType<IDRPG3DSpawnAnchor>(true);
+#endif
+        }
+
+        private static NavMeshSurface FindFirstNavMeshSurface()
+        {
+#if UNITY_2023_1_OR_NEWER
+            return FindFirstObjectByType<NavMeshSurface>();
+#else
+            return FindObjectOfType<NavMeshSurface>();
+#endif
+        }
+
+        private static EventSystem FindFirstEventSystem()
+        {
+#if UNITY_2023_1_OR_NEWER
+            return FindFirstObjectByType<EventSystem>();
+#else
+            return FindObjectOfType<EventSystem>();
+#endif
         }
 
         private static List<GameObject> SpawnHeroActors(GameObject heroPrefab, SplineComputer route, Transform root)
@@ -257,7 +302,7 @@ namespace IDRPG3D.LocalTest
 
         private IDRPG3DSpawnAnchor EnsureBossSpawnAnchor(SplineComputer route)
         {
-            var anchors = FindObjectsOfType<IDRPG3DSpawnAnchor>(true);
+            var anchors = FindAllSpawnAnchors();
             for (var i = 0; i < anchors.Length; i++)
             {
                 if (anchors[i] != null && string.Equals(anchors[i].AnchorId, BossAnchorId, StringComparison.OrdinalIgnoreCase))
@@ -525,7 +570,7 @@ namespace IDRPG3D.LocalTest
 
         private void EnsureNavMeshSurface()
         {
-            var surface = FindObjectOfType<NavMeshSurface>();
+            var surface = FindFirstNavMeshSurface();
             if (surface == null)
             {
                 surface = gameObject.AddComponent<NavMeshSurface>();
@@ -860,7 +905,7 @@ namespace IDRPG3D.LocalTest
 
         private static void EnsureEventSystem()
         {
-            if (FindObjectOfType<EventSystem>() != null)
+            if (FindFirstEventSystem() != null)
             {
                 return;
             }

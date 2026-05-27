@@ -27,8 +27,7 @@ namespace BLINK.RPGBuilder.Characters
         }
 
         private Vector3 lastPos;
-        public ControllerType currentController;
-        [SerializeField]
+        [SerializeField] public ControllerType currentController;
         public ControllerType CurrentController
         {
             get => currentController;
@@ -211,7 +210,7 @@ namespace BLINK.RPGBuilder.Characters
 
             if (ControllerEssentials.isTeleporting) return;
 
-            rbd.velocity = Vector3.zero;
+            rbd.linearVelocity = Vector3.zero;
             if (!ControllerEssentials.HasMovementRestrictions())
             {
                 switch (currentController)

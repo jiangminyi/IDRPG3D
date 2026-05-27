@@ -518,7 +518,11 @@ namespace IDRPG3D.GameplayPrototype
                     }
 
                     var radius = Definition.AuraRadius;
+#if UNITY_2023_1_OR_NEWER
+                    var units = UnityEngine.Object.FindObjectsByType<IDRPG3DCombatUnit>(FindObjectsSortMode.None);
+#else
                     var units = UnityEngine.Object.FindObjectsOfType<IDRPG3DCombatUnit>();
+#endif
                     for (var i = 0; i < units.Length; i++)
                     {
                         var unit = units[i];
