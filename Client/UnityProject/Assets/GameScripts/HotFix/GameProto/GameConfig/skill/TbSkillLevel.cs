@@ -19,7 +19,7 @@ public partial class TbSkillLevel
 {
     private readonly System.Collections.Generic.Dictionary<int, skill.SkillLevel> _dataMap;
     private readonly System.Collections.Generic.List<skill.SkillLevel> _dataList;
-
+    
     public TbSkillLevel(ByteBuf _buf)
     {
         int n = _buf.ReadSize();
@@ -52,3 +52,4 @@ public partial class TbSkillLevel
 }
 
 }
+

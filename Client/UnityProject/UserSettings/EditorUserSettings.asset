@@ -6,31 +6,31 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 05540d0751505c595f58597641775b44414f1d787c2c2468297e1965b4b9303a
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 57075254030750030b080a7614775b15144e412b7a2d73362b7f1e66bbb7373e
-      flags: 0
-    RecentlyUsedSceneGuid-2:
-      value: 5108560352560b580f0d0a7445755d4447164c7d2f2971687b2b4e67b2b3356e
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 5304065e0757500e5a0a0d2141720b44454f49292a7e27647f2f4562e6e66760
-      flags: 0
-    RecentlyUsedSceneGuid-4:
-      value: 0252015155030d080e0a0f7b43210c44424f1a292d2b7f6079791e35b6b56469
-      flags: 0
-    RecentlyUsedSceneGuid-5:
       value: 065355575d005f5d55080a7a457708154e154a7f742c2760297e4f63e3e2306b
       flags: 0
-    RecentlyUsedSceneGuid-6:
+    RecentlyUsedSceneGuid-1:
       value: 02550352000c5b090f5d082648730b44434f41297d7e20662b281c64b0b33660
       flags: 0
-    RecentlyUsedSceneGuid-7:
+    RecentlyUsedSceneGuid-2:
       value: 0705575603000d5a0e5a5c7440220d44444e4e297e7d20327e2c486ab3b46d39
       flags: 0
-    RecentlyUsedSceneGuid-8:
+    RecentlyUsedSceneGuid-3:
       value: 06075056000c080e595e55734577094844164f297f7876362e7c1c67b1e2306d
+      flags: 0
+    RecentlyUsedSceneGuid-4:
+      value: 550105500353580d550f0e7a43255a44104f482c7c7e73322b7c196be4e46c60
+      flags: 0
+    RecentlyUsedSceneGuid-5:
+      value: 52570204060c58595b085c2316735a44124e1c73747c7e347e2a4d60b0b33239
+      flags: 0
+    RecentlyUsedSceneGuid-6:
+      value: 5703035f57535c0b0e5d55214476594414164d7e7d7820612c711c30b5b66d61
+      flags: 0
+    RecentlyUsedSceneGuid-7:
+      value: 5309020752045d0f0f08587348255a44424e4d737d7975622f7c1861b4b1613a
+      flags: 0
+    RecentlyUsedSceneGuid-8:
+      value: 5757035100045b0d5f5e5a7240760644124f1d7f797e25697e781931b5b4663e
       flags: 0
     RecentlyUsedSceneGuid-9:
       value: 0550045155050f5859085f2643720c4447154e7d7a7e70687c284c64e6b43168
@@ -52,4 +52,6 @@ EditorUserSettings:
   m_VCHierarchyOverlayIcons: 1
   m_VCOtherOverlayIcons: 1
   m_VCAllowAsyncUpdate: 1
+  m_VCScanLocalPackagesOnConnect: 1
   m_ArtifactGarbageCollection: 1
+  m_CompressAssetsOnImport: 1

@@ -24,6 +24,7 @@ namespace IDRPG3D.GameplayPrototype
                 spawnMode,
                 enemyId,
                 enemyLevel,
+                new IDRPG3DWaveLevelRule("Fixed", enemyLevel, 0, 0, 0),
                 count,
                 spawnDistanceAhead,
                 spawnRadius,
@@ -48,6 +49,41 @@ namespace IDRPG3D.GameplayPrototype
             bool isBoss,
             float nextWaveDelay,
             IDRPG3DWaveEngageMode spawnEngageMode)
+            : this(
+                waveId,
+                stageId,
+                waveIndex,
+                spawnMode,
+                enemyId,
+                enemyLevel,
+                new IDRPG3DWaveLevelRule("Fixed", enemyLevel, 0, 0, 0),
+                count,
+                spawnDistanceAhead,
+                spawnRadius,
+                spawnAnchorId,
+                isBoss,
+                nextWaveDelay,
+                spawnEngageMode)
+        {
+        }
+
+        public IDRPG3DWaveDefinition(
+            int waveId,
+            int stageId,
+            int waveIndex,
+            IDRPG3DWaveSpawnMode spawnMode,
+            int enemyId,
+            int enemyLevel,
+            IDRPG3DWaveLevelRule levelRule,
+            int count,
+            float spawnDistanceAhead,
+            float spawnRadius,
+            string spawnAnchorId,
+            bool isBoss,
+            float nextWaveDelay,
+            IDRPG3DWaveEngageMode spawnEngageMode,
+            float hpMultiplier = 1f,
+            float attackMultiplier = 1f)
         {
             WaveId = waveId;
             StageId = stageId;
@@ -55,6 +91,7 @@ namespace IDRPG3D.GameplayPrototype
             SpawnMode = spawnMode;
             EnemyId = enemyId;
             EnemyLevel = Mathf.Max(1, enemyLevel);
+            LevelRule = levelRule;
             Count = Mathf.Max(1, count);
             SpawnDistanceAhead = Mathf.Max(0f, spawnDistanceAhead);
             SpawnRadius = Mathf.Max(0f, spawnRadius);
@@ -62,6 +99,8 @@ namespace IDRPG3D.GameplayPrototype
             IsBoss = isBoss;
             NextWaveDelay = Mathf.Max(0f, nextWaveDelay);
             SpawnEngageMode = spawnEngageMode;
+            HpMultiplier = Mathf.Max(0.01f, hpMultiplier);
+            AttackMultiplier = Mathf.Max(0.01f, attackMultiplier);
         }
 
         public int WaveId { get; }
@@ -70,6 +109,7 @@ namespace IDRPG3D.GameplayPrototype
         public IDRPG3DWaveSpawnMode SpawnMode { get; }
         public int EnemyId { get; }
         public int EnemyLevel { get; }
+        public IDRPG3DWaveLevelRule LevelRule { get; }
         public int Count { get; }
         public float SpawnDistanceAhead { get; }
         public float SpawnRadius { get; }
@@ -77,5 +117,7 @@ namespace IDRPG3D.GameplayPrototype
         public bool IsBoss { get; }
         public float NextWaveDelay { get; }
         public IDRPG3DWaveEngageMode SpawnEngageMode { get; }
+        public float HpMultiplier { get; }
+        public float AttackMultiplier { get; }
     }
 }

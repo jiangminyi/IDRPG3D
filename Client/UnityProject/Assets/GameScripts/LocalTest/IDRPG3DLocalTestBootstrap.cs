@@ -28,23 +28,16 @@ namespace IDRPG3D.LocalTest
         private const string CameraTargetName = "CameraTarget";
         private const string HeroPrefabPath = "Assets/AssetRaw/Actor/Hero.prefab";
         private const string EnemyPrefabPath = "Assets/AssetRaw/Actor/Enemy.prefab";
+        private const string MonsterWorldBarPrefabPath = "Assets/AssetRaw/UI/WorldBars/WorldBar_Monster_HealthOnly.prefab";
+        private const string WarriorWorldBarPrefabPath = "Assets/AssetRaw/UI/WorldBars/WorldBar_Warrior_HealthRage.prefab";
+        private const string MageWorldBarPrefabPath = "Assets/AssetRaw/UI/WorldBars/WorldBar_Mage_HealthMana.prefab";
         private const string BossAnchorId = "stage_01_boss_01";
         private const string SpawnedEnemiesRootName = "Prototype_WaveEnemies";
         private const string ProjectilesRootName = "Prototype_Projectiles";
         private const string TerrainLayerName = "Terrain";
         private const string GroundTerrainLayerName = "GroundTerrain";
         private const int PrototypeStageId = 1;
-        private const float PrototypeHeroDetectionRadius = 24f;
-        private const int FrostboltSkillId = 1001;
-        private const int FireballSkillId = 1002;
-        private const int HealSkillId = 1003;
-        private const int DevotionAuraSkillId = 1004;
-        private const string FrostboltProjectilePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Frostbolt.prefab";
-        private const string FrostboltMuzzlePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FrostMuzzle.prefab";
-        private const string FrostboltImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_IceSpike01_Blue.prefab";
-        private const string FireballProjectilePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Projectiles/Fireball.prefab";
-        private const string FireballMuzzlePath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/Art/CombatVisuals/Muzzle/FireMuzzle.prefab";
-        private const string FireballImpactPath = "Assets/ThirdParty/Blink/Tools/RPGBuilder/ThirdPartyAssets/GabrielAguiarProductions/Unique_Projectiles_Volume_2/Prefabs/Hits/vfx_Hit_Fireball04_Orange.prefab";
+        private const float PrototypeHeroDetectionRadius = 36f;
 
         private static readonly string[] HeroNames = { "Hero1", "Hero2", "Hero3" };
         private static readonly string[] SceneActorNamesToHide = { "Hero1", "Hero2", "Hero3", "Enemy", "Enemy1", "Enemy2", "Enemy3", "Hero_DebugCapsule", "Monster_DebugCapsule" };
@@ -62,6 +55,7 @@ namespace IDRPG3D.LocalTest
 
         private string currentAccount = "local_player_001";
         private Font defaultFont;
+        private IDRPG3DLocalHeroConfigLoader heroConfigLoader;
         private IDRPG3DLocalSkillConfigLoader skillConfigLoader;
         private IDRPG3DLocalWaveConfigLoader waveConfigLoader;
         private Dictionary<string, GameObject> enemyTemplates;
@@ -104,15 +98,20 @@ namespace IDRPG3D.LocalTest
             var projectileRoot = EnsureProjectilesRoot();
 
             var heroUnits = new List<IDRPG3DCombatUnit>(heroes.Count);
+            heroConfigLoader = new IDRPG3DLocalHeroConfigLoader();
             skillConfigLoader = new IDRPG3DLocalSkillConfigLoader();
             for (var i = 0; i < heroes.Count; i++)
             {
                 var hero = heroes[i];
-                var unit = ConfigureUnit(hero, 1 + i, i, IDRPG3DCombatFaction.Hero, 100 - i * 10, 220f, 118f, 1.8f, 1.25f, 7f, 3.2f, 10f);
-                ConfigureHeroPrototypeSkill(hero, projectileRoot);
+                if (!heroConfigLoader.TryBuildHero(i + 1, 1, out var heroConfig))
+                {
+                    Debug.LogWarning($"[IDRPG3D LocalTest] Hero config not found. HeroId={i + 1}");
+                    continue;
+                }
+
+                var unit = ConfigureHeroFromConfig(hero, heroConfig, i, projectileRoot);
                 heroUnits.Add(unit);
             }
-            ConfigureHeroSupportPrototype(heroUnits);
             activeHeroUnits = heroUnits;
             ConfigureCameraTarget(heroUnits);
 
@@ -390,9 +389,10 @@ namespace IDRPG3D.LocalTest
             IDRPG3DWaveSpawnPoint spawnPoint)
         {
             var spawnedUnits = new List<IDRPG3DCombatUnit>(wave.Count);
-            if (waveConfigLoader == null || !waveConfigLoader.TryBuildEnemyStats(wave.EnemyId, wave.EnemyLevel, out var enemyConfig))
+            var enemyLevel = ResolveEnemyLevel(wave);
+            if (waveConfigLoader == null || !waveConfigLoader.TryBuildEnemyStats(wave.EnemyId, enemyLevel, out var enemyConfig))
             {
-                Debug.LogWarning($"[IDRPG3D LocalTest] Enemy config not found. EnemyId={wave.EnemyId}, Lv={wave.EnemyLevel}");
+                Debug.LogWarning($"[IDRPG3D LocalTest] Enemy config not found. EnemyId={wave.EnemyId}, Lv={enemyLevel}");
                 return spawnedUnits;
             }
 
@@ -411,11 +411,53 @@ namespace IDRPG3D.LocalTest
                 enemyObject.name = $"{enemyConfig.EnemyKey}_Lv{enemyConfig.Level}_Wave{wave.WaveIndex}_{i + 1}";
                 enemyObject.SetActive(true);
                 var unit = ConfigureEnemyFromConfig(enemyObject, enemyConfig, wave, i);
+                unit.Died += OnPrototypeEnemyDied;
                 TryStartWaveEnemyEngage(unit, wave);
                 spawnedUnits.Add(unit);
             }
 
             return spawnedUnits;
+        }
+
+        private void OnPrototypeEnemyDied(IDRPG3DCombatUnit enemy)
+        {
+            if (enemy == null)
+            {
+                return;
+            }
+
+            enemy.Died -= OnPrototypeEnemyDied;
+            var reward = enemy.ExperienceReward;
+            if (reward <= 0 || activeHeroUnits == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < activeHeroUnits.Count; i++)
+            {
+                var hero = activeHeroUnits[i];
+                if (hero == null)
+                {
+                    continue;
+                }
+
+                var progression = hero.GetComponent<IDRPG3DHeroProgression>();
+                progression?.AddExperience(reward);
+            }
+        }
+
+        private int ResolveEnemyLevel(IDRPG3DWaveDefinition wave)
+        {
+            if (waveConfigLoader == null || !waveConfigLoader.TryBuildStage(PrototypeStageId, out var stageConfig))
+            {
+                return wave.EnemyLevel;
+            }
+
+            return IDRPG3DStageLevelResolver.ResolveEnemyLevel(
+                stageConfig.LevelRule,
+                wave.LevelRule,
+                IDRPG3DPrototypeCombatDirector.CalculatePartyReferenceLevel(activeHeroUnits),
+                wave.EnemyLevel);
         }
 
         private void ConfigureCameraTarget(IReadOnlyList<IDRPG3DCombatUnit> heroUnits)
@@ -547,14 +589,66 @@ namespace IDRPG3D.LocalTest
                 order,
                 IDRPG3DCombatFaction.Enemy,
                 enemyConfig.MovePriority,
-                enemyConfig.Health,
-                enemyConfig.Attack,
+                enemyConfig.Health * wave.HpMultiplier,
+                enemyConfig.Attack * wave.AttackMultiplier,
                 enemyConfig.AttackRange,
                 enemyConfig.AttackInterval,
                 enemyConfig.AggroRadius,
                 enemyConfig.MoveSpeed);
+            unit.SetLevel(enemyConfig.Level);
+            unit.SetExperienceReward(Mathf.RoundToInt(enemyConfig.ExperienceReward * wave.HpMultiplier));
             unit.SetBoss(wave.IsBoss);
-            ConfigureEnemyHealthBar(enemyObject, unit, enemyConfig.VisualScale);
+            ConfigureEnemyWorldBar(enemyObject, unit, enemyConfig.VisualScale);
+            return unit;
+        }
+
+        private IDRPG3DCombatUnit ConfigureHeroFromConfig(
+            GameObject hero,
+            IDRPG3DLocalHeroConfig heroConfig,
+            int order,
+            Transform projectileRoot)
+        {
+            var unit = ConfigureUnit(
+                hero,
+                heroConfig.HeroId,
+                order,
+                IDRPG3DCombatFaction.Hero,
+                heroConfig.MovePriority,
+                heroConfig.Health,
+                heroConfig.Attack,
+                heroConfig.AttackRange,
+                heroConfig.AttackInterval,
+                heroConfig.AggroRadius,
+                heroConfig.MoveSpeed,
+                heroConfig.HealthRegen);
+            unit.SetLevel(heroConfig.Level);
+
+            var resource = hero.GetComponent<IDRPG3DCombatResource>();
+            if (resource == null)
+            {
+                resource = hero.AddComponent<IDRPG3DCombatResource>();
+            }
+            resource.Configure(
+                heroConfig.ResourceType,
+                heroConfig.MaxResource,
+                heroConfig.InitialResource,
+                heroConfig.ResourceRegen);
+
+            var progression = hero.GetComponent<IDRPG3DHeroProgression>();
+            if (progression == null)
+            {
+                progression = hero.AddComponent<IDRPG3DHeroProgression>();
+            }
+            progression.Configure(
+                unit,
+                heroConfig.HeroId,
+                heroConfig.Level,
+                heroConfig.MaxLevel,
+                heroConfig.RequiredExperienceByLevel);
+            progression.LevelChanged += OnPrototypeHeroLevelChanged;
+
+            ConfigureHeroSkillBook(hero, heroConfig, projectileRoot);
+            ConfigureHeroWorldBar(hero, unit, heroConfig);
             return unit;
         }
 
@@ -683,111 +777,165 @@ namespace IDRPG3D.LocalTest
             return root.transform;
         }
 
-        private void ConfigureHeroPrototypeSkill(GameObject hero, Transform projectileRoot)
+        private void ConfigureHeroSkillBook(
+            GameObject hero,
+            IDRPG3DLocalHeroConfig heroConfig,
+            Transform projectileRoot)
         {
-            if (hero.name.Equals("Hero2", StringComparison.OrdinalIgnoreCase))
+            var skillBook = hero.GetComponent<IDRPG3DPrototypeSkillBook>();
+            if (skillBook == null)
             {
-                var skillCaster = EnsureSkillCaster(hero);
-                skillCaster.Configure(CreateConfiguredOrFallbackSkill(
-                    FrostboltSkillId,
-                    IDRPG3DPrototypeSkillDefinition.CreateFrostbolt(
-                        LoadEditorPrefab(FrostboltProjectilePath),
-                        LoadEditorPrefab(FrostboltMuzzlePath),
-                        LoadEditorPrefab(FrostboltImpactPath))), projectileRoot);
+                skillBook = hero.AddComponent<IDRPG3DPrototypeSkillBook>();
             }
-            else if (hero.name.Equals("Hero3", StringComparison.OrdinalIgnoreCase))
+
+            var runtimeSkills = new List<IDRPG3DPrototypeSkillRuntime>(heroConfig.DefaultSkillIds.Length);
+            var skillLevel = ResolveSkillLevelForHero(heroConfig.Level);
+            for (var i = 0; i < heroConfig.DefaultSkillIds.Length; i++)
             {
-                var skillCaster = EnsureSkillCaster(hero);
-                skillCaster.Configure(CreateConfiguredOrFallbackSkill(
-                    FireballSkillId,
-                    IDRPG3DPrototypeSkillDefinition.CreateFireball(
-                        LoadEditorPrefab(FireballProjectilePath),
-                        LoadEditorPrefab(FireballMuzzlePath),
-                        LoadEditorPrefab(FireballImpactPath))), projectileRoot);
+                if (!TryBuildRuntimeSkill(heroConfig.DefaultSkillIds[i], skillLevel, out var runtime))
+                {
+                    Debug.LogWarning($"[IDRPG3D LocalTest] Skill config not found. Hero={hero.name}, SkillId={heroConfig.DefaultSkillIds[i]}, Lv={skillLevel}");
+                    continue;
+                }
+
+                runtimeSkills.Add(runtime);
             }
+
+            skillBook.Configure(runtimeSkills, projectileRoot);
         }
 
-        private void ConfigureHeroSupportPrototype(IReadOnlyList<IDRPG3DCombatUnit> heroUnits)
+        private void OnPrototypeHeroLevelChanged(IDRPG3DHeroProgression progression)
         {
-            if (heroUnits.Count == 0)
+            if (progression == null || heroConfigLoader == null)
             {
                 return;
             }
 
-            ApplyConfiguredEffects(DevotionAuraSkillId, heroUnits[0], heroUnits[0], "Devotion Aura");
+            if (!heroConfigLoader.TryBuildHero(progression.HeroId, progression.Level, out var heroConfig))
+            {
+                Debug.LogWarning($"[IDRPG3D LocalTest] Hero level config not found. HeroId={progression.HeroId}, Lv={progression.Level}");
+                return;
+            }
 
-            if (heroUnits.Count <= 1)
+            var hero = progression.gameObject;
+            var unit = hero.GetComponent<IDRPG3DCombatUnit>();
+            if (unit != null)
+            {
+                unit.SetBaseStats(
+                    heroConfig.Health,
+                    heroConfig.Attack,
+                    heroConfig.AttackRange,
+                    heroConfig.AttackInterval,
+                    heroConfig.AggroRadius,
+                    heroConfig.HealthRegen,
+                    keepHealthRatio: true);
+            }
+
+            var resource = hero.GetComponent<IDRPG3DCombatResource>();
+            if (resource != null)
+            {
+                resource.Configure(
+                    heroConfig.ResourceType,
+                    heroConfig.MaxResource,
+                    Mathf.Min(resource.CurrentValue, heroConfig.MaxResource),
+                    heroConfig.ResourceRegen);
+            }
+
+            ConfigureHeroSkillBook(hero, heroConfig, EnsureProjectilesRoot());
+            Debug.Log($"[IDRPG3D LocalTest] Hero leveled. Hero={hero.name}, HeroId={heroConfig.HeroId}, Lv={heroConfig.Level}");
+        }
+
+        private bool TryBuildRuntimeSkill(int skillId, int skillLevel, out IDRPG3DPrototypeSkillRuntime runtime)
+        {
+            runtime = default;
+            if (skillConfigLoader == null || !skillConfigLoader.TryBuildSkill(skillId, skillLevel, out var record))
+            {
+                return false;
+            }
+
+            runtime = IDRPG3DPrototypeSkillConfigBuilder.BuildRuntime(
+                record,
+                LoadEditorPrefab(record.ProjectilePrefabPath),
+                LoadEditorPrefab(record.MuzzlePrefabPath),
+                LoadEditorPrefab(record.ImpactPrefabPath));
+            return runtime.IsValid;
+        }
+
+        private static int ResolveSkillLevelForHero(int heroLevel)
+        {
+            if (heroLevel >= 10)
+            {
+                return 3;
+            }
+
+            return heroLevel >= 5 ? 2 : 1;
+        }
+
+        private static void ConfigureHeroWorldBar(GameObject hero, IDRPG3DCombatUnit unit, IDRPG3DLocalHeroConfig heroConfig)
+        {
+            if (hero == null || unit == null)
             {
                 return;
             }
 
-            heroUnits[1].TakeDamage(20f, null);
-            ApplyConfiguredEffects(HealSkillId, heroUnits[0], heroUnits[1], "Heal");
+            var isWarrior = string.Equals(heroConfig.BarPrefabType, "Warrior", StringComparison.OrdinalIgnoreCase);
+            var prefab = LoadEditorPrefab(isWarrior ? WarriorWorldBarPrefabPath : MageWorldBarPrefabPath);
+            var resource = hero.GetComponent<IDRPG3DCombatResource>();
+            ConfigureWorldUnitBar(
+                hero,
+                unit,
+                prefab,
+                new Vector3(0f, 2.35f, 0f),
+                1f,
+                resource != null && resource.HasResource,
+                resource != null ? resource.FillAmount : 0f);
         }
 
-        private void ApplyConfiguredEffects(
-            int skillId,
-            IDRPG3DCombatUnit caster,
-            IDRPG3DCombatUnit target,
-            string debugName)
+        private static void ConfigureEnemyWorldBar(GameObject enemy, IDRPG3DCombatUnit unit, float visualScale)
         {
-            if (skillConfigLoader == null || !skillConfigLoader.TryBuildSkill(skillId, out var record))
+            if (enemy == null || unit == null)
             {
-                Debug.LogWarning($"[IDRPG3D LocalTest] {debugName} config not found. SkillId={skillId}");
                 return;
-            }
-
-            for (var i = 0; i < record.Effects.Count; i++)
-            {
-                IDRPG3DPrototypeEffectRunner.Apply(record.Effects[i], caster, target);
-            }
-
-            Debug.Log($"[IDRPG3D LocalTest] Applied configured {debugName} SkillId={skillId} Lv{record.Level}.");
-        }
-
-        private IDRPG3DPrototypeSkillDefinition CreateConfiguredOrFallbackSkill(
-            int skillId,
-            IDRPG3DPrototypeSkillDefinition fallback)
-        {
-            if (skillConfigLoader != null && skillConfigLoader.TryBuildSkill(skillId, out var record))
-            {
-                return IDRPG3DPrototypeSkillConfigBuilder.Build(
-                    record,
-                    LoadEditorPrefab(record.ProjectilePrefabPath),
-                    LoadEditorPrefab(record.MuzzlePrefabPath),
-                    LoadEditorPrefab(record.ImpactPrefabPath));
-            }
-
-            return fallback;
-        }
-
-        private static IDRPG3DPrototypeSkillCaster EnsureSkillCaster(GameObject hero)
-        {
-            var skillCaster = hero.GetComponent<IDRPG3DPrototypeSkillCaster>();
-            return skillCaster != null ? skillCaster : hero.AddComponent<IDRPG3DPrototypeSkillCaster>();
-        }
-
-        private static void ConfigureEnemyHealthBar(GameObject enemy, IDRPG3DCombatUnit unit)
-        {
-            var healthBar = enemy.GetComponent<IDRPG3DWorldHealthBar>();
-            if (healthBar == null)
-            {
-                healthBar = enemy.AddComponent<IDRPG3DWorldHealthBar>();
-            }
-
-            healthBar.Configure(unit, null, null, 2.6f, 0.36f, 2.25f);
-        }
-
-        private static void ConfigureEnemyHealthBar(GameObject enemy, IDRPG3DCombatUnit unit, float visualScale)
-        {
-            var healthBar = enemy.GetComponent<IDRPG3DWorldHealthBar>();
-            if (healthBar == null)
-            {
-                healthBar = enemy.AddComponent<IDRPG3DWorldHealthBar>();
             }
 
             var scale = Mathf.Max(1f, visualScale);
-            healthBar.Configure(unit, null, null, 2.6f * scale, 0.36f * Mathf.Min(1.5f, scale), 2.25f * scale);
+            ConfigureWorldUnitBar(
+                enemy,
+                unit,
+                LoadEditorPrefab(MonsterWorldBarPrefabPath),
+                new Vector3(0f, 2.25f * scale, 0f),
+                Mathf.Min(1.8f, scale),
+                false,
+                0f);
+        }
+
+        private static void ConfigureWorldUnitBar(
+            GameObject actor,
+            IDRPG3DCombatUnit unit,
+            GameObject prefab,
+            Vector3 worldOffset,
+            float visualScale,
+            bool showResourceBar,
+            float initialResourceFill)
+        {
+            if (actor == null || unit == null || prefab == null)
+            {
+                return;
+            }
+
+            var legacyHealthBar = actor.GetComponent<IDRPG3DWorldHealthBar>();
+            if (legacyHealthBar != null)
+            {
+                Destroy(legacyHealthBar);
+            }
+
+            var unitBar = actor.GetComponent<IDRPG3DWorldUnitBar>();
+            if (unitBar == null)
+            {
+                unitBar = actor.AddComponent<IDRPG3DWorldUnitBar>();
+            }
+
+            unitBar.Configure(unit, prefab, worldOffset, visualScale, showResourceBar, initialResourceFill);
         }
 
         private static GameObject LoadEditorPrefab(string assetPath)

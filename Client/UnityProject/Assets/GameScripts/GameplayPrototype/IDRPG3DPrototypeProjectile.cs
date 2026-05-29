@@ -10,7 +10,11 @@ namespace IDRPG3D.GameplayPrototype
         private IDRPG3DCombatUnit caster;
         private IDRPG3DCombatUnit target;
         private IDRPG3DPrototypeSkillDefinition skill;
+        private IDRPG3DCombatAction action;
         private GameObject impactPrefab;
+        private int projectileId;
+        private float resourceGainOnImpact;
+        private float threatMultiplier = 1f;
         private float spawnTime;
         private bool impacted;
 
@@ -20,9 +24,49 @@ namespace IDRPG3D.GameplayPrototype
             IDRPG3DPrototypeSkillDefinition skillDefinition,
             Vector3 startPosition)
         {
+            Launch(source, targetUnit, skillDefinition, startPosition, default, 0);
+        }
+
+        public void Launch(
+            IDRPG3DCombatUnit source,
+            IDRPG3DCombatUnit targetUnit,
+            IDRPG3DPrototypeSkillDefinition skillDefinition,
+            Vector3 startPosition,
+            IDRPG3DCombatAction combatAction,
+            int id)
+        {
+            Launch(source, targetUnit, skillDefinition, startPosition, combatAction, id, 0f);
+        }
+
+        public void Launch(
+            IDRPG3DCombatUnit source,
+            IDRPG3DCombatUnit targetUnit,
+            IDRPG3DPrototypeSkillDefinition skillDefinition,
+            Vector3 startPosition,
+            IDRPG3DCombatAction combatAction,
+            int id,
+            float resourceGain)
+        {
+            Launch(source, targetUnit, skillDefinition, startPosition, combatAction, id, resourceGain, 1f);
+        }
+
+        public void Launch(
+            IDRPG3DCombatUnit source,
+            IDRPG3DCombatUnit targetUnit,
+            IDRPG3DPrototypeSkillDefinition skillDefinition,
+            Vector3 startPosition,
+            IDRPG3DCombatAction combatAction,
+            int id,
+            float resourceGain,
+            float threat)
+        {
             caster = source;
             target = targetUnit;
             skill = skillDefinition;
+            action = combatAction;
+            projectileId = id;
+            resourceGainOnImpact = Mathf.Max(0f, resourceGain);
+            threatMultiplier = Mathf.Max(0f, threat);
             impactPrefab = skillDefinition.ImpactPrefab;
             spawnTime = Time.time;
             impacted = false;
@@ -72,20 +116,43 @@ namespace IDRPG3D.GameplayPrototype
             impacted = true;
             if (target != null && target.IsAlive)
             {
+                if (action.ActionId > 0)
+                {
+                    IDRPG3DCombatEventStream.PublishProjectileImpact(action, projectileId, target, GetTargetPoint());
+                }
+
                 var effects = skill.Effects;
                 if (effects != null && effects.Count > 0)
                 {
                     for (var i = 0; i < effects.Count; i++)
                     {
-                        IDRPG3DPrototypeEffectRunner.Apply(effects[i], caster, target);
+                        var result = IDRPG3DPrototypeEffectRunner.Apply(effects[i], caster, target, threatMultiplier);
+                        if (action.ActionId > 0)
+                        {
+                            IDRPG3DCombatEventStream.PublishEffect(action, caster, target, result);
+                        }
                     }
                 }
                 else
                 {
-                    IDRPG3DPrototypeEffectRunner.Apply(skill.PrimaryEffect, caster, target);
+                    var result = IDRPG3DPrototypeEffectRunner.Apply(skill.PrimaryEffect, caster, target, threatMultiplier);
+                    if (action.ActionId > 0)
+                    {
+                        IDRPG3DCombatEventStream.PublishEffect(action, caster, target, result);
+                    }
                 }
 
                 SpawnImpact(GetTargetPoint());
+                if (resourceGainOnImpact > 0f && caster != null)
+                {
+                    var resource = caster.GetComponent<IDRPG3DCombatResource>();
+                    resource?.Gain(resourceGainOnImpact);
+                }
+
+                if (action.ActionId > 0)
+                {
+                    IDRPG3DCombatEventStream.EndCast(action, target, GetTargetPoint());
+                }
             }
 
             if (Application.isPlaying)

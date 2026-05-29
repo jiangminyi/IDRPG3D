@@ -150,6 +150,12 @@ namespace IDRPG3D.LocalTest
                 ParseColor(!string.IsNullOrWhiteSpace(skillLevel.FallbackColor)
                     ? skillLevel.FallbackColor
                     : projectile?.FallbackColor),
+                IDRPG3DCombatResource.ParseType(skill.ResourceType),
+                skillLevel.ResourceCost,
+                skillLevel.ResourceGain,
+                IDRPG3DPrototypeSkillRuntime.ParseCastMode(skill.CastMode),
+                IDRPG3DPrototypeSkillRuntime.ParseTargetRule(skill.TargetRule),
+                skill.ThreatMultiplier,
                 effects);
         }
 
@@ -189,6 +195,26 @@ namespace IDRPG3D.LocalTest
             if (string.Equals(effect.EffectType, "Heal", StringComparison.OrdinalIgnoreCase))
             {
                 return IDRPG3DPrototypeEffectDefinition.Heal(effect.Id, effect.Value);
+            }
+
+            if (string.Equals(effect.EffectType, "AreaDamage", StringComparison.OrdinalIgnoreCase))
+            {
+                return IDRPG3DPrototypeEffectDefinition.AreaDamage(effect.Id, effect.Value);
+            }
+
+            if (string.Equals(effect.EffectType, "AddThreat", StringComparison.OrdinalIgnoreCase))
+            {
+                return IDRPG3DPrototypeEffectDefinition.AddThreat(effect.Id, effect.Value);
+            }
+
+            if (string.Equals(effect.EffectType, "GenerateResource", StringComparison.OrdinalIgnoreCase))
+            {
+                return IDRPG3DPrototypeEffectDefinition.GenerateResource(effect.Id, effect.Value);
+            }
+
+            if (string.Equals(effect.EffectType, "Resurrect", StringComparison.OrdinalIgnoreCase))
+            {
+                return IDRPG3DPrototypeEffectDefinition.Resurrect(effect.Id, effect.Value);
             }
 
             if (string.Equals(effect.EffectType, "AddBuff", StringComparison.OrdinalIgnoreCase))

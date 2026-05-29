@@ -23,6 +23,49 @@ namespace IDRPG3D.GameplayPrototype
                 configId,
                 skillKey,
                 displayName,
+                effectId,
+                damage,
+                range,
+                cooldown,
+                projectileSpeed,
+                projectilePrefabPath,
+                muzzlePrefabPath,
+                impactPrefabPath,
+                fallbackColor,
+                IDRPG3DCombatResourceType.None,
+                0f,
+                0f,
+                projectileSpeed > 0f ? IDRPG3DPrototypeSkillCastMode.Projectile : IDRPG3DPrototypeSkillCastMode.Instant,
+                IDRPG3DPrototypeSkillTargetRule.Enemy,
+                1f,
+                buff)
+        {
+        }
+
+        public IDRPG3DPrototypeSkillConfigRecord(
+            int configId,
+            string skillKey,
+            string displayName,
+            int effectId,
+            float damage,
+            float range,
+            float cooldown,
+            float projectileSpeed,
+            string projectilePrefabPath,
+            string muzzlePrefabPath,
+            string impactPrefabPath,
+            Color fallbackColor,
+            IDRPG3DCombatResourceType resourceType,
+            float resourceCost,
+            float resourceGain,
+            IDRPG3DPrototypeSkillCastMode castMode,
+            IDRPG3DPrototypeSkillTargetRule targetRule,
+            float threatMultiplier,
+            IDRPG3DPrototypeBuffDefinition buff = default)
+            : this(
+                configId,
+                skillKey,
+                displayName,
                 level: 1,
                 range,
                 cooldown,
@@ -31,6 +74,12 @@ namespace IDRPG3D.GameplayPrototype
                 muzzlePrefabPath,
                 impactPrefabPath,
                 fallbackColor,
+                resourceType,
+                resourceCost,
+                resourceGain,
+                castMode,
+                targetRule,
+                threatMultiplier,
                 buff.IsValid
                     ? new[]
                     {
@@ -56,6 +105,47 @@ namespace IDRPG3D.GameplayPrototype
             string impactPrefabPath,
             Color fallbackColor,
             IReadOnlyList<IDRPG3DPrototypeEffectDefinition> effects)
+            : this(
+                configId,
+                skillKey,
+                displayName,
+                level,
+                range,
+                cooldown,
+                projectileSpeed,
+                projectilePrefabPath,
+                muzzlePrefabPath,
+                impactPrefabPath,
+                fallbackColor,
+                IDRPG3DCombatResourceType.None,
+                0f,
+                0f,
+                projectileSpeed > 0f ? IDRPG3DPrototypeSkillCastMode.Projectile : IDRPG3DPrototypeSkillCastMode.Instant,
+                IDRPG3DPrototypeSkillTargetRule.Enemy,
+                1f,
+                effects)
+        {
+        }
+
+        public IDRPG3DPrototypeSkillConfigRecord(
+            int configId,
+            string skillKey,
+            string displayName,
+            int level,
+            float range,
+            float cooldown,
+            float projectileSpeed,
+            string projectilePrefabPath,
+            string muzzlePrefabPath,
+            string impactPrefabPath,
+            Color fallbackColor,
+            IDRPG3DCombatResourceType resourceType,
+            float resourceCost,
+            float resourceGain,
+            IDRPG3DPrototypeSkillCastMode castMode,
+            IDRPG3DPrototypeSkillTargetRule targetRule,
+            float threatMultiplier,
+            IReadOnlyList<IDRPG3DPrototypeEffectDefinition> effects)
         {
             ConfigId = configId;
             SkillKey = skillKey;
@@ -68,6 +158,12 @@ namespace IDRPG3D.GameplayPrototype
             MuzzlePrefabPath = muzzlePrefabPath;
             ImpactPrefabPath = impactPrefabPath;
             FallbackColor = fallbackColor;
+            ResourceType = resourceType;
+            ResourceCost = Mathf.Max(0f, resourceCost);
+            ResourceGain = Mathf.Max(0f, resourceGain);
+            CastMode = castMode;
+            TargetRule = targetRule;
+            ThreatMultiplier = Mathf.Max(0f, threatMultiplier);
             Effects = effects ?? System.Array.Empty<IDRPG3DPrototypeEffectDefinition>();
             var primary = Effects.Count > 0 ? Effects[0] : default;
             EffectId = primary.EffectId;
@@ -88,6 +184,12 @@ namespace IDRPG3D.GameplayPrototype
         public string MuzzlePrefabPath { get; }
         public string ImpactPrefabPath { get; }
         public Color FallbackColor { get; }
+        public IDRPG3DCombatResourceType ResourceType { get; }
+        public float ResourceCost { get; }
+        public float ResourceGain { get; }
+        public IDRPG3DPrototypeSkillCastMode CastMode { get; }
+        public IDRPG3DPrototypeSkillTargetRule TargetRule { get; }
+        public float ThreatMultiplier { get; }
         public IDRPG3DPrototypeBuffDefinition Buff { get; }
         public IReadOnlyList<IDRPG3DPrototypeEffectDefinition> Effects { get; }
     }

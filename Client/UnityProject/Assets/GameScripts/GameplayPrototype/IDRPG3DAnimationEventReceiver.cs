@@ -10,7 +10,7 @@ namespace IDRPG3D.GameplayPrototype
         {
             if (logFootsteps)
             {
-                Debug.Log($"[IDRPG3D AnimationEvent] {name} FootL.");
+                IDRPG3DPrototypeDebugLog.AnimationEvent($"[IDRPG3D AnimationEvent] {name} FootL.");
             }
         }
 
@@ -18,7 +18,7 @@ namespace IDRPG3D.GameplayPrototype
         {
             if (logFootsteps)
             {
-                Debug.Log($"[IDRPG3D AnimationEvent] {name} FootR.");
+                IDRPG3DPrototypeDebugLog.AnimationEvent($"[IDRPG3D AnimationEvent] {name} FootR.");
             }
         }
 
@@ -26,7 +26,7 @@ namespace IDRPG3D.GameplayPrototype
         {
             if (logFootsteps)
             {
-                Debug.Log($"[IDRPG3D AnimationEvent] {name} Footstep.");
+                IDRPG3DPrototypeDebugLog.AnimationEvent($"[IDRPG3D AnimationEvent] {name} Footstep.");
             }
         }
 
@@ -34,7 +34,7 @@ namespace IDRPG3D.GameplayPrototype
         {
             if (logFootsteps)
             {
-                Debug.Log($"[IDRPG3D AnimationEvent] {name} Footstep {foot}.");
+                IDRPG3DPrototypeDebugLog.AnimationEvent($"[IDRPG3D AnimationEvent] {name} Footstep {foot}.");
             }
         }
     }

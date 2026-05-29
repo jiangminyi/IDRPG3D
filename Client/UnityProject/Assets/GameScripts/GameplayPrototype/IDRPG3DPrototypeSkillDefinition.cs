@@ -7,6 +7,7 @@ namespace IDRPG3D.GameplayPrototype
     public struct IDRPG3DPrototypeSkillDefinition
     {
         [SerializeField] private string skillId;
+        [SerializeField] private int configId;
         [SerializeField] private string displayName;
         [SerializeField] private int level;
         [SerializeField] private float damage;
@@ -20,6 +21,7 @@ namespace IDRPG3D.GameplayPrototype
         [SerializeField] private GameObject impactPrefab;
 
         public string SkillId => skillId;
+        public int ConfigId => configId;
         public string DisplayName => displayName;
         public int Level => level;
         public float Damage => damage;
@@ -102,6 +104,7 @@ namespace IDRPG3D.GameplayPrototype
             GameObject impactPrefab = null)
         {
             this.skillId = skillId;
+            configId = 0;
             this.displayName = displayName;
             this.level = Mathf.Max(1, level);
             Effects = effects ?? System.Array.Empty<IDRPG3DPrototypeEffectDefinition>();
@@ -114,6 +117,12 @@ namespace IDRPG3D.GameplayPrototype
             this.projectilePrefab = projectilePrefab;
             this.muzzlePrefab = muzzlePrefab;
             this.impactPrefab = impactPrefab;
+        }
+
+        public IDRPG3DPrototypeSkillDefinition WithConfigId(int value)
+        {
+            configId = value;
+            return this;
         }
 
         private static float FindPrimaryDamage(IReadOnlyList<IDRPG3DPrototypeEffectDefinition> effects)

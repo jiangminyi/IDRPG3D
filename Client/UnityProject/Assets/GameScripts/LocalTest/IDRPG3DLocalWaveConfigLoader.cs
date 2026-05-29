@@ -47,6 +47,12 @@ namespace IDRPG3D.LocalTest
                     stage.Id,
                     stage.StageKey,
                     stage.RouteKey,
+                    new IDRPG3DStageLevelRule(
+                        stage.LevelMode,
+                        stage.MinEnemyLevel,
+                        stage.MaxEnemyLevel,
+                        stage.BaseLevelOffset,
+                        stage.PowerScale),
                     string.Equals(stage.LoopMode, "Repeat", StringComparison.OrdinalIgnoreCase),
                     waves);
                 return true;
@@ -113,13 +119,21 @@ namespace IDRPG3D.LocalTest
                 ParseSpawnMode(wave.SpawnMode),
                 wave.EnemyId,
                 wave.EnemyLevel,
+                new IDRPG3DWaveLevelRule(
+                    wave.LevelMode,
+                    wave.FixedEnemyLevel,
+                    wave.LevelOffset,
+                    wave.MinEnemyLevel,
+                    wave.MaxEnemyLevel),
                 wave.Count,
                 wave.SpawnDistanceAhead,
                 wave.SpawnRadius,
                 wave.SpawnAnchorId,
                 wave.IsBoss != 0,
                 wave.NextWaveDelay,
-                ParseEngageMode(wave.SpawnEngageMode, wave.IsBoss != 0));
+                ParseEngageMode(wave.SpawnEngageMode, wave.IsBoss != 0),
+                wave.HpMultiplier,
+                wave.AttackMultiplier);
         }
 
         private static EnemyLevelConfig FindEnemyLevel(Tables loadedTables, int enemyId, int level)
@@ -161,6 +175,7 @@ namespace IDRPG3D.LocalTest
                 enemy.BaseHp * hpMultiplier,
                 enemy.BaseAttack * attackMultiplier,
                 enemy.BaseDefense * defenseMultiplier,
+                Mathf.RoundToInt(enemy.BaseExp * (enemyLevel != null ? enemyLevel.ExpMultiplier : 1f)),
                 enemy.MoveSpeed,
                 enemy.AttackRange,
                 enemy.AttackInterval,
@@ -193,12 +208,14 @@ namespace IDRPG3D.LocalTest
             int stageId,
             string stageKey,
             string routeKey,
+            IDRPG3DStageLevelRule levelRule,
             bool loopStage,
             IReadOnlyList<IDRPG3DWaveDefinition> waves)
         {
             StageId = stageId;
             StageKey = stageKey ?? string.Empty;
             RouteKey = routeKey ?? string.Empty;
+            LevelRule = levelRule;
             LoopStage = loopStage;
             Waves = waves ?? Array.Empty<IDRPG3DWaveDefinition>();
         }
@@ -206,6 +223,7 @@ namespace IDRPG3D.LocalTest
         public int StageId { get; }
         public string StageKey { get; }
         public string RouteKey { get; }
+        public IDRPG3DStageLevelRule LevelRule { get; }
         public bool LoopStage { get; }
         public IReadOnlyList<IDRPG3DWaveDefinition> Waves { get; }
     }
@@ -221,6 +239,7 @@ namespace IDRPG3D.LocalTest
             float health,
             float attack,
             float defense,
+            int experienceReward,
             float moveSpeed,
             float attackRange,
             float attackInterval,
@@ -236,6 +255,7 @@ namespace IDRPG3D.LocalTest
             Health = Mathf.Max(1f, health);
             Attack = Mathf.Max(0f, attack);
             Defense = Mathf.Max(0f, defense);
+            ExperienceReward = Mathf.Max(0, experienceReward);
             MoveSpeed = Mathf.Max(0.1f, moveSpeed);
             AttackRange = Mathf.Max(0.1f, attackRange);
             AttackInterval = Mathf.Max(0.1f, attackInterval);
@@ -252,6 +272,7 @@ namespace IDRPG3D.LocalTest
         public float Health { get; }
         public float Attack { get; }
         public float Defense { get; }
+        public int ExperienceReward { get; }
         public float MoveSpeed { get; }
         public float AttackRange { get; }
         public float AttackInterval { get; }

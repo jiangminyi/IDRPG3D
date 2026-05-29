@@ -9,7 +9,11 @@ namespace IDRPG3D.GameplayPrototype
         None,
         Damage,
         Heal,
-        AddBuff
+        AddBuff,
+        AreaDamage,
+        AddThreat,
+        GenerateResource,
+        Resurrect
     }
 
     public enum IDRPG3DPrototypeStatType
@@ -257,6 +261,42 @@ namespace IDRPG3D.GameplayPrototype
                 0f,
                 buff);
         }
+
+        public static IDRPG3DPrototypeEffectDefinition AreaDamage(int effectId, float value)
+        {
+            return new IDRPG3DPrototypeEffectDefinition(
+                effectId,
+                IDRPG3DPrototypeEffectType.AreaDamage,
+                value,
+                default);
+        }
+
+        public static IDRPG3DPrototypeEffectDefinition AddThreat(int effectId, float value)
+        {
+            return new IDRPG3DPrototypeEffectDefinition(
+                effectId,
+                IDRPG3DPrototypeEffectType.AddThreat,
+                value,
+                default);
+        }
+
+        public static IDRPG3DPrototypeEffectDefinition GenerateResource(int effectId, float value)
+        {
+            return new IDRPG3DPrototypeEffectDefinition(
+                effectId,
+                IDRPG3DPrototypeEffectType.GenerateResource,
+                value,
+                default);
+        }
+
+        public static IDRPG3DPrototypeEffectDefinition Resurrect(int effectId, float healthRatio)
+        {
+            return new IDRPG3DPrototypeEffectDefinition(
+                effectId,
+                IDRPG3DPrototypeEffectType.Resurrect,
+                healthRatio,
+                default);
+        }
     }
 
     public readonly struct IDRPG3DPrototypeEffectResult
@@ -265,18 +305,24 @@ namespace IDRPG3D.GameplayPrototype
             bool applied,
             int effectId,
             int buffId,
-            float value)
+            float value,
+            int buffStack = 0,
+            float buffRemainingTime = 0f)
         {
             Applied = applied;
             EffectId = effectId;
             BuffId = buffId;
             Value = value;
+            BuffStack = buffStack;
+            BuffRemainingTime = buffRemainingTime;
         }
 
         public bool Applied { get; }
         public int EffectId { get; }
         public int BuffId { get; }
         public float Value { get; }
+        public int BuffStack { get; }
+        public float BuffRemainingTime { get; }
     }
 
     public static class IDRPG3DPrototypeEffectRunner
@@ -286,20 +332,57 @@ namespace IDRPG3D.GameplayPrototype
             IDRPG3DCombatUnit source,
             IDRPG3DCombatUnit target)
         {
-            if (!effect.IsValid || target == null || !target.IsAlive)
+            return Apply(effect, source, target, 1f);
+        }
+
+        public static IDRPG3DPrototypeEffectResult Apply(
+            IDRPG3DPrototypeEffectDefinition effect,
+            IDRPG3DCombatUnit source,
+            IDRPG3DCombatUnit target,
+            float threatMultiplier)
+        {
+            if (!effect.IsValid || target == null)
+            {
+                return default;
+            }
+
+            if (effect.EffectType != IDRPG3DPrototypeEffectType.Resurrect && !target.IsAlive)
             {
                 return default;
             }
 
             var appliedValue = 0f;
-            if (effect.EffectType == IDRPG3DPrototypeEffectType.Damage)
+            if (effect.EffectType == IDRPG3DPrototypeEffectType.Damage
+                || effect.EffectType == IDRPG3DPrototypeEffectType.AreaDamage)
             {
                 target.TakeDamage(effect.Value, source);
+                AddBonusThreat(target, source, effect.Value, threatMultiplier);
                 appliedValue = effect.Value;
             }
             else if (effect.EffectType == IDRPG3DPrototypeEffectType.Heal)
             {
                 appliedValue = target.Heal(effect.Value, source);
+            }
+            else if (effect.EffectType == IDRPG3DPrototypeEffectType.GenerateResource)
+            {
+                var resource = source != null ? source.GetComponent<IDRPG3DCombatResource>() : null;
+                resource?.Gain(effect.Value);
+                appliedValue = effect.Value;
+            }
+            else if (effect.EffectType == IDRPG3DPrototypeEffectType.Resurrect)
+            {
+                if (target.Revive(effect.Value))
+                {
+                    appliedValue = effect.Value;
+                }
+            }
+            else if (effect.EffectType == IDRPG3DPrototypeEffectType.AddThreat)
+            {
+                if (source != null)
+                {
+                    target.ThreatTable.AddThreat(source, effect.Value);
+                    appliedValue = effect.Value;
+                }
             }
 
             var buffId = 0;
@@ -320,7 +403,28 @@ namespace IDRPG3D.GameplayPrototype
                 buffId = effect.Buff.BuffId;
             }
 
-            return new IDRPG3DPrototypeEffectResult(true, effect.EffectId, buffId, appliedValue);
+            var buffController = buffId > 0 ? target.GetComponent<IDRPG3DPrototypeBuffController>() : null;
+            return new IDRPG3DPrototypeEffectResult(
+                true,
+                effect.EffectId,
+                buffId,
+                appliedValue,
+                buffController != null ? buffController.GetStack(buffId) : 0,
+                buffController != null ? buffController.GetRemainingTime(buffId) : 0f);
+        }
+
+        private static void AddBonusThreat(
+            IDRPG3DCombatUnit target,
+            IDRPG3DCombatUnit source,
+            float baseThreat,
+            float threatMultiplier)
+        {
+            if (target == null || source == null || baseThreat <= 0f || threatMultiplier <= 1f)
+            {
+                return;
+            }
+
+            target.ThreatTable.AddThreat(source, baseThreat * (threatMultiplier - 1f));
         }
     }
 
@@ -387,6 +491,11 @@ namespace IDRPG3D.GameplayPrototype
         public int GetStack(int buffId)
         {
             return activeBuffs.TryGetValue(buffId, out var active) ? active.Stack : 0;
+        }
+
+        public float GetRemainingTime(int buffId)
+        {
+            return activeBuffs.TryGetValue(buffId, out var active) ? active.RemainingTime : 0f;
         }
 
         private float CalculateMultiplier(IDRPG3DPrototypeStatType statType)

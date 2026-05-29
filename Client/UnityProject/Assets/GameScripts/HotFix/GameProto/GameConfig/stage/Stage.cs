@@ -22,6 +22,11 @@ public sealed partial class Stage : Luban.BeanBase
         RouteKey = _buf.ReadString();
         LoopMode = _buf.ReadString();
         FirstWaveIndex = _buf.ReadInt();
+        LevelMode = _buf.ReadString();
+        MinEnemyLevel = _buf.ReadInt();
+        MaxEnemyLevel = _buf.ReadInt();
+        BaseLevelOffset = _buf.ReadInt();
+        PowerScale = _buf.ReadFloat();
     }
 
     public static Stage DeserializeStage(ByteBuf _buf)
@@ -53,6 +58,26 @@ public sealed partial class Stage : Luban.BeanBase
     /// First wave index.
     /// </summary>
     public readonly int FirstWaveIndex;
+    /// <summary>
+    /// Enemy level mode.
+    /// </summary>
+    public readonly string LevelMode;
+    /// <summary>
+    /// Minimum enemy level.
+    /// </summary>
+    public readonly int MinEnemyLevel;
+    /// <summary>
+    /// Maximum enemy level.
+    /// </summary>
+    public readonly int MaxEnemyLevel;
+    /// <summary>
+    /// Base level offset.
+    /// </summary>
+    public readonly int BaseLevelOffset;
+    /// <summary>
+    /// Stage power scale.
+    /// </summary>
+    public readonly float PowerScale;
    
     public const int __ID__ = -1079587858;
     public override int GetTypeId() => __ID__;
@@ -70,6 +95,11 @@ public sealed partial class Stage : Luban.BeanBase
         + "routeKey:" + RouteKey + ","
         + "loopMode:" + LoopMode + ","
         + "firstWaveIndex:" + FirstWaveIndex + ","
+        + "levelMode:" + LevelMode + ","
+        + "minEnemyLevel:" + MinEnemyLevel + ","
+        + "maxEnemyLevel:" + MaxEnemyLevel + ","
+        + "baseLevelOffset:" + BaseLevelOffset + ","
+        + "powerScale:" + PowerScale + ","
         + "}";
     }
 }

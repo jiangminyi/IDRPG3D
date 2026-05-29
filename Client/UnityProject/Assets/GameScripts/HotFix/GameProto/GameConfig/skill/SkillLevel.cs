@@ -14,7 +14,7 @@ namespace GameConfig.skill
 {
 public sealed partial class SkillLevel : Luban.BeanBase
 {
-    public SkillLevel(ByteBuf _buf)
+    public SkillLevel(ByteBuf _buf) 
     {
         Id = _buf.ReadInt();
         SkillId = _buf.ReadInt();
@@ -24,6 +24,8 @@ public sealed partial class SkillLevel : Luban.BeanBase
         Range = _buf.ReadFloat();
         ProjectileSpeed = _buf.ReadFloat();
         FallbackColor = _buf.ReadString();
+        ResourceCost = _buf.ReadFloat();
+        ResourceGain = _buf.ReadFloat();
     }
 
     public static SkillLevel DeserializeSkillLevel(ByteBuf _buf)
@@ -63,7 +65,15 @@ public sealed partial class SkillLevel : Luban.BeanBase
     /// Fallback color.
     /// </summary>
     public readonly string FallbackColor;
-
+    /// <summary>
+    /// Resource cost.
+    /// </summary>
+    public readonly float ResourceCost;
+    /// <summary>
+    /// Resource gain on successful cast/impact.
+    /// </summary>
+    public readonly float ResourceGain;
+   
     public const int __ID__ = -65736816;
     public override int GetTypeId() => __ID__;
 
@@ -82,7 +92,10 @@ public sealed partial class SkillLevel : Luban.BeanBase
         + "range:" + Range + ","
         + "projectileSpeed:" + ProjectileSpeed + ","
         + "fallbackColor:" + FallbackColor + ","
+        + "resourceCost:" + ResourceCost + ","
+        + "resourceGain:" + ResourceGain + ","
         + "}";
     }
 }
 }
+

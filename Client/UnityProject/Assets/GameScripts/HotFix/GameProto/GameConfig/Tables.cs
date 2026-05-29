@@ -16,7 +16,7 @@ public partial class Tables
     #region The Tables
 
     private item.TbItem m_TbItem;
-    public item.TbItem TbItem
+    public item.TbItem TbItem 
     {
         get
         {
@@ -37,7 +37,7 @@ public partial class Tables
     /// ??????????????ID???????????????????? skill_level.xlsx?
     /// </summary>
     private skill.TbSkill m_TbSkill;
-    public skill.TbSkill TbSkill
+    public skill.TbSkill TbSkill 
     {
         get
         {
@@ -58,7 +58,7 @@ public partial class Tables
     /// ????????? skillId ??? level ???????????????????
     /// </summary>
     private skill.TbSkillLevel m_TbSkillLevel;
-    public skill.TbSkillLevel TbSkillLevel
+    public skill.TbSkillLevel TbSkillLevel 
     {
         get
         {
@@ -79,7 +79,7 @@ public partial class Tables
     /// ????????? skillId + level + order ???? effect?
     /// </summary>
     private skill.TbSkillEffect m_TbSkillEffect;
-    public skill.TbSkillEffect TbSkillEffect
+    public skill.TbSkillEffect TbSkillEffect 
     {
         get
         {
@@ -100,7 +100,7 @@ public partial class Tables
     /// ?????????????Buff???????
     /// </summary>
     private skill.TbEffect m_TbEffect;
-    public skill.TbEffect TbEffect
+    public skill.TbEffect TbEffect 
     {
         get
         {
@@ -121,7 +121,7 @@ public partial class Tables
     /// Buff???????????????????????
     /// </summary>
     private skill.TbBuff m_TbBuff;
-    public skill.TbBuff TbBuff
+    public skill.TbBuff TbBuff 
     {
         get
         {
@@ -142,7 +142,7 @@ public partial class Tables
     /// ??????????????Prefab????????
     /// </summary>
     private skill.TbProjectile m_TbProjectile;
-    public skill.TbProjectile TbProjectile
+    public skill.TbProjectile TbProjectile 
     {
         get
         {
@@ -163,7 +163,7 @@ public partial class Tables
     /// Stage config.
     /// </summary>
     private stage.TbStage m_TbStage;
-    public stage.TbStage TbStage
+    public stage.TbStage TbStage 
     {
         get
         {
@@ -184,7 +184,7 @@ public partial class Tables
     /// Enemy base config.
     /// </summary>
     private stage.TbEnemy m_TbEnemy;
-    public stage.TbEnemy TbEnemy
+    public stage.TbEnemy TbEnemy 
     {
         get
         {
@@ -205,7 +205,7 @@ public partial class Tables
     /// Enemy level growth config.
     /// </summary>
     private stage.TbEnemyLevel m_TbEnemyLevel;
-    public stage.TbEnemyLevel TbEnemyLevel
+    public stage.TbEnemyLevel TbEnemyLevel 
     {
         get
         {
@@ -226,7 +226,7 @@ public partial class Tables
     /// Wave spawn config.
     /// </summary>
     private stage.TbWave m_TbWave;
-    public stage.TbWave TbWave
+    public stage.TbWave TbWave 
     {
         get
         {
@@ -243,6 +243,48 @@ public partial class Tables
             m_TbWave.ResolveRef(this);
         }
     }
+    /// <summary>
+    /// Hero base config.
+    /// </summary>
+    private stage.TbHero m_TbHero;
+    public stage.TbHero TbHero 
+    {
+        get
+        {
+            if (m_TbHero == null)
+            {
+                m_TbHero = new stage.TbHero(defaultLoader("stage_tbhero"));
+                m_TbHero.ResolveRef(this);
+            }
+            return m_TbHero;
+        }
+        set
+        {
+            m_TbHero = value;
+            m_TbHero.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// Hero level growth config.
+    /// </summary>
+    private stage.TbHeroLevel m_TbHeroLevel;
+    public stage.TbHeroLevel TbHeroLevel 
+    {
+        get
+        {
+            if (m_TbHeroLevel == null)
+            {
+                m_TbHeroLevel = new stage.TbHeroLevel(defaultLoader("stage_tbherolevel"));
+                m_TbHeroLevel.ResolveRef(this);
+            }
+            return m_TbHeroLevel;
+        }
+        set
+        {
+            m_TbHeroLevel = value;
+            m_TbHeroLevel.ResolveRef(this);
+        }
+    }
 
     #endregion
 
@@ -253,7 +295,7 @@ public partial class Tables
         SetDefaultLoader(loader);
         Init();
     }
-
+    
     public void SetDefaultLoader(System.Func<string, ByteBuf> loader)
     {
         defaultLoader = null;

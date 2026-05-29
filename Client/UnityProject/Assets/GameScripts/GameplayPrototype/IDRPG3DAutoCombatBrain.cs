@@ -10,8 +10,22 @@ namespace IDRPG3D.GameplayPrototype
         private IDRPG3DNavMoveAgent mover;
         private IDRPG3DAnimatorBridge animatorBridge;
         private IDRPG3DPrototypeSkillCaster skillCaster;
+        private IDRPG3DPrototypeSkillBook skillBook;
         private IDRPG3DCombatUnit currentTarget;
+        private IDRPG3DCombatUnit committedTarget;
+        private IDRPG3DPrototypeSkillRuntime committedSkill;
         private float nextAttackTime;
+        private float committedHitTime;
+        private float nextThreatRecheckTime;
+        private bool hasCommittedAttack;
+        private bool committedUsesRuntimeSkill;
+        private bool committedUsesLegacySkill;
+
+        private const float AttackCommitDelay = 0.18f;
+        private const float DefaultGlobalRecovery = 0.2f;
+        private const float ThreatRecheckInterval = 0.35f;
+        private const float MeleeThreatSwitchRatio = 1.1f;
+        private const float RangedThreatSwitchRatio = 1.3f;
 
         public bool HasTarget => currentTarget != null && currentTarget.IsAlive;
 
@@ -35,6 +49,7 @@ namespace IDRPG3D.GameplayPrototype
                 animatorBridge = gameObject.AddComponent<IDRPG3DAnimatorBridge>();
             }
             skillCaster = GetComponent<IDRPG3DPrototypeSkillCaster>();
+            skillBook = GetComponent<IDRPG3DPrototypeSkillBook>();
             mover.Initialize();
             animatorBridge.Initialize();
         }
@@ -59,6 +74,13 @@ namespace IDRPG3D.GameplayPrototype
             if (unit == null || !unit.IsAlive)
             {
                 mover?.Stop();
+                ClearCommittedAttack();
+                return;
+            }
+
+            if (hasCommittedAttack)
+            {
+                TickCommittedAttack();
                 return;
             }
 
@@ -75,8 +97,16 @@ namespace IDRPG3D.GameplayPrototype
                 }
                 else
                 {
-                    return;
+                    var fallbackRadius = unit != null ? unit.AggroRadius : 0f;
+                    if (!IDRPG3DPrototypeCombatDirector.TryFindNearestEnemy(unit, fallbackRadius, out currentTarget))
+                    {
+                        return;
+                    }
                 }
+            }
+            else
+            {
+                ReevaluateThreatTarget();
             }
 
             var targetPosition = currentTarget.transform.position;
@@ -87,8 +117,17 @@ namespace IDRPG3D.GameplayPrototype
             {
                 skillCaster = GetComponent<IDRPG3DPrototypeSkillCaster>();
             }
+            if (skillBook == null)
+            {
+                skillBook = GetComponent<IDRPG3DPrototypeSkillBook>();
+            }
 
-            var baseAttackRange = skillCaster != null && skillCaster.HasSkill ? skillCaster.Skill.Range : unit.AttackRange;
+            IDRPG3DPrototypeSkillRuntime runtimeSkill = default;
+            var hasRuntimeSkill = skillBook != null && skillBook.TrySelectSkill(currentTarget, out runtimeSkill);
+
+            var baseAttackRange = hasRuntimeSkill
+                ? runtimeSkill.Definition.Range
+                : skillCaster != null && skillCaster.HasSkill ? skillCaster.Skill.Range : unit.AttackRange;
             var attackRange = baseAttackRange + currentTarget.Radius;
             if (sqrDistance > attackRange * attackRange)
             {
@@ -104,19 +143,121 @@ namespace IDRPG3D.GameplayPrototype
                 return;
             }
 
-            var usesSkill = skillCaster != null && skillCaster.HasSkill;
+            var usesSkill = hasRuntimeSkill || skillCaster != null && skillCaster.HasSkill;
             var attackSpeedMultiplier = Mathf.Max(0.05f, usesSkill ? GetCastSpeedMultiplier() : GetAttackSpeedMultiplier());
-            var baseInterval = usesSkill ? skillCaster.Skill.Cooldown : unit.AttackInterval;
+            var baseInterval = IsBasicRuntimeSkill(hasRuntimeSkill, runtimeSkill)
+                ? runtimeSkill.Definition.Cooldown
+                : hasRuntimeSkill ? DefaultGlobalRecovery : usesSkill ? skillCaster.Skill.Cooldown : unit.AttackInterval;
             nextAttackTime = Time.time + baseInterval / attackSpeedMultiplier;
-            animatorBridge.PlayMeleeAttack(attackSpeedMultiplier);
-            Debug.Log($"[IDRPG3D Combat] {name} attacks {currentTarget.name}.");
-            if (usesSkill)
+
+            if (hasRuntimeSkill && runtimeSkill.CastMode == IDRPG3DPrototypeSkillCastMode.Charge)
             {
-                skillCaster.TryCast(currentTarget);
+                IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} charges {currentTarget.name}.");
+                skillBook.TryCast(runtimeSkill, currentTarget);
                 return;
             }
 
-            currentTarget.TakeDamage(unit.AttackPower, unit);
+            CommitAttack(currentTarget, runtimeSkill, hasRuntimeSkill, usesSkill, attackSpeedMultiplier);
+        }
+
+        private void CommitAttack(
+            IDRPG3DCombatUnit target,
+            IDRPG3DPrototypeSkillRuntime runtimeSkill,
+            bool hasRuntimeSkill,
+            bool usesSkill,
+            float attackSpeedMultiplier)
+        {
+            committedTarget = target;
+            committedSkill = runtimeSkill;
+            committedUsesRuntimeSkill = hasRuntimeSkill;
+            committedUsesLegacySkill = usesSkill && !hasRuntimeSkill;
+            committedHitTime = Time.time + AttackCommitDelay / attackSpeedMultiplier;
+            hasCommittedAttack = true;
+            animatorBridge.PlayMeleeAttack(attackSpeedMultiplier);
+            IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} attacks {target.name}.");
+        }
+
+        private void TickCommittedAttack()
+        {
+            mover?.Stop();
+            if (committedTarget == null || !committedTarget.IsAlive)
+            {
+                ClearCommittedAttack();
+                return;
+            }
+
+            mover?.FacePosition(committedTarget.transform.position);
+            if (Time.time < committedHitTime)
+            {
+                return;
+            }
+
+            if (committedUsesRuntimeSkill)
+            {
+                skillBook.TryCast(committedSkill, committedTarget);
+            }
+            else if (committedUsesLegacySkill)
+            {
+                skillCaster.TryCast(committedTarget);
+            }
+            else
+            {
+                committedTarget.TakeDamage(unit.AttackPower, unit);
+            }
+
+            ClearCommittedAttack();
+        }
+
+        private void ReevaluateThreatTarget()
+        {
+            if (unit.Faction != IDRPG3DCombatFaction.Enemy || Time.time < nextThreatRecheckTime)
+            {
+                return;
+            }
+
+            nextThreatRecheckTime = Time.time + ThreatRecheckInterval;
+            if (!unit.ThreatTable.TryGetHighestThreatTarget(target => target != null && target.IsAlive, out var bestTarget, out var bestThreat)
+                || bestTarget == null
+                || bestTarget == currentTarget)
+            {
+                return;
+            }
+
+            var currentThreat = unit.ThreatTable.GetThreat(currentTarget);
+            var switchRatio = IsCurrentTargetInMeleeRange() ? MeleeThreatSwitchRatio : RangedThreatSwitchRatio;
+            if (currentThreat <= 0f || bestThreat >= currentThreat * switchRatio)
+            {
+                IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} switches target from {currentTarget.name} to {bestTarget.name}. Threat {currentThreat:0.#}->{bestThreat:0.#}");
+                currentTarget = bestTarget;
+                ClearCommittedAttack();
+            }
+        }
+
+        private bool IsCurrentTargetInMeleeRange()
+        {
+            if (currentTarget == null || unit == null)
+            {
+                return false;
+            }
+
+            var offset = currentTarget.transform.position - transform.position;
+            offset.y = 0f;
+            var range = unit.AttackRange + currentTarget.Radius;
+            return offset.sqrMagnitude <= range * range;
+        }
+
+        private static bool IsBasicRuntimeSkill(bool hasRuntimeSkill, IDRPG3DPrototypeSkillRuntime runtimeSkill)
+        {
+            return hasRuntimeSkill && runtimeSkill.IsBasicAttack;
+        }
+
+        private void ClearCommittedAttack()
+        {
+            hasCommittedAttack = false;
+            committedTarget = null;
+            committedSkill = default;
+            committedUsesRuntimeSkill = false;
+            committedUsesLegacySkill = false;
         }
 
         private float GetAttackSpeedMultiplier()

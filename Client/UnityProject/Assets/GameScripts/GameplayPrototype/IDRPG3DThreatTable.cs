@@ -25,7 +25,13 @@ namespace IDRPG3D.GameplayPrototype
 
         public bool TryGetHighestThreatTarget(Predicate<TTarget> isValid, out TTarget target)
         {
+            return TryGetHighestThreatTarget(isValid, out target, out _);
+        }
+
+        public bool TryGetHighestThreatTarget(Predicate<TTarget> isValid, out TTarget target, out float threat)
+        {
             target = null;
+            threat = 0f;
             var bestThreat = float.MinValue;
 
             foreach (var pair in threatByTarget)
@@ -42,7 +48,13 @@ namespace IDRPG3D.GameplayPrototype
                 }
             }
 
+            threat = target != null ? bestThreat : 0f;
             return target != null;
+        }
+
+        public float GetThreat(TTarget target)
+        {
+            return target != null && threatByTarget.TryGetValue(target, out var threat) ? threat : 0f;
         }
     }
 }

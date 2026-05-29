@@ -22,6 +22,11 @@ public sealed partial class Wave : Luban.BeanBase
         SpawnMode = _buf.ReadString();
         EnemyId = _buf.ReadInt();
         EnemyLevel = _buf.ReadInt();
+        LevelMode = _buf.ReadString();
+        FixedEnemyLevel = _buf.ReadInt();
+        LevelOffset = _buf.ReadInt();
+        MinEnemyLevel = _buf.ReadInt();
+        MaxEnemyLevel = _buf.ReadInt();
         Count = _buf.ReadInt();
         SpawnDistanceAhead = _buf.ReadFloat();
         SpawnRadius = _buf.ReadFloat();
@@ -29,6 +34,8 @@ public sealed partial class Wave : Luban.BeanBase
         IsBoss = _buf.ReadInt();
         NextWaveDelay = _buf.ReadFloat();
         SpawnEngageMode = _buf.ReadString();
+        HpMultiplier = _buf.ReadFloat();
+        AttackMultiplier = _buf.ReadFloat();
     }
 
     public static Wave DeserializeWave(ByteBuf _buf)
@@ -57,9 +64,29 @@ public sealed partial class Wave : Luban.BeanBase
     /// </summary>
     public readonly int EnemyId;
     /// <summary>
-    /// Enemy level.
+    /// Legacy/fallback enemy level.
     /// </summary>
     public readonly int EnemyLevel;
+    /// <summary>
+    /// Level mode: Inherit/Fixed/Dynamic.
+    /// </summary>
+    public readonly string LevelMode;
+    /// <summary>
+    /// Fixed enemy level.
+    /// </summary>
+    public readonly int FixedEnemyLevel;
+    /// <summary>
+    /// Dynamic level offset.
+    /// </summary>
+    public readonly int LevelOffset;
+    /// <summary>
+    /// Wave min level override, 0 means stage.
+    /// </summary>
+    public readonly int MinEnemyLevel;
+    /// <summary>
+    /// Wave max level override, 0 means stage.
+    /// </summary>
+    public readonly int MaxEnemyLevel;
     /// <summary>
     /// Enemy count.
     /// </summary>
@@ -85,9 +112,17 @@ public sealed partial class Wave : Luban.BeanBase
     /// </summary>
     public readonly float NextWaveDelay;
     /// <summary>
-    /// Spawn engage mode: RushTeam or HoldPosition.
+    /// Spawn engage mode.
     /// </summary>
     public readonly string SpawnEngageMode;
+    /// <summary>
+    /// Wave hp multiplier.
+    /// </summary>
+    public readonly float HpMultiplier;
+    /// <summary>
+    /// Wave attack multiplier.
+    /// </summary>
+    public readonly float AttackMultiplier;
    
     public const int __ID__ = 1073654793;
     public override int GetTypeId() => __ID__;
@@ -105,6 +140,11 @@ public sealed partial class Wave : Luban.BeanBase
         + "spawnMode:" + SpawnMode + ","
         + "enemyId:" + EnemyId + ","
         + "enemyLevel:" + EnemyLevel + ","
+        + "levelMode:" + LevelMode + ","
+        + "fixedEnemyLevel:" + FixedEnemyLevel + ","
+        + "levelOffset:" + LevelOffset + ","
+        + "minEnemyLevel:" + MinEnemyLevel + ","
+        + "maxEnemyLevel:" + MaxEnemyLevel + ","
         + "count:" + Count + ","
         + "spawnDistanceAhead:" + SpawnDistanceAhead + ","
         + "spawnRadius:" + SpawnRadius + ","
@@ -112,6 +152,8 @@ public sealed partial class Wave : Luban.BeanBase
         + "isBoss:" + IsBoss + ","
         + "nextWaveDelay:" + NextWaveDelay + ","
         + "spawnEngageMode:" + SpawnEngageMode + ","
+        + "hpMultiplier:" + HpMultiplier + ","
+        + "attackMultiplier:" + AttackMultiplier + ","
         + "}";
     }
 }

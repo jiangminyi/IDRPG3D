@@ -24,6 +24,10 @@ public sealed partial class Skill : Luban.BeanBase
         DefaultLevel = _buf.ReadInt();
         AnimationKey = _buf.ReadString();
         SyncEventKey = _buf.ReadString();
+        ResourceType = _buf.ReadString();
+        CastMode = _buf.ReadString();
+        TargetRule = _buf.ReadString();
+        ThreatMultiplier = _buf.ReadFloat();
     }
 
     public static Skill DeserializeSkill(ByteBuf _buf)
@@ -63,6 +67,22 @@ public sealed partial class Skill : Luban.BeanBase
     /// Sync event key.
     /// </summary>
     public readonly string SyncEventKey;
+    /// <summary>
+    /// Resource type.
+    /// </summary>
+    public readonly string ResourceType;
+    /// <summary>
+    /// Cast mode.
+    /// </summary>
+    public readonly string CastMode;
+    /// <summary>
+    /// Target rule.
+    /// </summary>
+    public readonly string TargetRule;
+    /// <summary>
+    /// Threat multiplier.
+    /// </summary>
+    public readonly float ThreatMultiplier;
    
     public const int __ID__ = 1155715156;
     public override int GetTypeId() => __ID__;
@@ -82,6 +102,10 @@ public sealed partial class Skill : Luban.BeanBase
         + "defaultLevel:" + DefaultLevel + ","
         + "animationKey:" + AnimationKey + ","
         + "syncEventKey:" + SyncEventKey + ","
+        + "resourceType:" + ResourceType + ","
+        + "castMode:" + CastMode + ","
+        + "targetRule:" + TargetRule + ","
+        + "threatMultiplier:" + ThreatMultiplier + ","
         + "}";
     }
 }

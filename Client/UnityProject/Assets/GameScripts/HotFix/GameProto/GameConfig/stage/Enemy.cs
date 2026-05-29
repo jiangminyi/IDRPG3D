@@ -23,6 +23,7 @@ public sealed partial class Enemy : Luban.BeanBase
         BaseHp = _buf.ReadFloat();
         BaseAttack = _buf.ReadFloat();
         BaseDefense = _buf.ReadFloat();
+        BaseExp = _buf.ReadInt();
         MoveSpeed = _buf.ReadFloat();
         AttackRange = _buf.ReadFloat();
         AttackInterval = _buf.ReadFloat();
@@ -65,6 +66,10 @@ public sealed partial class Enemy : Luban.BeanBase
     /// Base defense.
     /// </summary>
     public readonly float BaseDefense;
+    /// <summary>
+    /// Base exp reward.
+    /// </summary>
+    public readonly int BaseExp;
     /// <summary>
     /// Move speed.
     /// </summary>
@@ -111,6 +116,7 @@ public sealed partial class Enemy : Luban.BeanBase
         + "baseHp:" + BaseHp + ","
         + "baseAttack:" + BaseAttack + ","
         + "baseDefense:" + BaseDefense + ","
+        + "baseExp:" + BaseExp + ","
         + "moveSpeed:" + MoveSpeed + ","
         + "attackRange:" + AttackRange + ","
         + "attackInterval:" + AttackInterval + ","

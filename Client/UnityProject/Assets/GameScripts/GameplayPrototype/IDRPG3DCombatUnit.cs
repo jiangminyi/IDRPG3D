@@ -16,6 +16,8 @@ namespace IDRPG3D.GameplayPrototype
         [SerializeField] private float aggroRadius = 7f;
         [SerializeField] private float healthRegenPerSecond = 0f;
         [SerializeField] private bool isBoss;
+        [SerializeField] private int level = 1;
+        [SerializeField] private int experienceReward;
 
         private IDRPG3DAnimatorBridge animatorBridge;
         private IDRPG3DPrototypeBuffController buffController;
@@ -34,6 +36,8 @@ namespace IDRPG3D.GameplayPrototype
         public float HealthRegenPerSecond => healthRegenPerSecond;
         public bool IsBoss => isBoss;
         public bool IsControlImmune => isBoss;
+        public int Level => level;
+        public int ExperienceReward => experienceReward;
         public float BonusArmor
         {
             get
@@ -52,6 +56,7 @@ namespace IDRPG3D.GameplayPrototype
         public event Action<IDRPG3DCombatUnit, IDRPG3DCombatUnit> Damaged;
         public event Action<IDRPG3DCombatUnit, IDRPG3DCombatUnit> HealthChanged;
         public event Action<IDRPG3DCombatUnit> Died;
+        public event Action<IDRPG3DCombatUnit> LevelChanged;
 
         public void Configure(
             int id,
@@ -78,9 +83,46 @@ namespace IDRPG3D.GameplayPrototype
             Initialize();
         }
 
+        public void SetLevel(int value)
+        {
+            var nextLevel = Mathf.Max(1, value);
+            if (level == nextLevel)
+            {
+                return;
+            }
+
+            level = nextLevel;
+            LevelChanged?.Invoke(this);
+        }
+
+        public void SetExperienceReward(int value)
+        {
+            experienceReward = Mathf.Max(0, value);
+        }
+
         public void SetBoss(bool value)
         {
             isBoss = value;
+        }
+
+        public void SetBaseStats(
+            float health,
+            float damage,
+            float range,
+            float interval,
+            float aggro,
+            float regenPerSecond,
+            bool keepHealthRatio)
+        {
+            var healthRatio = maxHealth > 0f ? Mathf.Clamp01(Health / maxHealth) : 1f;
+            maxHealth = Mathf.Max(1f, health);
+            attackPower = Mathf.Max(0f, damage);
+            attackRange = Mathf.Max(0.1f, range);
+            attackInterval = Mathf.Max(0.1f, interval);
+            aggroRadius = Mathf.Max(0.1f, aggro);
+            healthRegenPerSecond = Mathf.Max(0f, regenPerSecond);
+            Health = keepHealthRatio ? maxHealth * healthRatio : maxHealth;
+            HealthChanged?.Invoke(this, null);
         }
 
         private void Awake()
@@ -138,7 +180,7 @@ namespace IDRPG3D.GameplayPrototype
                 ThreatTable.AddThreat(attacker, finalAmount);
             }
 
-            Debug.Log($"[IDRPG3D Combat] {name} took {finalAmount:0.#} damage from {(attacker != null ? attacker.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
+            IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} took {finalAmount:0.#} damage from {(attacker != null ? attacker.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
             Damaged?.Invoke(this, attacker);
             HealthChanged?.Invoke(this, attacker);
 
@@ -151,6 +193,24 @@ namespace IDRPG3D.GameplayPrototype
         public float Heal(float amount, IDRPG3DCombatUnit healer)
         {
             return HealInternal(amount, healer, true);
+        }
+
+        public bool Revive(float healthRatio)
+        {
+            if (IsAlive)
+            {
+                return false;
+            }
+
+            Health = Mathf.Clamp01(healthRatio) * maxHealth;
+            if (Health <= 0f)
+            {
+                Health = Mathf.Min(1f, maxHealth);
+            }
+
+            animatorBridge?.SetDead(false);
+            HealthChanged?.Invoke(this, null);
+            return true;
         }
 
         private float HealInternal(float amount, IDRPG3DCombatUnit healer, bool log)
@@ -167,7 +227,7 @@ namespace IDRPG3D.GameplayPrototype
             {
                 if (log)
                 {
-                    Debug.Log($"[IDRPG3D Combat] {name} healed {healed:0.#} from {(healer != null ? healer.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
+                    IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} healed {healed:0.#} from {(healer != null ? healer.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
                 }
 
                 HealthChanged?.Invoke(this, healer);
@@ -178,7 +238,7 @@ namespace IDRPG3D.GameplayPrototype
 
         private void Die()
         {
-            Debug.Log($"[IDRPG3D Combat] {name} died.");
+            IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} died.");
             animatorBridge?.SetDead(true);
             Died?.Invoke(this);
         }
