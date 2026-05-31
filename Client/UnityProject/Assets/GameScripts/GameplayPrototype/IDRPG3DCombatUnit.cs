@@ -55,6 +55,7 @@ namespace IDRPG3D.GameplayPrototype
 
         public event Action<IDRPG3DCombatUnit, IDRPG3DCombatUnit> Damaged;
         public event Action<IDRPG3DCombatUnit, IDRPG3DCombatUnit> HealthChanged;
+        public event Action<IDRPG3DCombatFloatingTextEvent> FloatingTextRequested;
         public event Action<IDRPG3DCombatUnit> Died;
         public event Action<IDRPG3DCombatUnit> LevelChanged;
 
@@ -178,10 +179,12 @@ namespace IDRPG3D.GameplayPrototype
             if (attacker != null)
             {
                 ThreatTable.AddThreat(attacker, finalAmount);
+                IDRPG3DPrototypeCombatDirector.ShareThreatWithNearbyAllies(this, attacker, finalAmount);
             }
 
             IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} took {finalAmount:0.#} damage from {(attacker != null ? attacker.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
             Damaged?.Invoke(this, attacker);
+            FloatingTextRequested?.Invoke(IDRPG3DCombatFloatingTextEvent.Damage(this, attacker, finalAmount));
             HealthChanged?.Invoke(this, attacker);
 
             if (Health <= 0f)
@@ -230,6 +233,11 @@ namespace IDRPG3D.GameplayPrototype
                     IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} healed {healed:0.#} from {(healer != null ? healer.name : "unknown")}. HP {Health:0.#}/{MaxHealth:0.#}.");
                 }
 
+                if (log)
+                {
+                    FloatingTextRequested?.Invoke(IDRPG3DCombatFloatingTextEvent.Heal(this, healer, healed));
+                }
+
                 HealthChanged?.Invoke(this, healer);
             }
 
@@ -241,6 +249,101 @@ namespace IDRPG3D.GameplayPrototype
             IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {name} died.");
             animatorBridge?.SetDead(true);
             Died?.Invoke(this);
+        }
+    }
+
+    public enum IDRPG3DCombatFloatingTextValueType
+    {
+        None,
+        Damage,
+        Heal
+    }
+
+    public enum IDRPG3DCombatFloatingTextKind
+    {
+        None,
+        NormalDamage,
+        CriticalDamage,
+        Heal
+    }
+
+    public readonly struct IDRPG3DCombatFloatingTextEvent
+    {
+        private IDRPG3DCombatFloatingTextEvent(
+            IDRPG3DCombatFloatingTextValueType valueType,
+            IDRPG3DCombatUnit target,
+            IDRPG3DCombatUnit source,
+            float value,
+            bool isCritical)
+        {
+            ValueType = valueType;
+            Target = target;
+            Source = source;
+            Value = Mathf.Max(0f, value);
+            IsCritical = isCritical;
+        }
+
+        public IDRPG3DCombatFloatingTextValueType ValueType { get; }
+        public IDRPG3DCombatUnit Target { get; }
+        public IDRPG3DCombatUnit Source { get; }
+        public float Value { get; }
+        public bool IsCritical { get; }
+
+        public IDRPG3DCombatFloatingTextKind Kind => IDRPG3DCombatFloatingTextClassifier.Classify(ValueType, Value, IsCritical);
+
+        public static IDRPG3DCombatFloatingTextEvent Damage(
+            IDRPG3DCombatUnit target,
+            IDRPG3DCombatUnit source,
+            float value,
+            bool isCritical = false)
+        {
+            return new IDRPG3DCombatFloatingTextEvent(
+                IDRPG3DCombatFloatingTextValueType.Damage,
+                target,
+                source,
+                value,
+                isCritical);
+        }
+
+        public static IDRPG3DCombatFloatingTextEvent Heal(
+            IDRPG3DCombatUnit target,
+            IDRPG3DCombatUnit source,
+            float value)
+        {
+            return new IDRPG3DCombatFloatingTextEvent(
+                IDRPG3DCombatFloatingTextValueType.Heal,
+                target,
+                source,
+                value,
+                isCritical: false);
+        }
+    }
+
+    public static class IDRPG3DCombatFloatingTextClassifier
+    {
+        public static IDRPG3DCombatFloatingTextKind Classify(
+            IDRPG3DCombatFloatingTextValueType valueType,
+            float value,
+            bool isCritical = false)
+        {
+            if (value <= 0f)
+            {
+                return IDRPG3DCombatFloatingTextKind.None;
+            }
+
+            if (valueType == IDRPG3DCombatFloatingTextValueType.Heal)
+            {
+                return IDRPG3DCombatFloatingTextKind.Heal;
+            }
+
+            if (valueType == IDRPG3DCombatFloatingTextValueType.Damage)
+            {
+                return isCritical
+                    ? IDRPG3DCombatFloatingTextKind.CriticalDamage
+                    : IDRPG3DCombatFloatingTextKind.NormalDamage;
+            }
+
+            return IDRPG3DCombatFloatingTextKind.None;
         }
     }
 }

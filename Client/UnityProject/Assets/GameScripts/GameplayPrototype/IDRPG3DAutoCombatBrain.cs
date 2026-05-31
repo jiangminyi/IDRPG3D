@@ -97,7 +97,7 @@ namespace IDRPG3D.GameplayPrototype
                 }
                 else
                 {
-                    var fallbackRadius = unit != null ? unit.AggroRadius : 0f;
+                    var fallbackRadius = unit != null && !unit.ThreatTable.HasAnyThreat ? unit.AggroRadius : 0f;
                     if (!IDRPG3DPrototypeCombatDirector.TryFindNearestEnemy(unit, fallbackRadius, out currentTarget))
                     {
                         return;

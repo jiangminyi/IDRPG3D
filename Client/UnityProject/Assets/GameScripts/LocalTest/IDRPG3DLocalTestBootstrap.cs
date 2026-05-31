@@ -31,6 +31,9 @@ namespace IDRPG3D.LocalTest
         private const string MonsterWorldBarPrefabPath = "Assets/AssetRaw/UI/WorldBars/WorldBar_Monster_HealthOnly.prefab";
         private const string WarriorWorldBarPrefabPath = "Assets/AssetRaw/UI/WorldBars/WorldBar_Warrior_HealthRage.prefab";
         private const string MageWorldBarPrefabPath = "Assets/AssetRaw/UI/WorldBars/WorldBar_Mage_HealthMana.prefab";
+        private const string NormalDamageNumberPrefabPath = "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Normal.prefab";
+        private const string CriticalDamageNumberPrefabPath = "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Critical.prefab";
+        private const string HealDamageNumberPrefabPath = "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Heal.prefab";
         private const string BossAnchorId = "stage_01_boss_01";
         private const string SpawnedEnemiesRootName = "Prototype_WaveEnemies";
         private const string ProjectilesRootName = "Prototype_Projectiles";
@@ -57,6 +60,7 @@ namespace IDRPG3D.LocalTest
         private Font defaultFont;
         private IDRPG3DLocalHeroConfigLoader heroConfigLoader;
         private IDRPG3DLocalSkillConfigLoader skillConfigLoader;
+        private IDRPG3DLocalDamageNumberConfigLoader damageNumberConfigLoader;
         private IDRPG3DLocalWaveConfigLoader waveConfigLoader;
         private Dictionary<string, GameObject> enemyTemplates;
         private IReadOnlyList<IDRPG3DCombatUnit> activeHeroUnits = Array.Empty<IDRPG3DCombatUnit>();
@@ -100,6 +104,7 @@ namespace IDRPG3D.LocalTest
             var heroUnits = new List<IDRPG3DCombatUnit>(heroes.Count);
             heroConfigLoader = new IDRPG3DLocalHeroConfigLoader();
             skillConfigLoader = new IDRPG3DLocalSkillConfigLoader();
+            damageNumberConfigLoader = new IDRPG3DLocalDamageNumberConfigLoader();
             for (var i = 0; i < heroes.Count; i++)
             {
                 var hero = heroes[i];
@@ -576,7 +581,7 @@ namespace IDRPG3D.LocalTest
             return spawnPoint.Position + sideOffset + depthOffset;
         }
 
-        private static IDRPG3DCombatUnit ConfigureEnemyFromConfig(
+        private IDRPG3DCombatUnit ConfigureEnemyFromConfig(
             GameObject enemyObject,
             IDRPG3DLocalEnemyConfig enemyConfig,
             IDRPG3DWaveDefinition wave,
@@ -599,6 +604,7 @@ namespace IDRPG3D.LocalTest
             unit.SetExperienceReward(Mathf.RoundToInt(enemyConfig.ExperienceReward * wave.HpMultiplier));
             unit.SetBoss(wave.IsBoss);
             ConfigureEnemyWorldBar(enemyObject, unit, enemyConfig.VisualScale);
+            ConfigureCombatFloatingText(enemyObject, unit, damageNumberConfigLoader);
             return unit;
         }
 
@@ -649,6 +655,7 @@ namespace IDRPG3D.LocalTest
 
             ConfigureHeroSkillBook(hero, heroConfig, projectileRoot);
             ConfigureHeroWorldBar(hero, unit, heroConfig);
+            ConfigureCombatFloatingText(hero, unit, damageNumberConfigLoader);
             return unit;
         }
 
@@ -936,6 +943,34 @@ namespace IDRPG3D.LocalTest
             }
 
             unitBar.Configure(unit, prefab, worldOffset, visualScale, showResourceBar, initialResourceFill);
+        }
+
+        private static void ConfigureCombatFloatingText(
+            GameObject actor,
+            IDRPG3DCombatUnit unit,
+            IDRPG3DLocalDamageNumberConfigLoader loader)
+        {
+            if (actor == null || unit == null)
+            {
+                return;
+            }
+
+            var presenter = actor.GetComponent<IDRPG3DCombatFloatingTextPresenter>();
+            if (presenter == null)
+            {
+                presenter = actor.AddComponent<IDRPG3DCombatFloatingTextPresenter>();
+            }
+
+            var catalog = loader != null && loader.TryBuildCatalog(out var configuredCatalog)
+                ? configuredCatalog
+                : IDRPG3DCombatFloatingTextCatalog.CreateDefault();
+            var popupPrefabs = new Dictionary<string, GameObject>
+            {
+                [NormalDamageNumberPrefabPath] = LoadEditorPrefab(NormalDamageNumberPrefabPath),
+                [CriticalDamageNumberPrefabPath] = LoadEditorPrefab(CriticalDamageNumberPrefabPath),
+                [HealDamageNumberPrefabPath] = LoadEditorPrefab(HealDamageNumberPrefabPath)
+            };
+            presenter.Configure(unit, catalog, popupPrefabs);
         }
 
         private static GameObject LoadEditorPrefab(string assetPath)

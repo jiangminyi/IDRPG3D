@@ -5,6 +5,9 @@ namespace IDRPG3D.GameplayPrototype
 {
     public static class IDRPG3DPrototypeCombatDirector
     {
+        private const float MinimumAssistRadius = 12f;
+        private const float AssistThreatRatio = 0.5f;
+
         public static bool TryFindLowestHealthAlly(
             IDRPG3DCombatUnit source,
             float radius,
@@ -118,6 +121,63 @@ namespace IDRPG3D.GameplayPrototype
             }
 
             return enemy != null;
+        }
+
+        public static bool TryFindNearestEnemy(IDRPG3DCombatUnit source, out IDRPG3DCombatUnit enemy)
+        {
+            return TryFindNearestEnemy(source, 0f, out enemy);
+        }
+
+        public static int ShareThreatWithNearbyAllies(
+            IDRPG3DCombatUnit damagedUnit,
+            IDRPG3DCombatUnit attacker,
+            float threatAmount)
+        {
+            if (damagedUnit == null
+                || attacker == null
+                || !attacker.IsAlive
+                || damagedUnit.Faction == attacker.Faction
+                || threatAmount <= 0f)
+            {
+                return 0;
+            }
+
+            var assistRadius = Mathf.Max(MinimumAssistRadius, damagedUnit.AggroRadius);
+            var assistSqrRadius = assistRadius * assistRadius;
+            var assistThreat = Mathf.Max(1f, threatAmount * AssistThreatRatio);
+            var assistedCount = 0;
+            var units = FindUnits();
+            for (var i = 0; i < units.Length; i++)
+            {
+                var ally = units[i];
+                if (ally == null
+                    || ally == damagedUnit
+                    || !ally.IsAlive
+                    || ally.Faction != damagedUnit.Faction)
+                {
+                    continue;
+                }
+
+                if ((ally.transform.position - damagedUnit.transform.position).sqrMagnitude > assistSqrRadius)
+                {
+                    continue;
+                }
+
+                ally.ThreatTable.AddThreat(attacker, assistThreat);
+                if (ally.TryGetComponent<IDRPG3DAutoCombatBrain>(out var brain) && !brain.HasTarget)
+                {
+                    brain.SetTarget(attacker);
+                }
+
+                assistedCount++;
+            }
+
+            if (assistedCount > 0)
+            {
+                IDRPG3DPrototypeDebugLog.Combat($"[IDRPG3D Combat] {damagedUnit.name} alerted {assistedCount} nearby allies to attack {attacker.name}.");
+            }
+
+            return assistedCount;
         }
 
         public static int CalculatePartyReferenceLevel(IReadOnlyList<IDRPG3DCombatUnit> heroes)

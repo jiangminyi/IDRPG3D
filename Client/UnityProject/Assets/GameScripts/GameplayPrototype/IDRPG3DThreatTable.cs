@@ -7,6 +7,8 @@ namespace IDRPG3D.GameplayPrototype
     {
         private readonly Dictionary<TTarget, float> threatByTarget = new Dictionary<TTarget, float>();
 
+        public bool HasAnyThreat => threatByTarget.Count > 0;
+
         public void AddThreat(TTarget target, float amount)
         {
             if (target == null || amount <= 0f)

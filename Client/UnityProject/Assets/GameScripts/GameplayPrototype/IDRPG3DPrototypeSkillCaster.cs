@@ -259,7 +259,7 @@ namespace IDRPG3D.GameplayPrototype
             IDRPG3DCombatUnit primaryTarget,
             IDRPG3DCombatAction action)
         {
-            IDRPG3DPrototypeCombatDirector.FindAreaEnemies(unit, primaryTarget.transform.position, runtime.Definition.Range, AreaTargets);
+            IDRPG3DPrototypeCombatDirector.FindAreaEnemies(unit, transform.position, runtime.Definition.Range, AreaTargets);
             for (var i = 0; i < AreaTargets.Count; i++)
             {
                 ApplyEffects(AreaTargets[i], action);

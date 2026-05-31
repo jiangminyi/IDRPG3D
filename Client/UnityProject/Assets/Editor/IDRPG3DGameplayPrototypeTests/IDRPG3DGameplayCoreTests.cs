@@ -73,6 +73,73 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void DamagedEnemySharesThreatWithNearbyAllies()
+        {
+            var heroObject = new GameObject("HeroAttacker");
+            var damagedEnemyObject = new GameObject("DamagedEnemy");
+            var nearbyEnemyObject = new GameObject("NearbyEnemy");
+            var farEnemyObject = new GameObject("FarEnemy");
+            try
+            {
+                damagedEnemyObject.transform.position = Vector3.zero;
+                nearbyEnemyObject.transform.position = new Vector3(4f, 0f, 0f);
+                farEnemyObject.transform.position = new Vector3(25f, 0f, 0f);
+
+                var hero = heroObject.AddComponent<IDRPG3DCombatUnit>();
+                hero.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 10f, 1.5f, 1f, 8f);
+                var damagedEnemy = damagedEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                damagedEnemy.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+                var nearbyEnemy = nearbyEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                nearbyEnemy.Configure(1002, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+                var farEnemy = farEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                farEnemy.Configure(1003, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+
+                damagedEnemy.TakeDamage(20f, hero);
+
+                Assert.AreEqual(20f, damagedEnemy.ThreatTable.GetThreat(hero), 0.001f);
+                Assert.Greater(nearbyEnemy.ThreatTable.GetThreat(hero), 0f);
+                Assert.AreEqual(0f, farEnemy.ThreatTable.GetThreat(hero), 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(heroObject);
+                Object.DestroyImmediate(damagedEnemyObject);
+                Object.DestroyImmediate(nearbyEnemyObject);
+                Object.DestroyImmediate(farEnemyObject);
+            }
+        }
+
+        [Test]
+        public void LethalDamageStillSharesThreatWithNearbyAllies()
+        {
+            var heroObject = new GameObject("BurstHeroAttacker");
+            var damagedEnemyObject = new GameObject("DefeatedEnemy");
+            var nearbyEnemyObject = new GameObject("NearbyEnemy");
+            try
+            {
+                nearbyEnemyObject.transform.position = new Vector3(4f, 0f, 0f);
+
+                var hero = heroObject.AddComponent<IDRPG3DCombatUnit>();
+                hero.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 10f, 1.5f, 1f, 8f);
+                var damagedEnemy = damagedEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                damagedEnemy.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 20f, 5f, 1.5f, 1f, 8f);
+                var nearbyEnemy = nearbyEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                nearbyEnemy.Configure(1002, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+
+                damagedEnemy.TakeDamage(40f, hero);
+
+                Assert.IsFalse(damagedEnemy.IsAlive);
+                Assert.Greater(nearbyEnemy.ThreatTable.GetThreat(hero), 0f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(heroObject);
+                Object.DestroyImmediate(damagedEnemyObject);
+                Object.DestroyImmediate(nearbyEnemyObject);
+            }
+        }
+
+        [Test]
         public void CombatResourceSpendsGainsAndTicksWithinBounds()
         {
             var unitObject = new GameObject("ResourceHero");
@@ -174,6 +241,153 @@ namespace IDRPG3D.EditorTools.Tests
             {
                 Object.DestroyImmediate(unitObject);
                 Object.DestroyImmediate(prefab);
+            }
+        }
+
+        [Test]
+        public void CombatFloatingTextClassifierMapsAppliedDamageAndHealing()
+        {
+            var damage = IDRPG3DCombatFloatingTextClassifier.Classify(IDRPG3DCombatFloatingTextValueType.Damage, 24f);
+            var heal = IDRPG3DCombatFloatingTextClassifier.Classify(IDRPG3DCombatFloatingTextValueType.Heal, 18f);
+            var zero = IDRPG3DCombatFloatingTextClassifier.Classify(IDRPG3DCombatFloatingTextValueType.Damage, 0f);
+
+            Assert.AreEqual(IDRPG3DCombatFloatingTextKind.NormalDamage, damage);
+            Assert.AreEqual(IDRPG3DCombatFloatingTextKind.Heal, heal);
+            Assert.AreEqual(IDRPG3DCombatFloatingTextKind.None, zero);
+        }
+
+        [Test]
+        public void CombatFloatingTextCatalogReturnsConfiguredPopupByKind()
+        {
+            var catalog = new IDRPG3DCombatFloatingTextCatalog(new[]
+            {
+                new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.NormalDamage,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Normal.prefab",
+                    new Color(1f, 0.48f, 0.05f, 1f),
+                    1f,
+                    new Vector3(0f, 1.35f, 0f),
+                    followTarget: true),
+                new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.Heal,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Heal.prefab",
+                    new Color(0.2f, 1f, 0.35f, 1f),
+                    1f,
+                    new Vector3(0f, 1.45f, 0f),
+                    followTarget: true)
+            });
+
+            Assert.IsTrue(catalog.TryGet(IDRPG3DCombatFloatingTextKind.NormalDamage, out var damage));
+            Assert.AreEqual("Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Normal.prefab", damage.PrefabPath);
+            Assert.AreEqual(new Color(1f, 0.48f, 0.05f, 1f), damage.Color);
+            Assert.IsTrue(catalog.TryGet(IDRPG3DCombatFloatingTextKind.Heal, out var heal));
+            Assert.AreEqual("Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Heal.prefab", heal.PrefabPath);
+            Assert.IsFalse(catalog.TryGet(IDRPG3DCombatFloatingTextKind.CriticalDamage, out _));
+        }
+
+        [Test]
+        public void CombatUnitRaisesHealFloatingTextOnlyForActualHealing()
+        {
+            var healerObject = new GameObject("Healer");
+            var targetObject = new GameObject("Target");
+            try
+            {
+                var healer = healerObject.AddComponent<IDRPG3DCombatUnit>();
+                healer.Configure(1, 0, IDRPG3DCombatFaction.Hero, 10, 100f, 10f, 1.5f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(2, 1, IDRPG3DCombatFaction.Hero, 10, 100f, 10f, 1.5f, 1f, 8f);
+
+                IDRPG3DCombatFloatingTextEvent? captured = null;
+                target.FloatingTextRequested += textEvent => captured = textEvent;
+
+                target.TakeDamage(30f, null);
+                captured = null;
+                var healed = target.Heal(12f, healer);
+
+                Assert.AreEqual(12f, healed, 0.001f);
+                Assert.IsTrue(captured.HasValue);
+                Assert.AreEqual(IDRPG3DCombatFloatingTextKind.Heal, captured.Value.Kind);
+                Assert.AreSame(target, captured.Value.Target);
+                Assert.AreSame(healer, captured.Value.Source);
+                Assert.AreEqual(12f, captured.Value.Value, 0.001f);
+
+                captured = null;
+                target.Heal(100f, healer);
+                target.Heal(10f, healer);
+
+                Assert.IsFalse(captured.HasValue);
+            }
+            finally
+            {
+                Object.DestroyImmediate(healerObject);
+                Object.DestroyImmediate(targetObject);
+            }
+        }
+
+        [Test]
+        public void CombatFloatingTextSpawnPositionUsesTargetHeadOffset()
+        {
+            var sourceObject = new GameObject("Source");
+            var targetObject = new GameObject("Target");
+            try
+            {
+                sourceObject.transform.position = new Vector3(100f, 0f, 100f);
+                targetObject.transform.position = new Vector3(3f, 0.5f, -2f);
+                var source = sourceObject.AddComponent<IDRPG3DCombatUnit>();
+                source.Configure(1, 0, IDRPG3DCombatFaction.Hero, 10, 100f, 10f, 1.5f, 1f, 8f);
+                var target = targetObject.AddComponent<IDRPG3DCombatUnit>();
+                target.Configure(2, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 10f, 1.5f, 1f, 8f);
+                var textEvent = IDRPG3DCombatFloatingTextEvent.Damage(target, source, 20f);
+                var config = new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.NormalDamage,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Normal.prefab",
+                    Color.white,
+                    1f,
+                    new Vector3(0f, 1.45f, 0f),
+                    followTarget: true);
+
+                var position = IDRPG3DCombatFloatingTextPresenter.CalculateSpawnPositionForTest(textEvent, config);
+
+                Assert.AreEqual(new Vector3(3f, 1.95f, -2f), position);
+            }
+            finally
+            {
+                Object.DestroyImmediate(sourceObject);
+                Object.DestroyImmediate(targetObject);
+            }
+        }
+
+        [Test]
+        public void CombatFloatingTextRuntimeSettingsRefreshPopupTextAfterSpawn()
+        {
+            var popupObject = new GameObject("PopupSpy");
+            var targetObject = new GameObject("FollowTarget");
+            try
+            {
+                var popup = popupObject.AddComponent<IDRPG3DDamageNumberPopupSpy>();
+                var config = new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.Heal,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Heal.prefab",
+                    new Color(0.2f, 1f, 0.35f, 1f),
+                    1.2f,
+                    new Vector3(0f, 1.45f, 0f),
+                    followTarget: true);
+
+                IDRPG3DCombatFloatingTextPresenter.ApplyPopupRuntimeSettingsForTest(
+                    popup,
+                    config,
+                    targetObject.transform);
+
+                Assert.AreEqual(config.Color, popup.Color);
+                Assert.AreEqual(1.2f, popup.Scale, 0.001f);
+                Assert.AreSame(targetObject.transform, popup.FollowedTarget);
+                Assert.IsTrue(popup.ModifiedSpamGroup);
+                Assert.IsTrue(popup.UpdateTextCalled);
+            }
+            finally
+            {
+                Object.DestroyImmediate(popupObject);
+                Object.DestroyImmediate(targetObject);
             }
         }
 
@@ -1080,6 +1294,51 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void AutoCombatBrainKeepsEngagingAfterThreatTargetDiesOutsideAggroRadius()
+        {
+            var enemyObject = new GameObject("LongAggroEnemyBrain");
+            var deadHeroObject = new GameObject("DeadHeroTarget");
+            var liveHeroObject = new GameObject("FarLiveHeroTarget");
+            try
+            {
+                enemyObject.transform.position = Vector3.zero;
+                deadHeroObject.transform.position = new Vector3(1f, 0f, 0f);
+                liveHeroObject.transform.position = new Vector3(20f, 0f, 0f);
+
+                enemyObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
+                enemyObject.AddComponent<IDRPG3DNavMoveAgent>();
+                var enemy = enemyObject.AddComponent<IDRPG3DCombatUnit>();
+                enemy.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 12f, 1.4f, 1f, 6f);
+
+                var deadHero = deadHeroObject.AddComponent<IDRPG3DCombatUnit>();
+                deadHero.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 100f, 5f, 1.5f, 1f, 8f);
+                deadHero.TakeDamage(200f, enemy);
+
+                var liveHero = liveHeroObject.AddComponent<IDRPG3DCombatUnit>();
+                liveHero.Configure(2, 1, IDRPG3DCombatFaction.Hero, 90, 100f, 5f, 1.5f, 1f, 8f);
+
+                var brain = enemyObject.AddComponent<IDRPG3DAutoCombatBrain>();
+                brain.Initialize();
+                brain.SetTarget(deadHero);
+
+                typeof(IDRPG3DAutoCombatBrain)
+                    .GetMethod("Tick", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.Invoke(brain, new object[] { 0.1f });
+
+                var currentTarget = typeof(IDRPG3DAutoCombatBrain)
+                    .GetField("currentTarget", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.GetValue(brain);
+                Assert.AreSame(liveHero, currentTarget);
+            }
+            finally
+            {
+                Object.DestroyImmediate(enemyObject);
+                Object.DestroyImmediate(deadHeroObject);
+                Object.DestroyImmediate(liveHeroObject);
+            }
+        }
+
+        [Test]
         public void EffectRunnerHealsWithoutExceedingMaxHealth()
         {
             var healerObject = new GameObject("Healer");
@@ -1801,6 +2060,66 @@ namespace IDRPG3D.EditorTools.Tests
         }
 
         [Test]
+        public void AreaSkillDamagesEnemiesAroundCasterNotCurrentTarget()
+        {
+            var warriorObject = new GameObject("Warrior");
+            var primaryTargetObject = new GameObject("PrimaryEnemy");
+            var nearbyEnemyObject = new GameObject("NearbyEnemy");
+            var targetOnlyEnemyObject = new GameObject("TargetOnlyEnemy");
+            try
+            {
+                warriorObject.transform.position = Vector3.zero;
+                primaryTargetObject.transform.position = new Vector3(3f, 0f, 0f);
+                nearbyEnemyObject.transform.position = new Vector3(-3f, 0f, 0f);
+                targetOnlyEnemyObject.transform.position = new Vector3(6.5f, 0f, 0f);
+
+                var warrior = warriorObject.AddComponent<IDRPG3DCombatUnit>();
+                warrior.Configure(1, 0, IDRPG3DCombatFaction.Hero, 100, 260f, 22f, 1.8f, 1.25f, 8f);
+                warriorObject.AddComponent<IDRPG3DCombatResource>()
+                    .Configure(IDRPG3DCombatResourceType.Rage, 100f, 100f, 0f);
+
+                var primaryTarget = primaryTargetObject.AddComponent<IDRPG3DCombatUnit>();
+                primaryTarget.Configure(1001, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+                var nearbyEnemy = nearbyEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                nearbyEnemy.Configure(1002, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+                var targetOnlyEnemy = targetOnlyEnemyObject.AddComponent<IDRPG3DCombatUnit>();
+                targetOnlyEnemy.Configure(1003, 0, IDRPG3DCombatFaction.Enemy, 10, 100f, 5f, 1.5f, 1f, 8f);
+
+                var thunderDefinition = new IDRPG3DPrototypeSkillDefinition(
+                    "thunder_clap",
+                    "Thunder Clap",
+                    level: 1,
+                    new[] { IDRPG3DPrototypeEffectDefinition.AreaDamage(210301, 30f) },
+                    range: 4f,
+                    cooldown: 6f,
+                    projectileSpeed: 0f,
+                    fallbackColor: Color.yellow).WithConfigId(1103);
+                var runtime = new IDRPG3DPrototypeSkillRuntime(
+                    thunderDefinition,
+                    IDRPG3DCombatResourceType.Rage,
+                    resourceCost: 20f,
+                    resourceGain: 0f,
+                    IDRPG3DPrototypeSkillCastMode.Area,
+                    IDRPG3DPrototypeSkillTargetRule.AreaEnemy,
+                    threatMultiplier: 4f);
+                var caster = warriorObject.AddComponent<IDRPG3DPrototypeSkillCaster>();
+
+                Assert.IsTrue(caster.TryCast(runtime, primaryTarget));
+
+                Assert.AreEqual(70f, primaryTarget.Health, 0.001f);
+                Assert.AreEqual(70f, nearbyEnemy.Health, 0.001f);
+                Assert.AreEqual(100f, targetOnlyEnemy.Health, 0.001f);
+            }
+            finally
+            {
+                Object.DestroyImmediate(warriorObject);
+                Object.DestroyImmediate(primaryTargetObject);
+                Object.DestroyImmediate(nearbyEnemyObject);
+                Object.DestroyImmediate(targetOnlyEnemyObject);
+            }
+        }
+
+        [Test]
         public void WorldHealthBarUpdatesFillScaleFromHealthRatio()
         {
             var unitObject = new GameObject("Unit");
@@ -1916,6 +2235,36 @@ namespace IDRPG3D.EditorTools.Tests
             }
 
             public bool IsAlive { get; }
+        }
+
+        private sealed class IDRPG3DDamageNumberPopupSpy : MonoBehaviour
+        {
+            public Color Color { get; private set; }
+            public float Scale { get; private set; }
+            public Transform FollowedTarget { get; private set; }
+            public bool ModifiedSpamGroup { get; private set; }
+            public bool UpdateTextCalled { get; private set; }
+
+            public void SetColor(Color color)
+            {
+                Color = color;
+            }
+
+            public void SetScale(float scale)
+            {
+                Scale = scale;
+            }
+
+            public void SetFollowedTarget(Transform followedTarget, bool modifySpamGroup)
+            {
+                FollowedTarget = followedTarget;
+                ModifiedSpamGroup = modifySpamGroup;
+            }
+
+            public void UpdateText()
+            {
+                UpdateTextCalled = true;
+            }
         }
 
         private static void AssertProjectilePrefabDoesNotUseLegacyParticleShaders(string prefabPath)

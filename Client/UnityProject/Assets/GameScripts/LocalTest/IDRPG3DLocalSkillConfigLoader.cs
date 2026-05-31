@@ -14,6 +14,127 @@ using ProjectileConfig = GameConfig.skill.Projectile;
 
 namespace IDRPG3D.LocalTest
 {
+    public sealed class IDRPG3DLocalDamageNumberConfigLoader
+    {
+        private const string ConfigBytesRoot = "AssetRaw/Configs/bytes";
+        private const string BytesExtension = ".bytes";
+
+        private Tables tables;
+
+        public bool TryBuildCatalog(out IDRPG3DCombatFloatingTextCatalog catalog)
+        {
+            catalog = IDRPG3DCombatFloatingTextCatalog.CreateDefault();
+            try
+            {
+                var loadedTables = GetTables();
+                var table = loadedTables.GetType().GetProperty("TbDamageNumberPopup")?.GetValue(loadedTables);
+                var dataList = table?.GetType().GetProperty("DataList")?.GetValue(table) as System.Collections.IEnumerable;
+                if (dataList == null)
+                {
+                    return false;
+                }
+
+                var configs = new List<IDRPG3DCombatFloatingTextConfig>();
+                foreach (var row in dataList)
+                {
+                    if (TryBuildConfig(row, out var config))
+                    {
+                        configs.Add(config);
+                    }
+                }
+
+                if (configs.Count == 0)
+                {
+                    return false;
+                }
+
+                catalog = new IDRPG3DCombatFloatingTextCatalog(configs);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                Debug.LogWarning($"[IDRPG3D LocalTest] Failed to load damage number popup config: {exception.Message}");
+                return false;
+            }
+        }
+
+        private Tables GetTables()
+        {
+            if (tables != null)
+            {
+                return tables;
+            }
+
+            tables = new Tables(LoadByteBuf);
+            return tables;
+        }
+
+        private static ByteBuf LoadByteBuf(string file)
+        {
+            var path = Path.Combine(Application.dataPath, ConfigBytesRoot, file + BytesExtension);
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"Config bytes not found: {path}", path);
+            }
+
+            return new ByteBuf(File.ReadAllBytes(path));
+        }
+
+        private static bool TryBuildConfig(object row, out IDRPG3DCombatFloatingTextConfig config)
+        {
+            config = default;
+            if (row == null)
+            {
+                return false;
+            }
+
+            var kind = ParseKind(GetValue<string>(row, "Kind"));
+            if (kind == IDRPG3DCombatFloatingTextKind.None)
+            {
+                return false;
+            }
+
+            config = new IDRPG3DCombatFloatingTextConfig(
+                kind,
+                GetValue<string>(row, "PrefabPath"),
+                ParseColor(GetValue<string>(row, "Color")),
+                GetValue<float>(row, "Scale"),
+                new Vector3(0f, GetValue<float>(row, "OffsetY"), 0f),
+                GetValue<bool>(row, "FollowTarget"));
+            return config.IsValid;
+        }
+
+        private static T GetValue<T>(object row, string fieldName)
+        {
+            var type = row.GetType();
+            var field = type.GetField(fieldName);
+            if (field != null && field.GetValue(row) is T fieldValue)
+            {
+                return fieldValue;
+            }
+
+            var property = type.GetProperty(fieldName);
+            if (property != null && property.GetValue(row) is T propertyValue)
+            {
+                return propertyValue;
+            }
+
+            return default;
+        }
+
+        private static IDRPG3DCombatFloatingTextKind ParseKind(string value)
+        {
+            return Enum.TryParse(value, true, out IDRPG3DCombatFloatingTextKind kind)
+                ? kind
+                : IDRPG3DCombatFloatingTextKind.None;
+        }
+
+        private static Color ParseColor(string colorText)
+        {
+            return ColorUtility.TryParseHtmlString(colorText, out var color) ? color : Color.white;
+        }
+    }
+
     public sealed class IDRPG3DLocalSkillConfigLoader
     {
         private const string ConfigBytesRoot = "AssetRaw/Configs/bytes";

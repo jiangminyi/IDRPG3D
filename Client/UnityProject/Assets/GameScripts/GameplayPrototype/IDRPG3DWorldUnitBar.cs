@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -388,6 +389,325 @@ namespace IDRPG3D.GameplayPrototype
                     return;
                 }
             }
+        }
+    }
+
+    public readonly struct IDRPG3DCombatFloatingTextConfig
+    {
+        public IDRPG3DCombatFloatingTextConfig(
+            IDRPG3DCombatFloatingTextKind kind,
+            string prefabPath,
+            Color color,
+            float scale,
+            Vector3 worldOffset,
+            bool followTarget)
+        {
+            Kind = kind;
+            PrefabPath = prefabPath ?? string.Empty;
+            Color = color;
+            Scale = Mathf.Max(0.01f, scale);
+            WorldOffset = worldOffset;
+            FollowTarget = followTarget;
+        }
+
+        public IDRPG3DCombatFloatingTextKind Kind { get; }
+        public string PrefabPath { get; }
+        public Color Color { get; }
+        public float Scale { get; }
+        public Vector3 WorldOffset { get; }
+        public bool FollowTarget { get; }
+        public bool IsValid => Kind != IDRPG3DCombatFloatingTextKind.None && !string.IsNullOrWhiteSpace(PrefabPath);
+    }
+
+    public sealed class IDRPG3DCombatFloatingTextCatalog
+    {
+        private readonly Dictionary<IDRPG3DCombatFloatingTextKind, IDRPG3DCombatFloatingTextConfig> configs =
+            new Dictionary<IDRPG3DCombatFloatingTextKind, IDRPG3DCombatFloatingTextConfig>();
+
+        public IDRPG3DCombatFloatingTextCatalog(IEnumerable<IDRPG3DCombatFloatingTextConfig> values)
+        {
+            if (values == null)
+            {
+                return;
+            }
+
+            foreach (var value in values)
+            {
+                if (value.IsValid)
+                {
+                    configs[value.Kind] = value;
+                }
+            }
+        }
+
+        public bool TryGet(IDRPG3DCombatFloatingTextKind kind, out IDRPG3DCombatFloatingTextConfig config)
+        {
+            return configs.TryGetValue(kind, out config);
+        }
+
+        public static IDRPG3DCombatFloatingTextCatalog CreateDefault()
+        {
+            return new IDRPG3DCombatFloatingTextCatalog(new[]
+            {
+                new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.NormalDamage,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Normal.prefab",
+                    new Color(1f, 0.48f, 0.05f, 1f),
+                    1f,
+                    new Vector3(0f, 1.35f, 0f),
+                    followTarget: true),
+                new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.CriticalDamage,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Critical.prefab",
+                    new Color(1f, 0.08f, 0.05f, 1f),
+                    1.35f,
+                    new Vector3(0f, 1.5f, 0f),
+                    followTarget: true),
+                new IDRPG3DCombatFloatingTextConfig(
+                    IDRPG3DCombatFloatingTextKind.Heal,
+                    "Assets/AssetRaw/UI/DamageNumbers/DamageNumber_Heal.prefab",
+                    new Color(0.2f, 1f, 0.35f, 1f),
+                    1f,
+                    new Vector3(0f, 1.45f, 0f),
+                    followTarget: true)
+            });
+        }
+    }
+
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(IDRPG3DCombatUnit))]
+    public sealed class IDRPG3DCombatFloatingTextPresenter : MonoBehaviour
+    {
+        private static readonly Type[] SpawnNumberSignature = { typeof(Vector3), typeof(float) };
+        private static readonly Type[] SpawnTextSignature = { typeof(Vector3), typeof(string) };
+        private static readonly Type[] ColorSignature = { typeof(Color) };
+        private static readonly Type[] ScaleSignature = { typeof(float) };
+        private static readonly Type[] FollowSignature = { typeof(Transform), typeof(bool) };
+        private static readonly Type[] EmptySignature = Type.EmptyTypes;
+
+        [SerializeField] private IDRPG3DCombatUnit unit;
+        [SerializeField] private GameObject normalDamagePrefab;
+        [SerializeField] private GameObject criticalDamagePrefab;
+        [SerializeField] private GameObject healPrefab;
+
+        private IDRPG3DCombatFloatingTextCatalog catalog = IDRPG3DCombatFloatingTextCatalog.CreateDefault();
+        private readonly Dictionary<string, GameObject> prefabsByPath = new Dictionary<string, GameObject>();
+
+        private void Awake()
+        {
+            if (unit == null)
+            {
+                unit = GetComponent<IDRPG3DCombatUnit>();
+            }
+
+            Subscribe();
+        }
+
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+
+        public void Configure(
+            IDRPG3DCombatUnit targetUnit,
+            IDRPG3DCombatFloatingTextCatalog textCatalog,
+            IReadOnlyDictionary<string, GameObject> popupPrefabs)
+        {
+            Unsubscribe();
+
+            unit = targetUnit != null ? targetUnit : GetComponent<IDRPG3DCombatUnit>();
+            catalog = textCatalog ?? IDRPG3DCombatFloatingTextCatalog.CreateDefault();
+            prefabsByPath.Clear();
+            if (popupPrefabs != null)
+            {
+                foreach (var pair in popupPrefabs)
+                {
+                    if (!string.IsNullOrWhiteSpace(pair.Key) && pair.Value != null)
+                    {
+                        prefabsByPath[pair.Key] = pair.Value;
+                    }
+                }
+            }
+
+            normalDamagePrefab = ResolvePrefab(IDRPG3DCombatFloatingTextKind.NormalDamage);
+            criticalDamagePrefab = ResolvePrefab(IDRPG3DCombatFloatingTextKind.CriticalDamage);
+            healPrefab = ResolvePrefab(IDRPG3DCombatFloatingTextKind.Heal);
+            Subscribe();
+        }
+
+        private void Subscribe()
+        {
+            if (unit != null)
+            {
+                unit.FloatingTextRequested += OnFloatingTextRequested;
+            }
+        }
+
+        private void Unsubscribe()
+        {
+            if (unit != null)
+            {
+                unit.FloatingTextRequested -= OnFloatingTextRequested;
+            }
+        }
+
+        private void OnFloatingTextRequested(IDRPG3DCombatFloatingTextEvent textEvent)
+        {
+            var kind = textEvent.Kind;
+            if (kind == IDRPG3DCombatFloatingTextKind.None
+                || textEvent.Target == null
+                || textEvent.Value <= 0f
+                || !catalog.TryGet(kind, out var config))
+            {
+                return;
+            }
+
+            var prefab = ResolvePrefab(config);
+            if (prefab == null)
+            {
+                return;
+            }
+
+            var position = CalculateSpawnPosition(textEvent, config);
+            var popup = SpawnPopup(prefab, position, textEvent.Value, kind == IDRPG3DCombatFloatingTextKind.Heal);
+            if (popup == null)
+            {
+                return;
+            }
+
+            ApplyPopupRuntimeSettings(popup, config, textEvent.Target.transform);
+        }
+
+        public static Vector3 CalculateSpawnPositionForTest(
+            IDRPG3DCombatFloatingTextEvent textEvent,
+            IDRPG3DCombatFloatingTextConfig config)
+        {
+            return CalculateSpawnPosition(textEvent, config);
+        }
+
+        public static void ApplyPopupRuntimeSettingsForTest(
+            Component popup,
+            IDRPG3DCombatFloatingTextConfig config,
+            Transform followedTarget)
+        {
+            ApplyPopupRuntimeSettings(popup, config, followedTarget);
+        }
+
+        private static Vector3 CalculateSpawnPosition(
+            IDRPG3DCombatFloatingTextEvent textEvent,
+            IDRPG3DCombatFloatingTextConfig config)
+        {
+            return textEvent.Target != null
+                ? textEvent.Target.transform.position + config.WorldOffset
+                : config.WorldOffset;
+        }
+
+        private static void ApplyPopupRuntimeSettings(
+            Component popup,
+            IDRPG3DCombatFloatingTextConfig config,
+            Transform followedTarget)
+        {
+            InvokePopupMethod(popup, "SetColor", ColorSignature, config.Color);
+            InvokePopupMethod(popup, "SetScale", ScaleSignature, config.Scale);
+            if (config.FollowTarget && followedTarget != null)
+            {
+                InvokePopupMethod(popup, "SetFollowedTarget", FollowSignature, followedTarget, true);
+            }
+
+            InvokePopupMethod(popup, "UpdateText", EmptySignature);
+        }
+
+        private GameObject ResolvePrefab(IDRPG3DCombatFloatingTextKind kind)
+        {
+            return catalog != null && catalog.TryGet(kind, out var config)
+                ? ResolvePrefab(config)
+                : null;
+        }
+
+        private GameObject ResolvePrefab(IDRPG3DCombatFloatingTextConfig config)
+        {
+            if (!string.IsNullOrWhiteSpace(config.PrefabPath)
+                && prefabsByPath.TryGetValue(config.PrefabPath, out var prefab)
+                && prefab != null)
+            {
+                return prefab;
+            }
+
+            if (config.Kind == IDRPG3DCombatFloatingTextKind.NormalDamage)
+            {
+                return normalDamagePrefab;
+            }
+
+            if (config.Kind == IDRPG3DCombatFloatingTextKind.CriticalDamage)
+            {
+                return criticalDamagePrefab;
+            }
+
+            return config.Kind == IDRPG3DCombatFloatingTextKind.Heal ? healPrefab : null;
+        }
+
+        private static Component SpawnPopup(GameObject prefab, Vector3 position, float value, bool showAsHeal)
+        {
+            var damageNumber = FindDamageNumberComponent(prefab);
+            if (damageNumber == null)
+            {
+                return null;
+            }
+
+            var type = damageNumber.GetType();
+            if (showAsHeal)
+            {
+                var textMethod = type.GetMethod("Spawn", SpawnTextSignature);
+                if (textMethod != null)
+                {
+                    return textMethod.Invoke(damageNumber, new object[] { position, $"+{Mathf.RoundToInt(value)}" }) as Component;
+                }
+            }
+
+            var method = type.GetMethod("Spawn", SpawnNumberSignature);
+            return method?.Invoke(damageNumber, new object[] { position, value }) as Component;
+        }
+
+        private static Component FindDamageNumberComponent(GameObject prefab)
+        {
+            if (prefab == null)
+            {
+                return null;
+            }
+
+            var components = prefab.GetComponentsInChildren<Component>(true);
+            for (var i = 0; i < components.Length; i++)
+            {
+                var component = components[i];
+                if (component == null)
+                {
+                    continue;
+                }
+
+                var type = component.GetType();
+                while (type != null)
+                {
+                    if (type.FullName == "DamageNumbersPro.DamageNumber")
+                    {
+                        return component;
+                    }
+
+                    type = type.BaseType;
+                }
+            }
+
+            return null;
+        }
+
+        private static void InvokePopupMethod(Component popup, string methodName, Type[] signature, params object[] arguments)
+        {
+            if (popup == null)
+            {
+                return;
+            }
+
+            var method = popup.GetType().GetMethod(methodName, signature);
+            method?.Invoke(popup, arguments);
         }
     }
 }

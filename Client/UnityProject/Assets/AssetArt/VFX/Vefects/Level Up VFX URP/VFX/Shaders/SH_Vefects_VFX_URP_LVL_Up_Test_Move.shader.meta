@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: bf6e2d2462d0b7248a4850318016095e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _CookieCutter: {fileID: 2800000, guid: 69106e0177378514bbc0797d4de122a3, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
